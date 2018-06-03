@@ -212,7 +212,24 @@ ActiveAdmin.setup do |config|
   # == Menu System
   #
   # You can add a navigation menu to be used in your application, or configure a provided menu
-  #
+
+  config.namespace :admin do |admin|
+    admin.build_menu do |menu|
+      menu.add(label: 'Switch current business', priority: 2, if: -> { current_user.admin? }) do |dropdown|
+        app = Rails.application
+        host = app.credentials[Rails.env.to_sym][:host]
+        Business.all.sort.each do |business|
+          if Rails.env.production?
+            url = app.routes.url_helpers.admin_root_url(subdomain: business.subdomain, host: host)
+          else
+            url = app.routes.url_helpers.admin_root_url(subdomain: business.subdomain, host: host)
+          end
+          dropdown.add(label: business.name, url: url)
+        end
+      end
+    end
+  end
+
   # To change the default utility navigation to show a link to your website & a logout btn
   #
   #   config.namespace :admin do |admin|
