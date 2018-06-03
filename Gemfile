@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Annotate Rails classes with schema and routes info
+gem 'annotate'
+
 group :development, :test do
   # Pretty print your Ruby objects with style - in full color and with proper indentation
   gem 'awesome_print'
