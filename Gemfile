@@ -40,6 +40,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'activeadmin'
 # Flexible authentication solution for Rails with Warden
 gem 'devise'
+# Minimal authorization through OO design and pure Ruby classes
+gem 'pundit'
 
 # Annotate Rails classes with schema and routes info
 gem 'annotate'

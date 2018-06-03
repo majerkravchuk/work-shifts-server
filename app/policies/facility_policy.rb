@@ -1,0 +1,3 @@
+class FacilityPolicy < ApplicationPolicy
+
+end

@@ -9,15 +9,23 @@ if Rails.env.development?
     email: 'admin@example.com',
     password: 'password',
     password_confirmation: 'password',
-    role: 2,
+    role: :admin,
     admin: true
+  )
+
+  User.create!(
+    email: 'manager@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    role: :manager,
+    business: business
   )
 
   User.create!(
     email: 'user@example.com',
     password: 'password',
     password_confirmation: 'password',
-    role: 0,
+    role: :user,
     business: business
   )
 
