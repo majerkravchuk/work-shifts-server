@@ -37,6 +37,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  # Pretty print your Ruby objects with style - in full color and with proper indentation
+  gem 'awesome_print'
+  # An IRB alternative and runtime developer console
+  gem 'pry'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
