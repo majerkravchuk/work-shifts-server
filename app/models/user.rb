@@ -18,6 +18,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  business_id            :integer
+#  position_id            :integer
 #
 # Indexes
 #
@@ -32,6 +33,7 @@ class User < ApplicationRecord
 
   # === relations ===
   belongs_to :business, required: false
+  belongs_to :position, required: false
 
   # === enums ===
   enum role: %i[user manager admin]

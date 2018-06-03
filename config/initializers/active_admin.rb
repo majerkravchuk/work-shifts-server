@@ -215,7 +215,7 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add(label: 'Switch current business', priority: 2, if: -> { current_user.admin? }) do |dropdown|
+      menu.add(label: 'Switch current business', priority: 0, if: -> { current_user.admin? }) do |dropdown|
         app = Rails.application
         host = app.credentials[Rails.env.to_sym][:host]
         Business.all.sort.each do |business|

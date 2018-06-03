@@ -1,5 +1,5 @@
-ActiveAdmin.register Facility do
-  menu priority: 2
+ActiveAdmin.register Position do
+  menu priority: 3
 
   permit_params :name, :business_id
 
@@ -20,8 +20,6 @@ ActiveAdmin.register Facility do
       row :created_at
     end
   end
-
-  filter :name
 
   form do |f|
     f.inputs do

@@ -1,3 +1,2 @@
 class FacilityPolicy < ApplicationPolicy
-
 end

@@ -16,6 +16,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.inet     :last_sign_in_ip
 
       t.integer :role, default: 0
+      t.integer :position_id
       t.integer :business_id
       t.boolean :admin, default: false
 
