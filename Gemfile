@@ -36,6 +36,11 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# The administration framework for Ruby on Rails applications
+gem 'activeadmin'
+# Flexible authentication solution for Rails with Warden
+gem 'devise'
+
 # Annotate Rails classes with schema and routes info
 gem 'annotate'
 
