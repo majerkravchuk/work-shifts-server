@@ -20,4 +20,7 @@ if Rails.env.development?
     role: 0,
     business: business
   )
+
+  facilities = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley', 'Henderson']
+  facilities.each { |name| Facility.create(name: name, business: business) }
 end
