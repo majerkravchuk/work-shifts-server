@@ -34,6 +34,9 @@ class User < ApplicationRecord
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
+  has_and_belongs_to_many :managed_positions,
+                          class_name: 'ManagersPosition',
+                          foreign_key: 'manager_id'
 
   # === enums ===
   enum role: %i[user manager admin]

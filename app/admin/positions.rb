@@ -7,7 +7,6 @@ ActiveAdmin.register Position do
 
   index do
     selectable_column
-    id_column
     column :name
     actions
   end
@@ -24,6 +23,7 @@ ActiveAdmin.register Position do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :access_to, as: :check_boxes, collection: [ ['Physician', 1], ['App', 1], ['Other user\'s position', 1] ]
       f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
