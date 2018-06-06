@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     return nil if request.subdomain.nil?
     @current_business ||= Business.find_by_subdomain(request.subdomain)
   end
+  helper_method :current_business
 
   def switch_business_for_admin
     if current_user.present? && current_user.admin? && current_user.business != current_business
