@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_175120) do
+ActiveRecord::Schema.define(version: 2018_06_06_202911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +22,31 @@ ActiveRecord::Schema.define(version: 2018_06_03_175120) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "employee_position_accesses", force: :cascade do |t|
+    t.integer "business_id", null: false
+    t.bigint "employee_id"
+    t.bigint "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_employee_position_accesses_on_employee_id"
+    t.index ["position_id"], name: "index_employee_position_accesses_on_position_id"
+  end
+
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.integer "business_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "manager_position_accesses", force: :cascade do |t|
+    t.integer "business_id", null: false
+    t.bigint "manager_id"
+    t.bigint "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_manager_position_accesses_on_manager_id"
+    t.index ["position_id"], name: "index_manager_position_accesses_on_position_id"
   end
 
   create_table "positions", force: :cascade do |t|

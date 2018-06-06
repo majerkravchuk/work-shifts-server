@@ -13,4 +13,8 @@ class Position < ApplicationRecord
   # === relations ===
   belongs_to :business
   has_many :users
+  has_many :manager_position_accesses
+  has_many :managers, through: :manager_position_accesses, source: :manager
+  has_many :employee_position_accesses
+  has_many :employees, through: :employee_position_accesses, source: :employee
 end

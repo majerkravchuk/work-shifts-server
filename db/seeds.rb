@@ -3,7 +3,7 @@
 
 # if Rails.env.development?
   business = Business.create(name: 'DMS/Envision', subdomain: 'dms')
-  fake = Business.create(name: 'Fake business', subdomain: 'fake')
+  fake_business = Business.create(name: 'Fake business', subdomain: 'fake')
 
   facilities = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley', 'Henderson']
   facilities.each { |name| Facility.create(name: name, business: business) }
@@ -11,7 +11,7 @@
   positions = %w[Physician APP]
   positions = positions.map { |name| Position.create(name: name, business: business) }
 
-  Position.create(name: 'Fake', business: fake)
+  fake_position = Position.create(name: 'Fake position', business: fake_business)
 
   User.create!(
     email: 'admin@example.com',
@@ -31,20 +31,29 @@
   )
 
   User.create!(
-    email: 'user_1@example.com',
+    email: 'user1@example.com',
     password: 'password',
     password_confirmation: 'password',
-    role: :user,
+    role: :employee,
     business: business,
     position: positions.first
   )
 
   User.create!(
-    email: 'user_2@example.com',
+    email: 'user2@example.com',
     password: 'password',
     password_confirmation: 'password',
-    role: :user,
+    role: :employee,
     business: business,
     position: positions.second
+  )
+
+  User.create!(
+    email: 'user3@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    role: :employee,
+    business: fake_business,
+    position: fake_position
   )
 # end

@@ -13,7 +13,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :integer          default("user")
+#  role                   :integer          default("employee")
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -34,12 +34,13 @@ class User < ApplicationRecord
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
-  has_and_belongs_to_many :managed_positions,
-                          class_name: 'ManagersPosition',
-                          foreign_key: 'manager_id'
+  has_many :manager_position_accesses, foreign_key: :manager_id
+  has_many :managed_positions, through: :manager_position_accesses, source: :position
+  has_many :employee_position_accesses, foreign_key: :employee_id
+  has_many :working_positions, through: :employee_position_accesses, source: :position
 
   # === enums ===
-  enum role: %i[user manager admin]
+  enum role: %i[employee manager admin]
 
   # === class methods ===
   class << self
