@@ -1,0 +1,2 @@
+class EmployeePositionPolicy < ApplicationPolicy
+end

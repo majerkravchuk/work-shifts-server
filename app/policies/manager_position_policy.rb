@@ -1,0 +1,2 @@
+class ManagerPositionPolicy < ApplicationPolicy
+end
