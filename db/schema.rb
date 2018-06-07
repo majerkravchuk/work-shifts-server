@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_202911) do
+ActiveRecord::Schema.define(version: 2018_06_07_183614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,14 +22,13 @@ ActiveRecord::Schema.define(version: 2018_06_06_202911) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "employee_position_accesses", force: :cascade do |t|
-    t.integer "business_id", null: false
+  create_table "employees_facilities", id: false, force: :cascade do |t|
+    t.bigint "business_id"
     t.bigint "employee_id"
-    t.bigint "position_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["employee_id"], name: "index_employee_position_accesses_on_employee_id"
-    t.index ["position_id"], name: "index_employee_position_accesses_on_position_id"
+    t.bigint "facility_id"
+    t.index ["business_id"], name: "index_employees_facilities_on_business_id"
+    t.index ["employee_id"], name: "index_employees_facilities_on_employee_id"
+    t.index ["facility_id"], name: "index_employees_facilities_on_facility_id"
   end
 
   create_table "facilities", force: :cascade do |t|
@@ -39,18 +38,18 @@ ActiveRecord::Schema.define(version: 2018_06_06_202911) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "manager_position_accesses", force: :cascade do |t|
-    t.integer "business_id", null: false
-    t.bigint "manager_id"
-    t.bigint "position_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["manager_id"], name: "index_manager_position_accesses_on_manager_id"
-    t.index ["position_id"], name: "index_manager_position_accesses_on_position_id"
+  create_table "managers_employees_positions", id: false, force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "manager_position_id"
+    t.bigint "employee_position_id"
+    t.index ["business_id"], name: "index_managers_employees_positions_on_business_id"
+    t.index ["employee_position_id"], name: "index_managers_employees_positions_on_employee_position_id"
+    t.index ["manager_position_id"], name: "index_managers_employees_positions_on_manager_position_id"
   end
 
   create_table "positions", force: :cascade do |t|
     t.string "name"
+    t.string "type"
     t.integer "business_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,7 +69,6 @@ ActiveRecord::Schema.define(version: 2018_06_06_202911) do
     t.integer "role", default: 0
     t.integer "position_id"
     t.integer "business_id"
-    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email", "business_id"], name: "index_users_on_email_and_business_id", unique: true

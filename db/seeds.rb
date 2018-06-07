@@ -1,59 +1,65 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
-# if Rails.env.development?
-  business = Business.create(name: 'DMS/Envision', subdomain: 'dms')
-  fake_business = Business.create(name: 'Fake business', subdomain: 'fake')
+User.create!(
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  role: :admin
+)
 
-  facilities = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley', 'Henderson']
-  facilities.each { |name| Facility.create(name: name, business: business) }
+facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley', 'Henderson']
 
-  positions = %w[Physician APP]
-  positions = positions.map { |name| Position.create(name: name, business: business) }
+[
+  { name: 'DMS/Envision', subdomain: 'dms'},
+  { name: 'Fake business', subdomain: 'fake'}
+].each do |business_data|
+  business = Business.create(name: business_data[:name], subdomain: business_data[:subdomain])
 
-  fake_position = Position.create(name: 'Fake position', business: fake_business)
+  facilities = facility_names.map { |name| Facility.create(name: name, business: business) }
 
-  User.create!(
-    email: 'admin@example.com',
-    password: 'password',
-    password_confirmation: 'password',
-    role: :admin,
-    admin: true
-  )
+  employee_positions = []
+  manager_positions = []
 
-  User.create!(
-    email: 'manager@example.com',
-    password: 'password',
-    password_confirmation: 'password',
-    role: :manager,
-    business: business,
-    position: positions.first
-  )
+  %w[Physician APP].map do |name|
+    employee_position = EmployeePosition.create(name: name, business: business)
+    manager_position = ManagerPosition.create(name: "#{name} manager", business: business)
 
-  User.create!(
-    email: 'user1@example.com',
-    password: 'password',
-    password_confirmation: 'password',
-    role: :employee,
-    business: business,
-    position: positions.first
-  )
+    employee_positions << employee_position
+    manager_positions << manager_position
 
-  User.create!(
-    email: 'user2@example.com',
-    password: 'password',
-    password_confirmation: 'password',
-    role: :employee,
-    business: business,
-    position: positions.second
-  )
+    manager_position.allowed_employee_positions << employee_positions
+  end
 
-  User.create!(
-    email: 'user3@example.com',
-    password: 'password',
-    password_confirmation: 'password',
-    role: :employee,
-    business: fake_business,
-    position: fake_position
-  )
-# end
+  manager_positions = ['Physician manager', 'APP manager'].map do |name|
+    ManagerPosition.create(name: name, business: business)
+  end
+
+  5.times do |i|
+    positions = employee_positions.cycle
+
+    employee = User.create!(
+      email: "employee#{i + 1}@example.com",
+      password: 'password',
+      password_confirmation: 'password',
+      role: :employee,
+      business: business,
+      position: positions.next
+    )
+
+    employee.allowed_facilities << facilities.sample
+  end
+
+  5.times do |i|
+    positions = manager_positions.cycle
+
+    User.create!(
+      email: "manager#{i + 1}@example.com",
+      password: 'password',
+      password_confirmation: 'password',
+      role: :manager,
+      business: business,
+      position: positions.next
+    )
+  end
+end

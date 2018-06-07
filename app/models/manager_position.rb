@@ -10,8 +10,9 @@
 #  business_id :integer          not null
 #
 
-class Position < ApplicationRecord
+class ManagerPosition < Position
   # === relations ===
-  belongs_to :business
-  # has_many :users
+  has_and_belongs_to_many :allowed_employee_positions,
+                          class_name: 'EmployeePosition',
+                          join_table: :managers_employees_positions
 end

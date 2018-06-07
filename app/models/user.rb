@@ -32,6 +32,10 @@ class User < ApplicationRecord
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
+  has_and_belongs_to_many :allowed_facilities,
+                          class_name: 'Facility',
+                          join_table: :employees_facilities,
+                          foreign_key: :employee_id
 
   # === validations ===
   validates_presence_of   :email
