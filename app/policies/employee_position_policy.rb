@@ -1,2 +1,2 @@
-class EmployeePositionPolicy < ApplicationPolicy
+class EmployeePositionPolicy < PositionPolicy
 end

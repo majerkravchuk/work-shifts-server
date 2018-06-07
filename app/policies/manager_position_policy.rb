@@ -1,2 +1,2 @@
-class ManagerPositionPolicy < ApplicationPolicy
+class ManagerPositionPolicy < PositionPolicy
 end

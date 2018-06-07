@@ -8,7 +8,13 @@ class UserPolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.where(business: current_user.business).where.not(role: :admin)
+      @scope = @scope.where(business: current_user.business).where.not(role: :admin)
+
+      if current_user.manager?
+        @scope = @scope.where(position: current_user.position.allowed_employee_positions)
+      end
+
+      scope
     end
   end
 end

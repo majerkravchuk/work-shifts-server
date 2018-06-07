@@ -6,7 +6,6 @@ ActiveAdmin.register ManagerPosition do
   config.sort_order = 'id_asc'
 
   index do
-    selectable_column
     column :name
     column(:allowed_employee_positions) do |manager_position|
       manager_position.allowed_employee_positions.pluck(:name).join(', ')

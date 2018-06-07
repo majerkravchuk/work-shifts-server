@@ -3,12 +3,21 @@ ActiveAdmin.register User do
 
   includes :position
 
-  permit_params :email, :role, :position_id
+  permit_params :email, :role, :position_id, :password, :password_confirmation
 
   config.sort_order = 'id_asc'
 
+  controller do
+    def update
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete('password')
+        params[:user].delete('password_confirmation')
+      end
+      super
+    end
+  end
+
   index do
-    selectable_column
     column :email
     column(:role) { |user| user.role.capitalize }
     column(:position) { |user| user.position.name.capitalize }
@@ -33,6 +42,8 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs do
       f.input :email
+      f.input :password
+      f.input :password_confirmation
       f.input(:role, {
         as: :select,
         collection: User.roles.reject { |r| r == 'admin' }.map { |k, _v| [k.capitalize, k.to_sym] },
