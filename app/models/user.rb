@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :bigint(8)        not null, primary key
-#  admin                  :boolean          default(FALSE)
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :inet
 #  email                  :string           default(""), not null
@@ -28,16 +27,20 @@
 
 class User < ApplicationRecord
   # === devise settings ===
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable,
-         request_keys: [:subdomain]
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, request_keys: [:subdomain]
 
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
-  has_many :manager_position_accesses, foreign_key: :manager_id
-  has_many :managed_positions, through: :manager_position_accesses, source: :position
-  has_many :employee_position_accesses, foreign_key: :employee_id
-  has_many :working_positions, through: :employee_position_accesses, source: :position
+
+  # === validations ===
+  validates_presence_of   :email
+  validates_uniqueness_of :email, case_sensitive: true, scope: :business_id
+  validates_format_of     :email, with: /\A[^@\s]+@[^@\s]+\z/
+
+  validates_presence_of     :password, if: :password_required?
+  validates_confirmation_of :password, if: :password_required?
+  validates_length_of       :password, minimum: 8, maximum: 32, allow_blank: true
 
   # === enums ===
   enum role: %i[employee manager admin]
@@ -56,5 +59,13 @@ class User < ApplicationRecord
         )
       ).first
     end
+  end
+
+  #=== instance methods ===
+
+  protected
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
   end
 end
