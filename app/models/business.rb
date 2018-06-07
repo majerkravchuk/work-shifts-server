@@ -14,4 +14,6 @@ class Business < ApplicationRecord
   has_many :users
   has_many :facilities
   has_many :positions
+  has_many :manager_positions
+  has_many :employee_positions
 end

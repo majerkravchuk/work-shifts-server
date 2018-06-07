@@ -31,10 +31,6 @@ facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 
     manager_position.allowed_employee_positions << employee_positions
   end
 
-  manager_positions = ['Physician manager', 'APP manager'].map do |name|
-    ManagerPosition.create(name: name, business: business)
-  end
-
   positions = employee_positions.cycle
 
   5.times do |i|
