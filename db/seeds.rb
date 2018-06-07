@@ -35,9 +35,9 @@ facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 
     ManagerPosition.create(name: name, business: business)
   end
 
-  5.times do |i|
-    positions = employee_positions.cycle
+  positions = employee_positions.cycle
 
+  5.times do |i|
     employee = User.create!(
       email: "employee#{i + 1}@example.com",
       password: 'password',
@@ -50,9 +50,9 @@ facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 
     employee.allowed_facilities << facilities.sample
   end
 
-  5.times do |i|
-    positions = manager_positions.cycle
+  positions = manager_positions.cycle
 
+  5.times do |i|
     User.create!(
       email: "manager#{i + 1}@example.com",
       password: 'password',
