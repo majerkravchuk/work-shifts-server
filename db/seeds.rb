@@ -1,11 +1,11 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
-User.create!(
+SuperAdmin.create!(
   email: 'admin@example.com',
   password: 'password',
   password_confirmation: 'password',
-  role: :admin
+  role: :super_admin
 )
 
 facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley', 'Henderson']
@@ -31,10 +31,23 @@ facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 
     manager_position.allowed_employee_positions << employee_positions
   end
 
+  positions = manager_positions.cycle
+
+  5.times do |i|
+    Manager.create!(
+      email: "manager#{i + 1}@example.com",
+      password: 'password',
+      password_confirmation: 'password',
+      role: :manager,
+      business: business,
+      position: positions.next
+    )
+  end
+
   positions = employee_positions.cycle
 
   5.times do |i|
-    employee = User.create!(
+    employee = Employee.create!(
       email: "employee#{i + 1}@example.com",
       password: 'password',
       password_confirmation: 'password',
@@ -44,18 +57,5 @@ facility_names = ['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 
     )
 
     employee.allowed_facilities << facilities.sample
-  end
-
-  positions = manager_positions.cycle
-
-  5.times do |i|
-    User.create!(
-      email: "manager#{i + 1}@example.com",
-      password: 'password',
-      password_confirmation: 'password',
-      role: :manager,
-      business: business,
-      position: positions.next
-    )
   end
 end

@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_06_07_183614) do
     t.integer "role", default: 0
     t.integer "position_id"
     t.integer "business_id"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email", "business_id"], name: "index_users_on_email_and_business_id", unique: true

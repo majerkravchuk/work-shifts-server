@@ -1,0 +1,2 @@
+class SuperAdminPolicy < ApplicationPolicy
+end

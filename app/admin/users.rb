@@ -3,7 +3,7 @@ ActiveAdmin.register User do
 
   includes :position
 
-  permit_params :email, :role, :position_id, :password, :password_confirmation
+  permit_params :email, :position_id, :password, :password_confirmation
 
   config.sort_order = 'id_asc'
 
@@ -19,21 +19,18 @@ ActiveAdmin.register User do
 
   index do
     column :email
-    column(:role) { |user| user.role.capitalize }
     column(:position) { |user| user.position.name.capitalize }
     column :created_at
     actions
   end
 
   filter :email
-  filter :role
   filter :position
   filter :created_at
 
   show do
     attributes_table do
       row :email
-      row(:role) { |user| user.role.capitalize }
       row(:position) { |user| user.position.name.capitalize }
       row :created_at
     end
@@ -44,11 +41,6 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input(:role, {
-        as: :select,
-        collection: User.roles.reject { |r| r == 'admin' }.map { |k, _v| [k.capitalize, k.to_sym] },
-        include_blank: false
-      })
       f.input(:position, {
         as: :select,
         collection: current_user.business.positions.map { |p| [p.name.capitalize, p.id] },

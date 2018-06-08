@@ -14,6 +14,7 @@
 #  reset_password_token   :string
 #  role                   :integer          default("employee")
 #  sign_in_count          :integer          default(0), not null
+#  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  business_id            :integer
@@ -27,15 +28,12 @@
 
 class User < ApplicationRecord
   # === devise settings ===
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, request_keys: [:subdomain]
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable,
+         request_keys: [:subdomain, :path]
 
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
-  has_and_belongs_to_many :allowed_facilities,
-                          class_name: 'Facility',
-                          join_table: :employees_facilities,
-                          foreign_key: :employee_id
 
   # === validations ===
   validates_presence_of   :email
@@ -47,18 +45,21 @@ class User < ApplicationRecord
   validates_length_of       :password, minimum: 8, maximum: 32, allow_blank: true
 
   # === enums ===
-  enum role: %i[employee manager admin]
+  enum role: %i[employee manager super_admin]
 
   # === class methods ===
   class << self
     def find_for_authentication(warden_conditions)
+      allowed_roles = [:manager]
+      allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
+
       where(
         email: warden_conditions[:email],
-        role: :admin
+        role: :super_admin
       ).or(
         where(
           email: warden_conditions[:email],
-          role: :manager,
+          role: allowed_roles,
           business: Business.find_by_subdomain(warden_conditions[:subdomain])
         )
       ).first

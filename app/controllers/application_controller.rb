@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_business
 
   def switch_business_for_admin
-    if current_user.present? && current_user.admin? && current_user.business != current_business
+    if current_user.present? && current_user.super_admin? && current_user.business != current_business
       current_user.update(business: current_business)
     end
   end

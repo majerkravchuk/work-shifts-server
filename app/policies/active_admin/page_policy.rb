@@ -7,7 +7,7 @@ module ActiveAdmin
     end
 
     def show?
-      current_user.admin? || current_user.manager?
+      current_user.super_admin? || current_user.manager?
     end
   end
 end

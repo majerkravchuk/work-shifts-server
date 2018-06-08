@@ -12,5 +12,6 @@
 
 class EmployeePosition < Position
   # === relations ===
+  has_many :employees, foreign_key: :position_id
   has_and_belongs_to_many :manager_positions, join_table: :managers_employees_positions
 end
