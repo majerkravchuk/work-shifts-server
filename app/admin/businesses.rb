@@ -1,12 +1,13 @@
-ActiveAdmin.register Facility do
-  menu priority: 4
+ActiveAdmin.register Business do
+  menu priority: 2
 
-  permit_params :name, :business_id
+  permit_params :name, :subdomain
 
   config.sort_order = 'id_asc'
 
   index do
     column :name
+    column :subdomain
     actions
   end
 
@@ -15,6 +16,7 @@ ActiveAdmin.register Facility do
   show do
     attributes_table do
       row :name
+      row :subdomain
       row :created_at
     end
   end
@@ -24,7 +26,7 @@ ActiveAdmin.register Facility do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
+      f.input :subdomain
     end
     f.actions
   end

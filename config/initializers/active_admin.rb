@@ -229,10 +229,10 @@ ActiveAdmin.setup do |config|
           dropdown.add label: business.name, url: url
         end
       end
-      menu.add label: 'Positions', priority: 2, if: -> { current_user.super_admin? }
-      menu.add label: 'Users', priority: 1, if: -> { current_user.super_admin? }
+      menu.add label: 'Positions', priority: 3, if: -> { current_user.super_admin? }
+      menu.add label: 'Users', priority: 2, if: -> { current_user.super_admin? }
       menu.add label: 'Employees',
-               priority: 1,
+               priority: 2,
                url: Rails.application.routes.url_helpers.admin_employees_path,
                if: -> { current_user.manager? }
     end

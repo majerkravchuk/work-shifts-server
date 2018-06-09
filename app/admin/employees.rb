@@ -1,5 +1,5 @@
 ActiveAdmin.register Employee do
-  menu priority: 2, parent: 'Users', if: -> { current_user.super_admin? }
+  menu priority: 3, parent: 'Users', if: -> { current_user.super_admin? }
 
   includes :position
 
@@ -18,16 +18,18 @@ ActiveAdmin.register Employee do
     end
   end
 
+  filter :email
+  filter :position,
+         as: :select,
+         collection: proc { EmployeePosition.where(business: current_business) }
+  filter :created_at
+
   index do
     column :email
     column(:position) { |user| user.position.name.capitalize }
     column :created_at
     actions
   end
-
-  filter :email
-  filter :position
-  filter :created_at
 
   show do
     attributes_table do
