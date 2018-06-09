@@ -1,5 +1,5 @@
 ActiveAdmin.register Facility do
-  menu priority: 2
+  menu priority: 3
 
   permit_params :name, :business_id
 

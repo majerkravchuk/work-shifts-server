@@ -1,5 +1,5 @@
-ActiveAdmin.register User do
-  menu priority: 1
+ActiveAdmin.register Manager do
+  menu parent: 'Users', priority: 1
 
   includes :position
 
@@ -9,9 +9,9 @@ ActiveAdmin.register User do
 
   controller do
     def update
-      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-        params[:user].delete('password')
-        params[:user].delete('password_confirmation')
+      if params[:manager][:password].blank? && params[:manager][:password_confirmation].blank?
+        params[:manager].delete('password')
+        params[:manager].delete('password_confirmation')
       end
       super
     end
@@ -43,7 +43,7 @@ ActiveAdmin.register User do
       f.input :password_confirmation
       f.input(:position, {
         as: :select,
-        collection: current_user.business.positions.map { |p| [p.name.capitalize, p.id] },
+        collection: ManagerPosition.where(business: current_business).map { |p| [p.name.capitalize, p.id] },
         include_blank: false
       })
       f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden

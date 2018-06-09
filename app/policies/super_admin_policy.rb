@@ -1,2 +1,2 @@
-class SuperAdminPolicy < ApplicationPolicy
+class SuperAdminPolicy < UserPolicy
 end

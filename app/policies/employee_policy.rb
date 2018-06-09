@@ -1,0 +1,2 @@
+class EmployeePolicy < UserPolicy
+end

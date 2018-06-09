@@ -114,7 +114,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  config.root_to = 'facilities#index'
+  config.root_to = 'employees#index'
 
   # == Admin Comments
   #
@@ -222,14 +222,19 @@ ActiveAdmin.setup do |config|
         host = app.credentials[Rails.env.to_sym][:host]
         Business.all.sort.each do |business|
           if Rails.env.production?
-            url = app.routes.url_helpers.admin_facilities_url subdomain: business.subdomain, host: host
+            url = app.routes.url_helpers.admin_employees_url subdomain: business.subdomain, host: host
           else
-            url = app.routes.url_helpers.admin_facilities_url subdomain: business.subdomain, host: host
+            url = app.routes.url_helpers.admin_employees_url subdomain: business.subdomain, host: host
           end
           dropdown.add label: business.name, url: url
         end
       end
-      menu.add label: 'Positions', priority: 3, if: -> { current_user.super_admin? }
+      menu.add label: 'Positions', priority: 2, if: -> { current_user.super_admin? }
+      menu.add label: 'Users', priority: 1, if: -> { current_user.super_admin? }
+      menu.add label: 'Employees',
+               priority: 1,
+               url: Rails.application.routes.url_helpers.admin_employees_path,
+               if: -> { current_user.manager? }
     end
   end
 
