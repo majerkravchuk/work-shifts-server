@@ -1,5 +1,5 @@
 ActiveAdmin.register Employee do
-  menu priority: 1, parent: 'Users', if: -> { current_user.super_admin? }
+  menu priority: 2, parent: 'Users', if: -> { current_user.super_admin? }
 
   includes :position
 
