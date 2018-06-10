@@ -119,7 +119,7 @@ shifts_data = [
       ]
     }]
   }, {
-    position_name: 'Physician',
+    position_name: 'APP',
     facilities: [{
       name: 'Centennial',
       shifts: [
