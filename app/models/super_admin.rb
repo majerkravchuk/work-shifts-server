@@ -27,6 +27,11 @@
 #
 
 class SuperAdmin < User
+  # === relations ===
+  has_many :allowed_employee_positions,
+           source: :employee_positions,
+           through: :business
+
   # === validations ===
   validate do
     errors.add(:position, 'the administrator can not have a position') if position.present?

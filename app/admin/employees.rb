@@ -53,7 +53,7 @@ ActiveAdmin.register Employee do
       f.input :password_confirmation
       f.input(:position, {
         as: :select,
-        collection: EmployeePosition.where(business: current_business).map { |p| [p.name.capitalize, p.id] },
+        collection: current_user.allowed_employee_positions.map { |p| [p.name.capitalize, p.id] },
         include_blank: false
       })
       collected_data = current_business.facilities.map do |facility|
