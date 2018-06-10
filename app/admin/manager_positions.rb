@@ -14,6 +14,9 @@ ActiveAdmin.register ManagerPosition do
   end
 
   filter :name
+  filter :allowed_employee_positions,
+         as: :select,
+         collection: proc { current_business.employee_positions }
 
   show do
     attributes_table do

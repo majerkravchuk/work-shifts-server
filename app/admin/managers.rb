@@ -3,7 +3,7 @@ ActiveAdmin.register Manager do
 
   includes :position
 
-  permit_params :email, :position_id, :password, :password_confirmation
+  permit_params :email, :business_id, :position_id, :password, :password_confirmation
 
   config.sort_order = 'id_asc'
 

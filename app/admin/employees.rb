@@ -1,9 +1,9 @@
 ActiveAdmin.register Employee do
   menu priority: 3, parent: 'Users', if: -> { current_user.super_admin? }
 
-  includes :position
+  includes :position, :allowed_facilities
 
-  permit_params :email, :position_id, :password, :password_confirmation,
+  permit_params :email, :business_id, :position_id, :password, :password_confirmation,
                 allowed_facility_ids: []
 
   config.sort_order = 'id_asc'
@@ -21,12 +21,18 @@ ActiveAdmin.register Employee do
   filter :email
   filter :position,
          as: :select,
-         collection: proc { EmployeePosition.where(business: current_business) }
+         collection: proc { current_business.employee_positions }
+  filter :allowed_facilities,
+         as: :select,
+         collection: proc { current_business.facilities }
   filter :created_at
 
   index do
     column :email
     column(:position) { |user| user.position.name.capitalize }
+    column(:allowed_facilities) do |employee|
+      employee.allowed_facilities.pluck(:name).join(', ')
+    end
     column :created_at
     actions
   end
@@ -34,10 +40,8 @@ ActiveAdmin.register Employee do
   show do
     attributes_table do
       row :email
-      row(:position) { |user| user.position.name.capitalize }
-      row(:allowed_facilities) do |employee|
-        employee.allowed_facilities.pluck(:name).join(', ')
-      end
+      row(:position) { |employee| employee.position.name.capitalize }
+      row(:allowed_facilities) { |employee| employee.allowed_facilities.pluck(:name).join(', ') }
       row :created_at
     end
   end
@@ -52,7 +56,7 @@ ActiveAdmin.register Employee do
         collection: EmployeePosition.where(business: current_business).map { |p| [p.name.capitalize, p.id] },
         include_blank: false
       })
-      collected_data = Facility.where(business: current_business).map do |facility|
+      collected_data = current_business.facilities.map do |facility|
         [
           facility.name,
           facility.id,

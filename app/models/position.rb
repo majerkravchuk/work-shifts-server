@@ -13,5 +13,4 @@
 class Position < ApplicationRecord
   # === relations ===
   belongs_to :business
-  # has_many :users
 end
