@@ -16,4 +16,5 @@ class Business < ApplicationRecord
   has_many :positions
   has_many :manager_positions
   has_many :employee_positions
+  has_many :shifts
 end

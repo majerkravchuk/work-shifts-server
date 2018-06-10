@@ -16,4 +16,5 @@ class Facility < ApplicationRecord
                           class_name: 'User',
                           association_foreign_key: :employee_id,
                           join_table: :employees_facilities
+  has_many :shifts
 end
