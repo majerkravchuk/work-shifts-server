@@ -5,8 +5,8 @@ class CreateShifts < ActiveRecord::Migration[5.2]
       t.belongs_to :business
       t.belongs_to :facility
       t.belongs_to :employee_position
-      t.string :from
-      t.string :to
+      t.string :start_time
+      t.string :end_time
 
       t.timestamps
     end

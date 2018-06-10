@@ -67,55 +67,55 @@ shifts_data = [
     facilities: [{
       name: 'Centennial',
       shifts: [
-        { name: 'C1', from: '6am', to: '3pm' },
-        { name: 'C2', from: '11am', to: '8pm' },
-        { name: 'C4', from: '3pm', to: '1am' },
-        { name: 'C5', from: '8pm', to: '6am' }
+        { name: 'C1', start_time: '6am', end_time: '3pm' },
+        { name: 'C2', start_time: '11am', end_time: '8pm' },
+        { name: 'C4', start_time: '3pm', end_time: '1am' },
+        { name: 'C5', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Desert Springs',
       shifts: [
-        { name: 'D1', from: '6am', to: '3pm' },
-        { name: 'D2', from: '11am', to: '8pm' },
-        { name: 'D3', from: '1pm', to: '11pm' },
-        { name: 'D5', from: '8pm', to: '6am' }
+        { name: 'D1', start_time: '6am', end_time: '3pm' },
+        { name: 'D2', start_time: '11am', end_time: '8pm' },
+        { name: 'D3', start_time: '1pm', end_time: '11pm' },
+        { name: 'D5', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Spring Valley',
       shifts: [
-        { name: 'SV1', from: '6am', to: '3pm' },
-        { name: 'SV2', from: '11am', to: '8pm' },
-        { name: 'SV4', from: '1pm', to: '11pm' },
-        { name: 'SV5', from: '8pm', to: '6am' }
+        { name: 'SV1', start_time: '6am', end_time: '3pm' },
+        { name: 'SV2', start_time: '11am', end_time: '8pm' },
+        { name: 'SV4', start_time: '1pm', end_time: '11pm' },
+        { name: 'SV5', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Summerlin',
       shifts: [
-        { name: 'S1', from: '6am', to: '3pm' },
-        { name: 'S2', from: '10am', to: '8pm' },
-        { name: 'S4', from: '3pm', to: '1am' },
-        { name: 'S5', from: '8pm', to: '6am' }
+        { name: 'S1', start_time: '6am', end_time: '3pm' },
+        { name: 'S2', start_time: '10am', end_time: '8pm' },
+        { name: 'S4', start_time: '3pm', end_time: '1am' },
+        { name: 'S5', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Valley',
       shifts: [
-        { name: 'V1', from: '6am', to: '3pm' },
-        { name: 'V2', from: '11am', to: '8pm' },
-        { name: 'V4', from: '3pm', to: '12:30am' },
-        { name: 'V5', from: '8pm', to: '6am' }
+        { name: 'V1', start_time: '6am', end_time: '3pm' },
+        { name: 'V2', start_time: '11am', end_time: '8pm' },
+        { name: 'V4', start_time: '3pm', end_time: '12:30am' },
+        { name: 'V5', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Henderson',
       shifts: [
-        { name: 'H1', from: '6am', to: '4pm' },
-        { name: 'H2', from: '11am', to: '9pm' },
-        { name: 'H4', from: '3pm', to: '1am' },
-        { name: 'H5', from: '8pm', to: '6am' }
+        { name: 'H1', start_time: '6am', end_time: '4pm' },
+        { name: 'H2', start_time: '11am', end_time: '9pm' },
+        { name: 'H4', start_time: '3pm', end_time: '1am' },
+        { name: 'H5', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'On Call',
       shifts: [
-        { name: 'OC', from: '4:45am', to: '4:44am' }
+        { name: 'OC', start_time: '4:45am', end_time: '4:44am' }
       ]
     }]
   }, {
@@ -123,55 +123,55 @@ shifts_data = [
     facilities: [{
       name: 'Centennial',
       shifts: [
-        { name: '1C', from: '8am', to: '5pm' },
-        { name: '2C', from: '11am', to: '8pm' },
-        { name: '4C', from: '4pm', to: '2am' },
-        { name: '5C', from: '7pm', to: '5am' }
+        { name: '1C', start_time: '8am', end_time: '5pm' },
+        { name: '2C', start_time: '11am', end_time: '8pm' },
+        { name: '4C', start_time: '4pm', end_time: '2am' },
+        { name: '5C', start_time: '7pm', end_time: '5am' }
       ]
     }, {
       name: 'Desert Springs',
       shifts: [
-        { name: '1D', from: '8am', to: '5pm' },
-        { name: '2D', from: '10am', to: '8pm' },
-        { name: '3D', from: '5pm', to: '2pm' },
-        { name: '5D', from: '8pm', to: '6am' }
+        { name: '1D', start_time: '8am', end_time: '5pm' },
+        { name: '2D', start_time: '10am', end_time: '8pm' },
+        { name: '3D', start_time: '5pm', end_time: '2pm' },
+        { name: '5D', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Spring Valley',
       shifts: [
-        { name: '1SV', from: '8am', to: '6pm' },
-        { name: '2SV', from: '10am', to: '8pm' },
-        { name: '4SV', from: '4pm', to: '2pm' },
-        { name: '5SV', from: '7pm', to: '5am' }
+        { name: '1SV', start_time: '8am', end_time: '6pm' },
+        { name: '2SV', start_time: '10am', end_time: '8pm' },
+        { name: '4SV', start_time: '4pm', end_time: '2pm' },
+        { name: '5SV', start_time: '7pm', end_time: '5am' }
       ]
     }, {
       name: 'Summerlin',
       shifts: [
-        { name: '1S', from: '8am', to: '6pm' },
-        { name: '2S', from: '11am', to: '9pm' },
-        { name: '4S', from: '4pm', to: '2am' },
-        { name: '5S', from: '8pm', to: '6am' }
+        { name: '1S', start_time: '8am', end_time: '6pm' },
+        { name: '2S', start_time: '11am', end_time: '9pm' },
+        { name: '4S', start_time: '4pm', end_time: '2am' },
+        { name: '5S', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Valley',
       shifts: [
-        { name: '1V', from: '7am', to: '4pm' },
-        { name: '2V', from: '12am', to: '9pm' },
-        { name: '4V', from: '4pm', to: '1am' },
-        { name: '5V', from: '8pm', to: '6am' }
+        { name: '1V', start_time: '7am', end_time: '4pm' },
+        { name: '2V', start_time: '12am', end_time: '9pm' },
+        { name: '4V', start_time: '4pm', end_time: '1am' },
+        { name: '5V', start_time: '8pm', end_time: '6am' }
       ]
     }, {
       name: 'Henderson',
       shifts: [
-        { name: '1H', from: '8am', to: '6pm' },
-        { name: '2H', from: '10am', to: '8pm' },
-        { name: '4H', from: '4pm', to: '2am' },
-        { name: '5H', from: '7pm', to: '5am' }
+        { name: '1H', start_time: '8am', end_time: '6pm' },
+        { name: '2H', start_time: '10am', end_time: '8pm' },
+        { name: '4H', start_time: '4pm', end_time: '2am' },
+        { name: '5H', start_time: '7pm', end_time: '5am' }
       ]
     }, {
       name: 'On Call',
       shifts: [
-        { name: 'OC', from: '7am', to: '6:59am' }
+        { name: 'OC', start_time: '7am', end_time: '6:59am' }
       ]
     }]
   }]
@@ -189,8 +189,8 @@ businesses.each do |business|
           facility: facility,
           employee_position: position,
           name: shift_data[:name],
-          from: shift_data[:from],
-          to: shift_data[:to]
+          start_time: shift_data[:start_time],
+          end_time: shift_data[:end_time]
         )
       end
     end

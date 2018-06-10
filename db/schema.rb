@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_10_145632) do
+ActiveRecord::Schema.define(version: 2018_06_10_164743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "facility_id"
+    t.bigint "employee_id"
+    t.bigint "shift_id"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_assignments_on_business_id"
+    t.index ["employee_id"], name: "index_assignments_on_employee_id"
+    t.index ["facility_id"], name: "index_assignments_on_facility_id"
+    t.index ["shift_id"], name: "index_assignments_on_shift_id"
+  end
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
@@ -60,8 +74,8 @@ ActiveRecord::Schema.define(version: 2018_06_10_145632) do
     t.bigint "business_id"
     t.bigint "facility_id"
     t.bigint "employee_position_id"
-    t.string "from"
-    t.string "to"
+    t.string "start_time"
+    t.string "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_shifts_on_business_id"

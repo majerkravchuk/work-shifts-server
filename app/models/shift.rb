@@ -3,9 +3,9 @@
 # Table name: shifts
 #
 #  id                   :bigint(8)        not null, primary key
-#  from                 :string
+#  end_time             :string
 #  name                 :string
-#  to                   :string
+#  start_time           :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  business_id          :bigint(8)
@@ -29,15 +29,15 @@ class Shift < ApplicationRecord
   belongs_to :employee_position
 
   # === validations ===
-  validates :from, format: { with: TIME_FORMAT }
-  validates :to, format: { with: TIME_FORMAT }
+  validates :start_time, format: { with: TIME_FORMAT }
+  validates :end_time, format: { with: TIME_FORMAT }
 
   # === callbacks ===
-  before_save :normalize_time
+  before_validation :normalize_time
 
   # === instance methods ===
   def normalize_time
-    self.from = Time.parse(from).strftime("%H:%M")
-    self.to = Time.parse(to).strftime("%H:%M")
+    self.start_time = Time.parse(start_time).strftime("%H:%M")
+    self.end_time = Time.parse(end_time).strftime("%H:%M")
   end
 end
