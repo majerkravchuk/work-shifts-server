@@ -8,6 +8,16 @@ ActiveAdmin.register Shift do
 
   includes :facility, :employee_position
 
+  controller do
+    def create
+      create!{ admin_shifts_path }
+    end
+
+    def update
+      update!{ admin_shifts_path }
+    end
+  end
+
   index as: :grouped_by_belongs_to_table, association: :facility, association_title: :name do
     column :name
     column(:employee_position) { |shift| shift.employee_position.name }
