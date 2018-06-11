@@ -21,7 +21,7 @@
 
 class Shift < ApplicationRecord
   # === constants ===
-  TIME_FORMAT = /\A\d{2}:\d{2}\z/
+  TIME_FORMAT = /\A(0[0-9]|1[0-2]):[0-5][0-9]\s[AP]M\z/
 
   # === relations ===
   belongs_to :business
@@ -29,6 +29,7 @@ class Shift < ApplicationRecord
   belongs_to :employee_position
 
   # === validations ===
+  validates_presence_of :name, :start_time, :end_time
   validates :start_time, format: { with: TIME_FORMAT }
   validates :end_time, format: { with: TIME_FORMAT }
 
@@ -36,8 +37,11 @@ class Shift < ApplicationRecord
   before_validation :normalize_time
 
   # === instance methods ===
+
+  private
+
   def normalize_time
-    self.start_time = Time.parse(start_time).strftime("%H:%M")
-    self.end_time = Time.parse(end_time).strftime("%H:%M")
+    self.start_time = Time.parse(start_time).strftime('%I:%M %p')
+    self.end_time = Time.parse(end_time).strftime('%I:%M %p')
   end
 end

@@ -1,5 +1,7 @@
 {
   "name": "work-shifts",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "imask": "^3.4.0"
+  }
 }
