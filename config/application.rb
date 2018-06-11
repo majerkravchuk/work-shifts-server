@@ -29,6 +29,7 @@ module WorkShifts
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.autoload_paths << config.root.join('lib/assets')
     Rails.application.config.assets.paths << Rails.root.join('node_modules')
   end
 end

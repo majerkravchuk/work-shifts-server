@@ -3,11 +3,12 @@ ActiveAdmin.register Shift do
 
   permit_params :name, :business_id, :facility_id, :employee_position_id, :start_time, :end_time
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'name_asc'
+  config.paginate = false
 
   includes :facility, :employee_position
 
-  index do
+  index as: :grouped_by_belongs_to_table, association: :facility, association_title: :name do
     column :name
     column(:facility) { |shift| shift.facility.name }
     column(:employee_position) { |shift| shift.employee_position.name }

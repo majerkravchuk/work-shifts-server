@@ -41,7 +41,7 @@ class Shift < ApplicationRecord
   private
 
   def normalize_time
-    self.start_time = Time.parse(start_time).strftime('%I:%M %p')
-    self.end_time = Time.parse(end_time).strftime('%I:%M %p')
+    self.start_time = Time.parse(start_time).strftime('%I:%M %p') rescue nil
+    self.end_time = Time.parse(end_time).strftime('%I:%M %p') rescue nil
   end
 end
