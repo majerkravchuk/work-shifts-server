@@ -10,7 +10,6 @@ ActiveAdmin.register Shift do
 
   index as: :grouped_by_belongs_to_table, association: :facility, association_title: :name do
     column :name
-    column(:facility) { |shift| shift.facility.name }
     column(:employee_position) { |shift| shift.employee_position.name }
     column :start_time
     column :end_time
