@@ -1,5 +1,6 @@
 //= require active_admin/base
 //= require imask/dist/imask.min
+//= require simple-jscalendar/source/jsCalendar
 
 $(function() {
   if (location.pathname === "/admin/employees" || location.pathname === "/admin") {

@@ -2,6 +2,7 @@
   "name": "work-shifts",
   "private": true,
   "dependencies": {
-    "imask": "^3.4.0"
+    "imask": "^3.4.0",
+    "simple-jscalendar": "^1.4.2"
   }
 }

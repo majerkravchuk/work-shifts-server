@@ -5,3 +5,7 @@
 imask@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/imask/-/imask-3.4.0.tgz#e8893d712796f525d8a5ef7945c5128fb0ca51aa"
+
+simple-jscalendar@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/simple-jscalendar/-/simple-jscalendar-1.4.2.tgz#b265879ba08ca652ed0b2fc3cd839e4a481bb685"

@@ -1,0 +1,31 @@
+.auto-jsCalendar {
+  & > table {
+    width: initial;
+
+    & > thead {
+      background-image: linear-gradient(180deg, #6a7176, #4d5256);
+
+      th {
+        background: none;
+      }
+
+      .jsCalendar-title {
+        height: 38px;
+        line-height: 38px;
+
+        .jsCalendar-nav-left,
+        .jsCalendar-nav-right {
+          margin: 9px 8px;
+
+          &:hover {
+            background: #373a3c;
+          }
+        }
+      }
+    }
+  }
+
+  .jsCalendar-current {
+    background-image: linear-gradient(180deg, #6a7176, #4d5256);
+  }
+}
