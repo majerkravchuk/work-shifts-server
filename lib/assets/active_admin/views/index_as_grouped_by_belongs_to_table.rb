@@ -4,7 +4,8 @@ module ActiveAdmin
       def build(page_presenter, collection)
         parent_association = page_presenter[:association]
         if parent_association.present?
-          collection.group_by(&parent_association).sort.each do |parent, group_collection|
+          collection = Hash[collection.group_by(&parent_association).sort_by{ |key, value| key.name }]
+          collection.each do |parent, group_collection|
             h3 parent.send(page_presenter[:association_title] || :id)
             super page_presenter, group_collection
           end

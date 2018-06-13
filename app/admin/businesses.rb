@@ -3,7 +3,7 @@ ActiveAdmin.register Business do
 
   permit_params :name, :subdomain
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'name_asc'
 
   index do
     column :name

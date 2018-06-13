@@ -3,7 +3,7 @@ ActiveAdmin.register ManagerPosition do
 
   permit_params :name, :business_id, allowed_employee_position_ids: []
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'name_asc'
 
   index do
     column :name

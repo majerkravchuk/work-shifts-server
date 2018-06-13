@@ -3,7 +3,7 @@ ActiveAdmin.register Facility do
 
   permit_params :name, :business_id
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'name_asc'
 
   index do
     column :name

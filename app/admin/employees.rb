@@ -6,7 +6,7 @@ ActiveAdmin.register Employee do
   permit_params :email, :business_id, :position_id, :password, :password_confirmation,
                 allowed_facility_ids: []
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'email_asc'
 
   controller do
     def update
@@ -31,7 +31,7 @@ ActiveAdmin.register Employee do
     column :email
     column(:position) { |user| user.position.name.capitalize }
     column(:allowed_facilities) do |employee|
-      employee.allowed_facilities.pluck(:name).join(', ')
+      employee.allowed_facilities.pluck(:name).sort.join(', ')
     end
     column :created_at
     actions
@@ -41,7 +41,7 @@ ActiveAdmin.register Employee do
     attributes_table do
       row :email
       row(:position) { |employee| employee.position.name.capitalize }
-      row(:allowed_facilities) { |employee| employee.allowed_facilities.pluck(:name).join(', ') }
+      row(:allowed_facilities) { |employee| employee.allowed_facilities.pluck(:name).sort.join(', ') }
       row :created_at
     end
   end

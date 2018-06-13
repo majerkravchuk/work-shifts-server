@@ -5,7 +5,7 @@ ActiveAdmin.register Manager do
 
   permit_params :email, :business_id, :position_id, :password, :password_confirmation
 
-  config.sort_order = 'id_asc'
+  config.sort_order = 'email_asc'
 
   controller do
     def update
