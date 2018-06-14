@@ -6,6 +6,8 @@ ActiveAdmin.register Invitation do
 
   config.sort_order = 'email_asc'
 
+  includes :manager, :position
+
   controller do
     def create
       params[:invitation][:manager_id] = current_user.id
@@ -72,7 +74,7 @@ ActiveAdmin.register Invitation do
       else
         f.input :position,
                 as: :select,
-                collection: current_user.allowed_employee.positions.order(:name).map { |m| [m.name, m.id] },
+                collection: current_user.allowed_employee_positions.order(:name).map { |m| [m.name, m.id] },
                 include_blank: false
       end
 
