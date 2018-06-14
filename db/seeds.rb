@@ -112,11 +112,6 @@ shifts_data = [
         { name: 'H4', start_time: '3pm', end_time: '1am' },
         { name: 'H5', start_time: '8pm', end_time: '6am' }
       ]
-    }, {
-      name: 'On Call',
-      shifts: [
-        { name: 'OC', start_time: '4:45am', end_time: '4:44am' }
-      ]
     }]
   }, {
     position_name: 'APP',
@@ -167,11 +162,6 @@ shifts_data = [
         { name: '2H', start_time: '10am', end_time: '8pm' },
         { name: '4H', start_time: '4pm', end_time: '2am' },
         { name: '5H', start_time: '7pm', end_time: '5am' }
-      ]
-    }, {
-      name: 'On Call',
-      shifts: [
-        { name: 'OC', start_time: '7am', end_time: '6:59am' }
       ]
     }]
   }]
