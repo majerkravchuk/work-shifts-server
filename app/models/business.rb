@@ -12,6 +12,10 @@
 class Business < ApplicationRecord
   # === relations ===
   has_many :users
+  has_many :admins_and_managers, -> { where(role: %i[manager super_admin]) }, class_name: 'User'
+  has_many :managers
+  has_many :employees
+  has_many :admins
   has_many :facilities
   has_many :positions
   has_many :manager_positions

@@ -8,7 +8,7 @@ ActiveAdmin.register ManagerPosition do
   index do
     column :name
     column(:allowed_employee_positions) do |manager_position|
-      manager_position.allowed_employee_positions.pluck(:name).join(', ')
+      manager_position.allowed_employee_positions.pluck(:name).sort.join(', ')
     end
     actions
   end
@@ -31,7 +31,6 @@ ActiveAdmin.register ManagerPosition do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
       collected_data = current_business.employee_positions.map do |position|
         [
           position.name,
@@ -42,6 +41,7 @@ ActiveAdmin.register ManagerPosition do
         ]
       end
       f.input :allowed_employee_positions, as: :check_boxes, collection: collected_data
+      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
   end
