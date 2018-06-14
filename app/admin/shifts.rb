@@ -30,7 +30,8 @@ ActiveAdmin.register Shift do
   filter :facility
   filter :employee_position,
          as: :select,
-         collection: proc { current_user.allowed_employee_positions }
+         collection: proc { current_user.allowed_employee_positions },
+         if: proc { current_user.super_admin? }
 
   show do
     attributes_table do
