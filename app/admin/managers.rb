@@ -3,7 +3,7 @@ ActiveAdmin.register Manager do
 
   includes :position
 
-  permit_params :email, :business_id, :position_id, :password, :password_confirmation
+  permit_params :name, :email, :business_id, :position_id, :password, :password_confirmation
 
   config.sort_order = 'email_asc'
 
@@ -17,6 +17,7 @@ ActiveAdmin.register Manager do
     end
   end
 
+  filter :name
   filter :email
   filter :position,
          as: :select,
@@ -24,6 +25,7 @@ ActiveAdmin.register Manager do
   filter :created_at
 
   index do
+    column :name
     column :email
     column(:position) { |user| user.position.name.capitalize }
     column :created_at
@@ -32,6 +34,7 @@ ActiveAdmin.register Manager do
 
   show do
     attributes_table do
+      row :name
       row :email
       row(:position) { |user| user.position.name.capitalize }
       row :created_at
@@ -40,6 +43,7 @@ ActiveAdmin.register Manager do
 
   form do |f|
     f.inputs do
+      f.input :name
       f.input :email
       f.input :password
       f.input :password_confirmation

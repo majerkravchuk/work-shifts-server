@@ -3,7 +3,7 @@ ActiveAdmin.register Employee do
 
   includes :position, :allowed_facilities
 
-  permit_params :email, :business_id, :position_id, :password, :password_confirmation,
+  permit_params :name, :email, :business_id, :position_id, :password, :password_confirmation,
                 allowed_facility_ids: []
 
   config.sort_order = 'email_asc'
@@ -18,6 +18,7 @@ ActiveAdmin.register Employee do
     end
   end
 
+  filter :name
   filter :email
   filter :position,
          as: :select,
@@ -28,6 +29,7 @@ ActiveAdmin.register Employee do
   filter :created_at
 
   index do
+    column :name
     column :email
     column(:position) { |user| user.position.name.capitalize }
     column(:allowed_facilities) do |employee|
@@ -39,6 +41,7 @@ ActiveAdmin.register Employee do
 
   show do
     attributes_table do
+      row :name
       row :email
       row(:position) { |employee| employee.position.name.capitalize }
       row(:allowed_facilities) { |employee| employee.allowed_facilities.pluck(:name).sort.join(', ') }
@@ -48,6 +51,7 @@ ActiveAdmin.register Employee do
 
   form do |f|
     f.inputs do
+      f.input :name
       f.input :email
       f.input :password
       f.input :password_confirmation

@@ -1,4 +1,10 @@
+Faker::Name.name      #=> "Christophe Bartell"
+
+Faker::Internet.email #=> "kirsten.greenholt@corkeryfisher.info"
+
+
 SuperAdmin.create!(
+  name: Faker::Name.name,
   email: 'admin@example.com',
   password: 'password',
   password_confirmation: 'password',
@@ -34,6 +40,7 @@ businesses = businesses.map do |business_data|
 
   5.times do |i|
     Manager.create!(
+      name: Faker::Name.name,
       email: "manager#{i + 1}@example.com",
       password: 'password',
       password_confirmation: 'password',
@@ -47,7 +54,8 @@ businesses = businesses.map do |business_data|
 
   5.times do |i|
     employee = Employee.create!(
-      email: "employee#{i + 1}@example.com",
+      name: Faker::Name.name,
+      email: Faker::Internet.safe_email,
       password: 'password',
       password_confirmation: 'password',
       role: :employee,

@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2018_06_14_160701) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.string "name", null: false
     t.integer "role", default: 0
     t.integer "position_id"
     t.integer "business_id"

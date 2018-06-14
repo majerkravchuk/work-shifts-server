@@ -9,6 +9,7 @@
 #  encrypted_password     :string           default(""), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
+#  name                   :string           not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -36,7 +37,7 @@ class User < ApplicationRecord
   belongs_to :position, required: false
 
   # === validations ===
-  validates_presence_of   :email
+  validates_presence_of   :email, :name
   validates_uniqueness_of :email, case_sensitive: true, scope: :business_id
   validates_format_of     :email, with: /\A[^@\s]+@[^@\s]+\z/
 

@@ -45,6 +45,8 @@ gem 'pundit'
 
 # Annotate Rails classes with schema and routes info
 gem 'annotate'
+# A library for generating fake data such as names, addresses, and phone numbers.
+gem 'faker'
 
 group :development, :test do
   # Pretty print your Ruby objects with style - in full color and with proper indentation
