@@ -1,7 +1,7 @@
 ActiveAdmin.register Invitation do
   menu priority: 6
 
-  permit_params :email, :business_id, :position_id, :manager_id, :role,
+  permit_params :name, :email, :business_id, :position_id, :manager_id, :role,
                 allowed_facility_ids: []
 
   config.sort_order = 'email_asc'
@@ -18,6 +18,7 @@ ActiveAdmin.register Invitation do
   end
 
   index do
+    column :name
     column :email
     column :role
     column :status
@@ -29,6 +30,7 @@ ActiveAdmin.register Invitation do
     actions
   end
 
+  filter :name
   filter :email
   filter :role
   filter :position,
@@ -43,6 +45,7 @@ ActiveAdmin.register Invitation do
 
   show do
     attributes_table do
+      row :name
       row :email
       row :status
       row :position
@@ -56,6 +59,8 @@ ActiveAdmin.register Invitation do
 
   form do |f|
     f.inputs do
+      f.input :name
+
       if f.object.new_record?
         f.input :email, input_html: { autocomplete: :off }
       else

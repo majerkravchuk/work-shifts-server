@@ -4,6 +4,7 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  email       :string
+#  name        :string
 #  role        :integer          not null
 #  status      :integer          default("pending")
 #  token       :string

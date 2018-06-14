@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_06_14_160701) do
     t.bigint "business_id"
     t.bigint "position_id"
     t.bigint "manager_id"
+    t.string "name"
     t.string "email"
     t.string "token"
     t.integer "role", null: false

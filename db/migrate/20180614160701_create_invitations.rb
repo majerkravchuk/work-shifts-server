@@ -4,6 +4,7 @@ class CreateInvitations < ActiveRecord::Migration[5.2]
       t.belongs_to :business
       t.belongs_to :position
       t.belongs_to :manager
+      t.string :name
       t.string :email, index: true
       t.string :token
       t.integer :role, null: false
