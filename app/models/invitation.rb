@@ -51,14 +51,6 @@ class Invitation < ApplicationRecord
   enum role: %i[employee manager]
   enum status: %i[pending received]
 
-  # === class methods ===
-  class << self
-    def generate_token
-      self.token = SecureRandom.urlsafe_base64
-      generate_token if ModelName.exists?(token: self.token)
-    end
-  end
-
   # === instance methods ===
   def set_token
     self.token = SecureRandom.urlsafe_base64(64, false)
