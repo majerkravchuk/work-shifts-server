@@ -34,6 +34,16 @@ class Invitation < ApplicationRecord
   validates_presence_of :email, :token
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
 
+  validate do
+    if manager? && !position.kind_of?(ManagerPosition)
+      errors.add(:position, 'manager can have a position only for managers')
+    end
+
+    if employee? && !position.kind_of?(EmployeePosition)
+      errors.add(:position, 'emlpoyee can have a position only for employees')
+    end
+  end
+
   # === callbacks ===
   before_validation :set_token, on: [:create]
 
