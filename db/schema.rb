@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_160701) do
+ActiveRecord::Schema.define(version: 2018_06_16_213905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,28 @@ ActiveRecord::Schema.define(version: 2018_06_14_160701) do
     t.bigint "invitation_id"
     t.index ["facility_id"], name: "index_facilities_invitation_on_facility_id"
     t.index ["invitation_id"], name: "index_facilities_invitation_on_invitation_id"
+  end
+
+  create_table "invitation_loading_results", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "manager_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_invitation_loading_results_on_business_id"
+    t.index ["manager_id"], name: "index_invitation_loading_results_on_manager_id"
+  end
+
+  create_table "invitation_loading_rows", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "result_id"
+    t.integer "status"
+    t.integer "row"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_invitation_loading_rows_on_business_id"
+    t.index ["result_id"], name: "index_invitation_loading_rows_on_result_id"
   end
 
   create_table "invitations", force: :cascade do |t|
