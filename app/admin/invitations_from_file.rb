@@ -7,7 +7,7 @@ ActiveAdmin.register_page 'Invitations from file' do
   end
 
   page_action :create, method: :post do
-    loader = ActiveAdmin::Extensions::InvitationLoaders::FromXlsx.new(
+    loader = InvitationLoaders::FromXlsx.new(
       params[:file], current_user, current_business
     )
     result = loader.parse!
