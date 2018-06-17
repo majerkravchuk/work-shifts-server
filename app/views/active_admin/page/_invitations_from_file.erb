@@ -5,7 +5,7 @@
 
 <% if result.present? %>
   <div class="result">
-    <% result.rows.each do |row| %>
+    <% result.rows.order(:row).each do |row| %>
       <div class="row row-<%= row.status %>">
         <p>Row <%= row.row %>: <%= row.message %></p>
       </div>
