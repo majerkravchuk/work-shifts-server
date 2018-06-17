@@ -42,6 +42,8 @@ gem 'activeadmin'
 gem 'devise'
 # Minimal authorization through OO design and pure Ruby classes
 gem 'pundit'
+# Roo provides an interface to spreadsheets of several sorts
+gem "roo"
 
 # Annotate Rails classes with schema and routes info
 gem 'annotate'
