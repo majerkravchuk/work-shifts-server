@@ -19,5 +19,13 @@ class InvitationLoading::Result < ApplicationRecord
   # === relations ===
   belongs_to :business
   belongs_to :manager, class_name: 'User', foreign_key: :manager_id
-  has_many :rows
+  has_many :rows, dependent: :delete_all
+
+  # === callbacks ===
+  before_create :destroy_old_results
+
+  #=== instance methods ===
+  def destroy_old_results
+    InvitationLoading::Result.where('created_at < ?', 5.minutes.ago).destroy_all
+  end
 end
