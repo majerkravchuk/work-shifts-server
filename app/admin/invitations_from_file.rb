@@ -13,4 +13,9 @@ ActiveAdmin.register_page 'Invitations from file' do
     result = loader.parse!
     redirect_to admin_invitations_from_file_path(result_id: result.id)
   end
+
+  page_action :download_example, method: :get do
+    send_file 'public/invitations_example.xlsx',
+              type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  end
 end

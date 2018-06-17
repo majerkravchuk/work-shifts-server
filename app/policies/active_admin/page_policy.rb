@@ -13,5 +13,9 @@ module ActiveAdmin
     def load_from_file?
       current_user.super_admin? || current_user.manager?
     end
+
+    def download_example?
+      current_user.super_admin? || current_user.manager?
+    end
   end
 end

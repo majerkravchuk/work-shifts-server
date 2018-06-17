@@ -53,6 +53,12 @@ body {
     &.admin_invitations_from_file {
       #main_content {
         form {
+          margin-bottom: 4px;
+        }
+
+        .download-example {
+          color: #3e4850;
+          display: inline-block;
           margin-bottom: 20px;
         }
 
