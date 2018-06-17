@@ -8,6 +8,10 @@ ActiveAdmin.register Invitation do
 
   includes :manager, :position
 
+  action_item :load_from_file, only: :index do
+    link_to 'Load from file', admin_invitations_from_file_path
+  end
+
   controller do
     def create
       params[:invitation][:manager_id] = current_user.id

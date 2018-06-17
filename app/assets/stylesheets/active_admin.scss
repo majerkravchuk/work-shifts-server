@@ -49,5 +49,46 @@ body {
         }
       }
     }
+
+    &.admin_invitations_from_file {
+      #main_content {
+        form {
+          margin-bottom: 20px;
+        }
+
+        .result {
+          .row {
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 4px;
+            color: #4c4c4c;
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            padding: 8px 16px;
+
+            &.row-created {
+              background: #d9ead3;
+              border-color: #7e9e6f;
+            }
+
+            &.row-updated {
+              background: #fdf2cc;
+              border-color: #b7a774;
+            }
+
+            &.row-rejected {
+              background: #f4cccd;
+              border-color: #a26467;
+            }
+
+            p {
+              margin-bottom: 3px;
+            }
+          }
+        }
+      }
+    }
   }
 }

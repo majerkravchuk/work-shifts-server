@@ -1,0 +1,14 @@
+<%= form_tag admin_invitations_from_file_create_path, multipart: true do %>
+  <%= file_field_tag 'file' %>
+  <%= submit_tag 'Load Invitations' %>
+<% end %>
+
+<% if result.present? %>
+  <div class="result">
+    <% result.rows.each do |row| %>
+      <div class="row row-<%= row.status %>">
+        <p>Row <%= row.row %>: <%= row.message %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
