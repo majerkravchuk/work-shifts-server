@@ -25,7 +25,7 @@ class Shift < ApplicationRecord
 
   # === relations ===
   belongs_to :business
-  belongs_to :facility
+  belongs_to :facility, required: false
   belongs_to :employee_position
 
   # === validations ===

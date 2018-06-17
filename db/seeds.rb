@@ -175,6 +175,18 @@ shifts_data = [
   }]
 
 businesses.each do |business|
+  business.employee_positions.each do |position|
+    Shift.create(
+      business: business,
+      employee_position: position,
+      name: 'OC',
+      start_time: '7am',
+      end_time: '6:59am'
+    )
+  end
+end
+
+businesses.each do |business|
   shifts_data.each do |data|
     position = business.employee_positions.find_by_name(data[:position_name])
 

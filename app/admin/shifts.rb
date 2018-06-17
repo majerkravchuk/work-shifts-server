@@ -51,8 +51,7 @@ ActiveAdmin.register Shift do
       f.input :name
       f.input(:facility, {
         as: :select,
-        collection: current_business.facilities.map { |p| [p.name.capitalize, p.id] },
-        include_blank: false
+        collection: current_business.facilities.map { |p| [p.name.capitalize, p.id] }
       })
       f.input(:employee_position, {
         as: :select,
