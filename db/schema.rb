@@ -15,20 +15,6 @@ ActiveRecord::Schema.define(version: 2018_06_16_213905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "assignments", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "facility_id"
-    t.bigint "employee_id"
-    t.bigint "shift_id"
-    t.date "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_assignments_on_business_id"
-    t.index ["employee_id"], name: "index_assignments_on_employee_id"
-    t.index ["facility_id"], name: "index_assignments_on_facility_id"
-    t.index ["shift_id"], name: "index_assignments_on_shift_id"
-  end
-
   create_table "businesses", force: :cascade do |t|
     t.string "name"
     t.string "subdomain"
