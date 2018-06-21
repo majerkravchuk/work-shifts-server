@@ -10,8 +10,8 @@
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
-@import "simple-jscalendar/source/jsCalendar";
-@import "js-calendar";
+//@import "simple-jscalendar/source/jsCalendar";
+//@import "calendar";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -26,6 +26,9 @@ body {
         table-layout: fixed;
 
         th, td {
+          overflow: hidden;
+          text-overflow: ellipsis;
+
           &.col-actions {
             text-align: center;
             width: 140px;
