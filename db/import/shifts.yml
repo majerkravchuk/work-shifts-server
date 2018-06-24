@@ -1,0 +1,168 @@
+- position_name: Physician
+  facilities:
+  - name: Centennial
+    shifts:
+    - name: C1
+      start_time: 6am
+      end_time: 3pm
+    - name: C2
+      start_time: 11am
+      end_time: 8pm
+    - name: C4
+      start_time: 3pm
+      end_time: 1am
+    - name: C5
+      start_time: 8pm
+      end_time: 6am
+  - name: Spring Valley
+    shifts:
+    - name: SV1
+      start_time: 6am
+      end_time: 3pm
+    - name: SV2
+      start_time: 11am
+      end_time: 8pm
+    - name: SV4
+      start_time: 1pm
+      end_time: 11pm
+    - name: SV5
+      start_time: 8pm
+      end_time: 6am
+  - name: Summerlin
+    shifts:
+    - name: S1
+      start_time: 6am
+      end_time: 3pm
+    - name: S2
+      start_time: 10am
+      end_time: 8pm
+    - name: S4
+      start_time: 3pm
+      end_time: 1am
+    - name: S5
+      start_time: 8pm
+      end_time: 6am
+  - name: Valley
+    shifts:
+    - name: V1
+      start_time: 6am
+      end_time: 3pm
+    - name: V2
+      start_time: 11am
+      end_time: 8pm
+    - name: V4
+      start_time: 3pm
+      end_time: 12:30am
+    - name: V5
+      start_time: 8pm
+      end_time: 6am
+  - name: Henderson
+    shifts:
+    - name: H1
+      start_time: 6am
+      end_time: 4pm
+    - name: H2
+      start_time: 11am
+      end_time: 9pm
+    - name: H4
+      start_time: 3pm
+      end_time: 1am
+    - name: H5
+      start_time: 8pm
+      end_time: 6am
+  - name: Common
+    shifts:
+    - name: OC
+      start_time: 7am
+      end_time: 6:59am
+- position_name: APP
+  facilities:
+  - name: Centennial
+    shifts:
+    - name: 1C
+      start_time: 8am
+      end_time: 5pm
+    - name: 2C
+      start_time: 11am
+      end_time: 8pm
+    - name: 4C
+      start_time: 4pm
+      end_time: 2am
+    - name: 5C
+      start_time: 7pm
+      end_time: 5am
+  - name: Desert Springs
+    shifts:
+    - name: 1D
+      start_time: 8am
+      end_time: 5pm
+    - name: 2D
+      start_time: 10am
+      end_time: 8pm
+    - name: 3D
+      start_time: 5pm
+      end_time: 2pm
+    - name: 5D
+      start_time: 8pm
+      end_time: 6am
+  - name: Spring Valley
+    shifts:
+    - name: 1SV
+      start_time: 8am
+      end_time: 6pm
+    - name: 2SV
+      start_time: 10am
+      end_time: 8pm
+    - name: 4SV
+      start_time: 4pm
+      end_time: 2pm
+    - name: 5SV
+      start_time: 7pm
+      end_time: 5am
+  - name: Summerlin
+    shifts:
+    - name: 1S
+      start_time: 8am
+      end_time: 6pm
+    - name: 2S
+      start_time: 11am
+      end_time: 9pm
+    - name: 4S
+      start_time: 4pm
+      end_time: 2am
+    - name: 5S
+      start_time: 8pm
+      end_time: 6am
+  - name: Valley
+    shifts:
+    - name: 1V
+      start_time: 7am
+      end_time: 4pm
+    - name: 2V
+      start_time: 12am
+      end_time: 9pm
+    - name: 4V
+      start_time: 4pm
+      end_time: 1am
+    - name: 5V
+      start_time: 8pm
+      end_time: 6am
+  - name: Henderson
+    shifts:
+    - name: 1H
+      start_time: 8am
+      end_time: 6pm
+    - name: 2H
+      start_time: 10am
+      end_time: 8pm
+    - name: 4H
+      start_time: 4pm
+      end_time: 2am
+    - name: 5H
+      start_time: 7pm
+      end_time: 5am
+  - name: Common
+    shifts:
+    - name: OC
+      start_time: 7am
+      end_time: 6:59am
