@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_213905) do
     t.integer "role", default: 0
     t.integer "position_id"
     t.integer "business_id"
+    t.integer "status", default: 0
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

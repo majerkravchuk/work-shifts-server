@@ -15,6 +15,7 @@
 #  reset_password_token   :string
 #  role                   :integer          default("employee")
 #  sign_in_count          :integer          default(0), not null
+#  status                 :integer          default("imported")
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
