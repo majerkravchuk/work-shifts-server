@@ -235,6 +235,7 @@ ActiveAdmin.setup do |config|
                priority: 2,
                url: Rails.application.routes.url_helpers.admin_employees_path,
                if: -> { current_user.manager? }
+      menu.add label: 'Emails', priority: 6
     end
   end
 

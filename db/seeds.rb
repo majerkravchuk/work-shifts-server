@@ -4,7 +4,6 @@ SuperAdmin.create!(
   password: 'password',
   password_confirmation: 'password',
   role: :super_admin,
-  status: :registered
 )
 
 businesses = [
@@ -46,7 +45,6 @@ businesses = businesses.map do |business_data|
       role: :manager,
       business: business,
       position: positions.next,
-      status: :registered
     )
   end
 
@@ -61,7 +59,6 @@ businesses = businesses.map do |business_data|
       role: :employee,
       business: business,
       position: positions.next,
-      status: :registered
     )
 
     employee.allowed_facilities << facilities.sample

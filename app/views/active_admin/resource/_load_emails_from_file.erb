@@ -1,0 +1,4 @@
+<%= form_tag load_from_file_admin_emails_path, multipart: true do %>
+  <%= file_field_tag 'file', id: :load_emails_file %>
+  <%= submit_tag 'Load Emails' %>
+<% end %>

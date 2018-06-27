@@ -1,4 +1,4 @@
-module InvitationLoaders
+module AllowedEmailLoaders
   class Base
     attr_accessor :file, :current_user, :current_business, :result
 

@@ -1,9 +1,9 @@
-<%= form_tag admin_invitations_from_file_create_path, multipart: true do %>
+<%= form_tag admin_emails_from_file_create_path, multipart: true do %>
   <%= file_field_tag 'file' %>
   <%= submit_tag 'Load Invitations' %>
 <% end %>
 
-<%= link_to 'Download example', admin_invitations_from_file_download_example_path, class: 'download-example' %>
+<%= link_to 'Download example', admin_emails_from_file_download_example_path, class: 'download-example' %>
 
 <% if result.present? %>
   <div class="result">

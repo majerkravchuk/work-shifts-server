@@ -1,6 +1,5 @@
 //= require active_admin/base
 //= require imask/dist/imask.min
-//= require simple-jscalendar/source/jsCalendar
 
 $(function() {
   if (location.pathname === "/admin/employees" || location.pathname === "/admin") {
@@ -17,5 +16,19 @@ $(function() {
         D: new IMask.MaskedPattern.Group.Enum(['A', 'P'])
       }
     });
+  });
+
+  $('#email_role_input #email_role').on('change', function() {
+    if (this.value === 'employee') {
+      $('#email_allowed_facilities_input').show();
+      $('.employee-position').show();
+      $('#email_position_id').val($('.employee-position')[0].value);
+      $('.manager-position').hide();
+    } else if (this.value === 'manager') {
+      $('#email_allowed_facilities_input').hide();
+      $('.manager-position').show();
+      $('#email_position_id').val($('.manager-position')[0].value);
+      $('.employee-position').hide();
+    }
   });
 });

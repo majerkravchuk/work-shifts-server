@@ -10,10 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_213905) do
+ActiveRecord::Schema.define(version: 2018_06_26_153155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allowed_email_loading_results", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "manager_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_allowed_email_loading_results_on_business_id"
+    t.index ["manager_id"], name: "index_allowed_email_loading_results_on_manager_id"
+  end
+
+  create_table "allowed_email_loading_rows", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "result_id"
+    t.integer "status"
+    t.integer "row"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_allowed_email_loading_rows_on_business_id"
+    t.index ["result_id"], name: "index_allowed_email_loading_rows_on_result_id"
+  end
+
+  create_table "allowed_emails", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "position_id"
+    t.string "name"
+    t.string "email"
+    t.string "token"
+    t.integer "role", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_allowed_emails_on_business_id"
+    t.index ["email"], name: "index_allowed_emails_on_email"
+    t.index ["position_id"], name: "index_allowed_emails_on_position_id"
+  end
+
+  create_table "allowed_emails_facilities", id: false, force: :cascade do |t|
+    t.bigint "facility_id"
+    t.bigint "allowed_email_id"
+    t.index ["allowed_email_id"], name: "index_allowed_emails_facilities_on_allowed_email_id"
+    t.index ["facility_id"], name: "index_allowed_emails_facilities_on_facility_id"
+  end
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
@@ -38,50 +82,17 @@ ActiveRecord::Schema.define(version: 2018_06_16_213905) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "facilities_invitation", id: false, force: :cascade do |t|
-    t.bigint "facility_id"
-    t.bigint "invitation_id"
-    t.index ["facility_id"], name: "index_facilities_invitation_on_facility_id"
-    t.index ["invitation_id"], name: "index_facilities_invitation_on_invitation_id"
-  end
-
-  create_table "invitation_loading_results", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "manager_id"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_invitation_loading_results_on_business_id"
-    t.index ["manager_id"], name: "index_invitation_loading_results_on_manager_id"
-  end
-
-  create_table "invitation_loading_rows", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "result_id"
-    t.integer "status"
-    t.integer "row"
-    t.string "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_invitation_loading_rows_on_business_id"
-    t.index ["result_id"], name: "index_invitation_loading_rows_on_result_id"
-  end
-
   create_table "invitations", force: :cascade do |t|
     t.bigint "business_id"
-    t.bigint "position_id"
     t.bigint "manager_id"
-    t.string "name"
-    t.string "email"
+    t.bigint "allowed_email_id"
     t.string "token"
-    t.integer "role", null: false
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["allowed_email_id"], name: "index_invitations_on_allowed_email_id"
     t.index ["business_id"], name: "index_invitations_on_business_id"
-    t.index ["email"], name: "index_invitations_on_email"
     t.index ["manager_id"], name: "index_invitations_on_manager_id"
-    t.index ["position_id"], name: "index_invitations_on_position_id"
   end
 
   create_table "managers_employees_positions", id: false, force: :cascade do |t|
@@ -130,7 +141,6 @@ ActiveRecord::Schema.define(version: 2018_06_16_213905) do
     t.integer "role", default: 0
     t.integer "position_id"
     t.integer "business_id"
-    t.integer "status", default: 0
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

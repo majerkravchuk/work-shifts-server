@@ -21,6 +21,7 @@ class Business < ApplicationRecord
   has_many :manager_positions
   has_many :employee_positions
   has_many :shifts
+  has_many :allowed_email
+  has_many :email_loading_results, class_name: 'EmailLoading::Result'
   has_many :invitations
-  has_many :invitation_loading_results, class_name: 'InvitationLoading::Result'
 end

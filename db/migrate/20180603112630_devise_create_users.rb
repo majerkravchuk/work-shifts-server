@@ -19,7 +19,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer :role, default: 0
       t.integer :position_id
       t.integer :business_id
-      t.integer :status, default: 0
       t.string  :type
 
       t.timestamps null: false

@@ -2,38 +2,30 @@
 #
 # Table name: invitations
 #
-#  id          :bigint(8)        not null, primary key
-#  email       :string
-#  name        :string
-#  role        :integer          not null
-#  status      :integer          default("pending")
-#  token       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  business_id :bigint(8)
-#  manager_id  :bigint(8)
-#  position_id :bigint(8)
+#  id               :bigint(8)        not null, primary key
+#  status           :integer          default("pending")
+#  token            :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  allowed_email_id :bigint(8)
+#  business_id      :bigint(8)
+#  manager_id       :bigint(8)
 #
 # Indexes
 #
-#  index_invitations_on_business_id  (business_id)
-#  index_invitations_on_email        (email)
-#  index_invitations_on_manager_id   (manager_id)
-#  index_invitations_on_position_id  (position_id)
+#  index_invitations_on_allowed_email_id  (allowed_email_id)
+#  index_invitations_on_business_id       (business_id)
+#  index_invitations_on_manager_id        (manager_id)
 #
 
 class Invitation < ApplicationRecord
   # === relations ===
   belongs_to :business
-  belongs_to :position
+  belongs_to :allowed_email
   belongs_to :manager, class_name: 'User', foreign_key: :manager_id
-  has_and_belongs_to_many :allowed_facilities,
-                          class_name: 'Facility',
-                          join_table: :facilities_invitation
 
   # === validations ===
-  validates_presence_of :email, :token
-  validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
+  validates_presence_of :allowed_email, :token
 
   validate do
     if manager? && !position.kind_of?(ManagerPosition)
@@ -51,6 +43,11 @@ class Invitation < ApplicationRecord
   # === enums ===
   enum role: %i[employee manager]
   enum status: %i[pending received]
+
+  # === delegates ===
+  delegate :name, :email, :position, :role, :allowed_facilities,
+           to: :allowed_email,
+           allow_nil: true
 
   # === instance methods ===
   def set_token

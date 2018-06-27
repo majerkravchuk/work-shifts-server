@@ -29,6 +29,10 @@ body {
           overflow: hidden;
           text-overflow: ellipsis;
 
+          &.col-selectable {
+            width: 12px;
+          }
+
           &.col-actions {
             text-align: center;
             width: 140px;
@@ -40,6 +44,27 @@ body {
     #active_admin_content {
       #sidebar {
         margin-top: 4px;
+
+        #load_from_file_sidebar_section {
+          .panel_contents {
+            padding-top: 8px;
+
+            .file-field {
+              display: block;
+              margin: 0 auto 12px;
+            }
+
+            .submit-button {
+              display: block;
+              margin: 0 auto 8px;
+            }
+
+            .example-link {
+              display: block;
+              text-align: center;
+            }
+          }
+        }
       }
     }
 
@@ -53,7 +78,7 @@ body {
       }
     }
 
-    &.admin_invitations_from_file {
+    &.admin_emails_from_file {
       #main_content {
         form {
           margin-bottom: 4px;

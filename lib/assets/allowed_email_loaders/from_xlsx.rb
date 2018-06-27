@@ -1,10 +1,10 @@
-module InvitationLoaders
+module AllowedEmailLoaders
   class FromXlsx < Base
     attr_accessor :xlsx_file
 
     def parse!
       @xlsx_file = Roo::Spreadsheet.open(file)
-      @result = InvitationLoading::Result.create(business: current_business, manager: current_user)
+      @result = AllowedEmailLoading::Result.create(business: current_business, manager: current_user)
 
       @xlsx_file.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |xlsx_row|
         next if xlsx_row.all? { |c| c.nil? || c.value.nil? }
@@ -15,24 +15,25 @@ module InvitationLoaders
 
         next unless validate_fields(row, email, role, position_name, facility_names)
 
-        invitation = current_business.invitations.find_or_initialize_by(email: email)
-        invitation.name = name
-        invitation.manager = current_user
-        invitation.role = role
-        invitation.position = current_business.positions.where('LOWER(name) = ?', position_name.downcase).first
+        allowed_email = current_business.allowed_email.find_or_initialize_by(email: email)
+        allowed_email.name = name
+        allowed_email.role = role
+        allowed_email.position = current_business.positions.where('LOWER(name) = ?', position_name.downcase).first
 
-        facilities = current_business.facilities.where('LOWER(name) IN (?)', facility_names.map(&:downcase))
-        invitation.allowed_facilities = facilities
-
-        if invitation.new_record?
-          row.status = :created
-          row.message = "invitation for [#{email}] successfully created!"
-        else
-          row.status = :updated
-          row.message = "invitation for [#{email}] successfully updated!"
+        if role == :employee
+          facilities = current_business.facilities.where('LOWER(name) IN (?)', facility_names.map(&:downcase))
+          allowed_email.allowed_facilities = facilities
         end
 
-        invitation.save
+        if allowed_email.new_record?
+          row.status = :created
+          row.message = "email for [#{email}] successfully imported!"
+        else
+          row.status = :updated
+          row.message = "email for [#{email}] successfully updated!"
+        end
+
+        allowed_email.save
         row.save
       end
 
