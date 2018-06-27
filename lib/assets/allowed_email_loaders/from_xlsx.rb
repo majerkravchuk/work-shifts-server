@@ -27,10 +27,10 @@ module AllowedEmailLoaders
 
         if allowed_email.new_record?
           row.status = :created
-          row.message = "email for [#{email}] successfully imported!"
+          row.message = "Allowed email for [#{email}] successfully imported!"
         else
           row.status = :updated
-          row.message = "email for [#{email}] successfully updated!"
+          row.message = "Allowed email for [#{email}] successfully updated!"
         end
 
         allowed_email.save
