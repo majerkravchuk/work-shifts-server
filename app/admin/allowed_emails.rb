@@ -12,12 +12,19 @@ ActiveAdmin.register AllowedEmail do
   end
 
   batch_action :invite do
+    batch_action_collection.each do |resource|
+      Invitation.create!(
+        allowed_email: resource,
+        business: current_business,
+        manager: current_user
+      )
+    end
     batch_action_collection.where(status: :imported).update_all(status: :invited)
     redirect_to collection_path, notice: 'The users have been invited.'
   end
 
   batch_action :reject_invitations do
-    resource.invitation.delete
+    Invitation.where(allowed_email: batch_action_collection).delete_all
     batch_action_collection.update_all(status: :imported)
     redirect_to collection_path, notice: 'The invitations have been rejected.'
   end
@@ -33,7 +40,7 @@ ActiveAdmin.register AllowedEmail do
   end
 
   member_action :reject_invitation, method: :put do
-    resource.invitation.delete
+    resource.invitation.delete if resource.invitation.present?
     resource.update(status: :imported)
     redirect_to admin_allowed_emails_path, notice: 'The invitation has been rejected.'
   end
