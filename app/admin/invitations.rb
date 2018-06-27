@@ -8,6 +8,13 @@ ActiveAdmin.register Invitation do
 
   config.filters = false
 
+  controller do
+    def destroy
+      resource.allowed_email.update(status: :imported)
+      super
+    end
+  end
+
   index do
     column(:email) { |invitation| invitation.allowed_email.email }
     column(:name) { |invitation| invitation.allowed_email.name }
