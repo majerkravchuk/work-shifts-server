@@ -1,4 +1,8 @@
 class UserPolicy < ApplicationPolicy
+  def reset_password?
+    @current_user.super_admin? || @current_user.manager?
+  end
+
   class Scope
     attr_reader :current_user, :scope
 

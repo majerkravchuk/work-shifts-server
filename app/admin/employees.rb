@@ -18,6 +18,11 @@ ActiveAdmin.register Employee do
     end
   end
 
+  member_action :reset_password, method: :post do
+    resource.send_reset_password_instructions
+    redirect_to admin_employees_path, notice: 'The instruction for password recovery has been sent.'
+  end
+
   filter :name
   filter :email
   filter :position,
@@ -36,7 +41,9 @@ ActiveAdmin.register Employee do
       employee.allowed_facilities.pluck(:name).sort.join(', ')
     end
     column :created_at
-    actions
+    actions defaults: true do |manager|
+      link_to 'Reset password', reset_password_admin_employee_path(manager), method: :post
+    end
   end
 
   show do
