@@ -6,7 +6,7 @@ ActiveAdmin.register Employee do
   permit_params :name, :email, :business_id, :position_id, :password, :password_confirmation,
                 allowed_facility_ids: []
 
-  config.sort_order = 'email_asc'
+  config.sort_order = 'name_asc'
 
   controller do
     def update
