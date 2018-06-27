@@ -1,10 +1,6 @@
 ActiveAdmin.register Invitation do
   menu priority: 6
 
-  permit_params :business_id, :manager_id, :name, allowed_email_attributes: [
-    :email, :name, :role, :position_id, allowed_facility_ids: []
-  ]
-
   actions :index, :show, :destroy
 
   config.sort_order = 'created_at_asc'

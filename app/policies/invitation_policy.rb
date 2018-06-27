@@ -5,7 +5,8 @@ class InvitationPolicy < ApplicationPolicy
 
   def show?
     current_user.super_admin? ||
-    current_user.manager? && record.employee? && current_user.allowed_employee_positions.include?(record.position)
+    current_user.manager? && record.allowed_email.employee? &&
+    current_user.allowed_employee_positions.include?(record.allowed_email.position)
   end
 
   def create?
@@ -44,10 +45,10 @@ class InvitationPolicy < ApplicationPolicy
       if current_user.super_admin?
         scope.where(business: current_user.business)
       elsif current_user.manager?
-        scope.where(business: current_user.business).where(
+        scope.includes(:allowed_email).where(business: current_user.business).where(allowed_emails: {
           role: :employee,
           position_id: current_user.allowed_employee_positions
-        )
+        })
       else
         []
       end
