@@ -216,6 +216,8 @@ ActiveAdmin.setup do |config|
   # You can add a navigation menu to be used in your application, or configure a provided menu
 
   config.namespace :admin do |admin|
+    admin.download_links = false
+
     admin.build_menu do |menu|
       menu.add label: 'Switch current business', priority: 0, if: -> { current_user.super_admin? } do |dropdown|
         app = Rails.application
