@@ -5,7 +5,7 @@ module EmailLoader
     def parse!
       open_xlsx_file
 
-      return @result if @result.rejected?
+      return @result if @result.error?
 
       row_id = 0
 
@@ -30,7 +30,7 @@ module EmailLoader
     def open_xlsx_file
       begin
         @xlsx_file = Roo::Spreadsheet.open(file)
-      rescue Roo::Error
+      rescue
         @xlsx_file = nil
       end
 
