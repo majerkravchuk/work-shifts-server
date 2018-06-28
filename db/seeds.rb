@@ -31,7 +31,7 @@ businesses = businesses.map do |business_data|
     employee_positions << employee_position
     manager_positions << manager_position
 
-    manager_position.allowed_employee_positions << employee_positions
+    manager_position.employee_positions << employee_position
   end
 
   positions = manager_positions.cycle
