@@ -7,7 +7,6 @@
 #  name        :string
 #  role        :integer          not null
 #  status      :integer          default("imported")
-#  token       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  business_id :bigint(8)
@@ -32,11 +31,11 @@ class AllowedEmail < ApplicationRecord
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
 
   validate do
-    if manager? && !position.kind_of?(ManagerPosition)
+    if manager? && !position.is_a?(ManagerPosition)
       errors.add(:position, 'manager can have a position only for managers')
     end
 
-    if employee? && !position.kind_of?(EmployeePosition)
+    if employee? && !position.is_a?(EmployeePosition)
       errors.add(:position, 'emlpoyee can have a position only for employees')
     end
   end

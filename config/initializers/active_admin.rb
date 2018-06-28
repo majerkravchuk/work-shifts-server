@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = -> (_v) {
+  config.site_title = lambda {
     current_user.present? ? "WorkShifts | #{current_user.business.name}" : 'WorkShifts'
   }
 
@@ -223,11 +223,7 @@ ActiveAdmin.setup do |config|
         app = Rails.application
         host = app.credentials[Rails.env.to_sym][:host]
         Business.all.sort.each do |business|
-          if Rails.env.production?
-            url = app.routes.url_helpers.admin_employees_url subdomain: business.subdomain, host: host
-          else
-            url = app.routes.url_helpers.admin_employees_url subdomain: business.subdomain, host: host
-          end
+          url = app.routes.url_helpers.admin_employees_url subdomain: business.subdomain, host: host
           dropdown.add label: business.name, url: url
         end
       end

@@ -7,7 +7,7 @@ module EmailLoader
         end
 
         if facilitiy_couples.map(&:first).any?(&:nil?)
-          facility_names = facilitiy_couples.select { |f| f.first.nil? }.map(&:second).join ", "
+          facility_names = facilitiy_couples.select { |f| f.first.nil? }.map(&:second).join ', '
           reject_row("facilities [#{facility_names}] do not exist")
           return false
         end

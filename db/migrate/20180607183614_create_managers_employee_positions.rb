@@ -1,4 +1,4 @@
-class CreateManagersEmployeesPositions < ActiveRecord::Migration[5.2]
+class CreateManagersEmployeePositions < ActiveRecord::Migration[5.2]
   def change
     create_table :managers_employee_positions, id: false do |t|
       t.belongs_to :business

@@ -3,12 +3,12 @@ SuperAdmin.create!(
   email: 'admin@example.com',
   password: 'password',
   password_confirmation: 'password',
-  role: :super_admin,
+  role: :super_admin
 )
 
 businesses = [
-  { name: 'DMS/Envision', subdomain: 'dms'},
-  { name: 'Fake business', subdomain: 'fake'}
+  { name: 'DMS/Envision', subdomain: 'dms' },
+  { name: 'Fake business', subdomain: 'fake' }
 ]
 
 facility_names = [
@@ -44,7 +44,7 @@ businesses = businesses.map do |business_data|
       password_confirmation: 'password',
       role: :manager,
       business: business,
-      position: positions.next,
+      position: positions.next
     )
   end
 
@@ -58,7 +58,7 @@ businesses = businesses.map do |business_data|
       password_confirmation: 'password',
       role: :employee,
       business: business,
-      position: positions.next,
+      position: positions.next
     )
 
     employee.facilities << facilities.sample

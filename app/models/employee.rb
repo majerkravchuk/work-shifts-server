@@ -36,7 +36,7 @@ class Employee < User
 
   # === validations ===
   validate do
-    unless position.kind_of? EmployeePosition
+    unless position.is_a? EmployeePosition
       errors.add(:position, 'the employee can have a position only for the employee')
     end
   end

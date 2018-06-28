@@ -5,8 +5,8 @@ class InvitationPolicy < ApplicationPolicy
 
   def show?
     current_user.super_admin? ||
-    current_user.manager? && record.allowed_email.employee? &&
-    current_user.employee_positions.include?(record.allowed_email.position)
+      current_user.manager? && record.allowed_email.employee? &&
+      current_user.employee_positions.include?(record.allowed_email.position)
   end
 
   def create?

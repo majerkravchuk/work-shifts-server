@@ -117,14 +117,14 @@ ActiveAdmin.register AllowedEmail do
       end
 
       positions_collection = current_business.positions.order(:name).map do |position|
-        if position.kind_of?(ManagerPosition) && !current_user.super_admin?
+        if position.is_a?(ManagerPosition) && !current_user.super_admin?
           nil
         elsif current_user.employee_positions.exclude?(position) && !current_user.super_admin?
           nil
         else
           [position.name, position.id, {
             class: position.type.underscore.gsub('_', '-'),
-            hidden: position.kind_of?(ManagerPosition)
+            hidden: position.is_a?(ManagerPosition)
           }]
         end
       end

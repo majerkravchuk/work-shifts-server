@@ -3,7 +3,7 @@ module EmailLoader
     class Role < Validation::Base
       def validate!
         if value.blank?
-          reject_row("email can't be blank")
+          reject_row("role can't be blank")
           return false
         end
 

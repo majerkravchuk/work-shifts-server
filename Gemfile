@@ -51,6 +51,8 @@ gem 'annotate'
 gem 'faker'
 
 group :development, :test do
+  # A Ruby static code analyzer, based on the community Ruby style guide
+  gem 'rubocop'
   # Pretty print your Ruby objects with style - in full color and with proper indentation
   gem 'awesome_print'
   # An IRB alternative and runtime developer console

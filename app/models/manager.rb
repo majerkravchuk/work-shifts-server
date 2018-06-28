@@ -34,7 +34,7 @@ class Manager < User
 
   # === validations ===
   validate do
-    unless position.kind_of? ManagerPosition
+    unless position.is_a? ManagerPosition
       errors.add(:position, 'the manager can have a position only for the manager')
     end
   end

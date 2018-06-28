@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2018_06_26_153155) do
     t.bigint "position_id"
     t.string "name"
     t.string "email"
-    t.string "token"
     t.integer "role", null: false
     t.integer "status", default: 0
     t.datetime "created_at", null: false

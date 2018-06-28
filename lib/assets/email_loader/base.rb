@@ -10,12 +10,11 @@ module EmailLoader
     end
 
     def parse!
-      raise RuntimeError, 'not implemented!'
+      raise RuntimeError
     end
 
     def extraxt_fields
-      raise RuntimeError, 'not implemented!'
+      raise RuntimeError
     end
   end
 end
-

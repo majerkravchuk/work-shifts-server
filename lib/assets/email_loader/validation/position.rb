@@ -3,7 +3,7 @@ module EmailLoader
     class Position < Validation::Base
       def validate!
         if value.blank?
-          reject_row("email can't be blank")
+          reject_row("position can't be blank")
           return false
         end
 
@@ -12,14 +12,12 @@ module EmailLoader
         if position.blank?
           reject_row("position [#{value}] does not exist")
           return false
-        end
 
-        if position.kind_of?(EmployeePosition) && user.employee_positions.exclude?(position)
+        elsif position.is_a?(EmployeePosition) && user.employee_positions.exclude?(position)
           reject_row("you do not have access to the [#{value}] position")
           return false
-        end
 
-        if position.kind_of?(ManagerPosition) && user.position != position
+        elsif position.is_a?(ManagerPosition) && user.position != position
           reject_row('you can not invite the manager with a different position from yours')
           return false
         end
