@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: allowed_email_loading_rows
+# Table name: email_loader_rows
 #
 #  id          :bigint(8)        not null, primary key
 #  message     :string
@@ -13,11 +13,11 @@
 #
 # Indexes
 #
-#  index_allowed_email_loading_rows_on_business_id  (business_id)
-#  index_allowed_email_loading_rows_on_result_id    (result_id)
+#  index_email_loader_rows_on_business_id  (business_id)
+#  index_email_loader_rows_on_result_id    (result_id)
 #
 
-class AllowedEmailLoading::Row < ApplicationRecord
+class EmailLoader::Row < ApplicationRecord
   # === relations ===
   belongs_to :business
   belongs_to :result

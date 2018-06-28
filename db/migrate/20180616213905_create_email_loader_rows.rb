@@ -1,6 +1,6 @@
-class CreateAllowedEmailLoadingRows < ActiveRecord::Migration[5.2]
+class CreateEmailLoaderRows < ActiveRecord::Migration[5.2]
   def change
-    create_table :allowed_email_loading_rows do |t|
+    create_table :email_loader_rows do |t|
       t.belongs_to :business
       t.belongs_to :result
       t.integer :status

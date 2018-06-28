@@ -2,7 +2,7 @@ ActiveAdmin.register_page 'Emails from file' do
   menu parent: 'Emails', label: 'Import from file'
 
   content do
-    @result = AllowedEmailLoading::Result.find_by(id: params[:result_id])
+    @result = EmailLoader::Result.find_by(id: params[:result_id])
     render partial: 'emails_from_file', locals: { result: @result }
   end
 
@@ -11,8 +11,8 @@ ActiveAdmin.register_page 'Emails from file' do
   end
 
   page_action :create, method: :post do
-    loader = AllowedEmailLoaders::FromXlsx.new(
-      params[:file], current_user, current_business
+    loader = EmailLoader::FromXlsx.new(
+      current_business, current_user, params[:file]
     )
     result = loader.parse!
     redirect_to admin_emails_from_file_path(result_id: result.id)

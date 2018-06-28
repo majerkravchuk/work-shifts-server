@@ -15,28 +15,6 @@ ActiveRecord::Schema.define(version: 2018_06_26_153155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "allowed_email_loading_results", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "manager_id"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_allowed_email_loading_results_on_business_id"
-    t.index ["manager_id"], name: "index_allowed_email_loading_results_on_manager_id"
-  end
-
-  create_table "allowed_email_loading_rows", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "result_id"
-    t.integer "status"
-    t.integer "row"
-    t.string "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_allowed_email_loading_rows_on_business_id"
-    t.index ["result_id"], name: "index_allowed_email_loading_rows_on_result_id"
-  end
-
   create_table "allowed_emails", force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "position_id"
@@ -64,6 +42,28 @@ ActiveRecord::Schema.define(version: 2018_06_26_153155) do
     t.string "subdomain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "email_loader_results", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "manager_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_email_loader_results_on_business_id"
+    t.index ["manager_id"], name: "index_email_loader_results_on_manager_id"
+  end
+
+  create_table "email_loader_rows", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "result_id"
+    t.integer "status"
+    t.integer "row"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_email_loader_rows_on_business_id"
+    t.index ["result_id"], name: "index_email_loader_rows_on_result_id"
   end
 
   create_table "employees_facilities", id: false, force: :cascade do |t|

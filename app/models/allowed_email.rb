@@ -46,4 +46,30 @@ class AllowedEmail < ApplicationRecord
   # === enums ===
   enum role: %i[employee manager]
   enum status: %i[imported invited]
+
+  # === class methods ===
+  class << self
+    def update_or_create_for_loader_row(business, row, fields)
+      email = business.allowed_email.find_or_initialize_by(email: fields[:email])
+      email.name = fields[:name]
+      email.role = fields[:role]
+      email.position = business.positions.where('LOWER(name) = ?', fields[:position].downcase).first
+
+      if fields[:role] == :employee
+        facilities = business.facilities.where('LOWER(name) IN (?)', fields[:facilities].map(&:downcase))
+        email.allowed_facilities = facilities
+      end
+
+      if email.new_record?
+        row.status = :created
+        row.message = "Allowed email for [#{fields[:email]}] successfully imported!"
+      else
+        row.status = :updated
+        row.message = "Allowed email for [#{fields[:email]}] successfully updated!"
+      end
+
+      row.save
+      email
+    end
+  end
 end
