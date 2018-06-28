@@ -80,6 +80,9 @@ ActiveAdmin.register AllowedEmail do
 
   filter :email
   filter :name
+  filter :status,
+         as: :select,
+         collection: proc { AllowedEmail.statuses }
   filter :role,
          as: :select,
          collection: proc { AllowedEmail.roles }
