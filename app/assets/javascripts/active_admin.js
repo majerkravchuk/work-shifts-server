@@ -18,16 +18,16 @@ $(function() {
     });
   });
 
-  $('#email_role_input #email_role').on('change', function() {
+  $('#allowed_email_role_input #allowed_email_role').on('change', function() {
     if (this.value === 'employee') {
-      $('#email_facilities_input').show();
+      $('#allowed_email_facilities_input').show();
       $('.employee-position').show();
-      $('#email_position_id').val($('.employee-position')[0].value);
+      $('#allowed_email_position_id').val($('.employee-position')[0].value);
       $('.manager-position').hide();
     } else if (this.value === 'manager') {
-      $('#email_facilities_input').hide();
+      $('#allowed_email_facilities_input').hide();
       $('.manager-position').show();
-      $('#email_position_id').val($('.manager-position')[0].value);
+      $('#allowed_email_position_id').val($('.manager-position')[0].value);
       $('.employee-position').hide();
     }
   });
