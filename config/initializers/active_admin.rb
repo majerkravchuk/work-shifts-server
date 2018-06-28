@@ -4,9 +4,9 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = lambda {
+  config.site_title = lambda do |_v|
     current_user.present? ? "WorkShifts | #{current_user.business.name}" : 'WorkShifts'
-  }
+  end
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
