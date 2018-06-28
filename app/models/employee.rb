@@ -29,7 +29,7 @@
 
 class Employee < User
   # === relations ===
-  has_and_belongs_to_many :allowed_facilities,
+  has_and_belongs_to_many :facilities,
                           class_name: 'Facility',
                           foreign_key: :employee_id,
                           join_table: :employees_facilities

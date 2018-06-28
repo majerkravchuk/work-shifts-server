@@ -5,7 +5,6 @@ class CreateAllowedEmails < ActiveRecord::Migration[5.2]
       t.belongs_to :position
       t.string :name
       t.string :email, index: true
-      t.string :token
       t.integer :role, null: false
       t.integer :status, default: 0
 

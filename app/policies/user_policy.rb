@@ -15,7 +15,7 @@ class UserPolicy < ApplicationPolicy
       @scope = @scope.where(business: current_user.business).where.not(role: :super_admin)
 
       if current_user.manager?
-        @scope = @scope.where(position: current_user.position.allowed_employee_positions)
+        @scope = @scope.where(position: current_user.position.employee_positions)
       end
 
       scope

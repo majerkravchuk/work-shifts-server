@@ -14,7 +14,7 @@ module EmailLoader
           return false
         end
 
-        if position.kind_of?(EmployeePosition) && user.allowed_employee_positions.exclude?(position)
+        if position.kind_of?(EmployeePosition) && user.employee_positions.exclude?(position)
           reject_row("you do not have access to the [#{value}] position")
           return false
         end

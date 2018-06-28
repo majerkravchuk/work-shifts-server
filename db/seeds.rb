@@ -61,7 +61,7 @@ businesses = businesses.map do |business_data|
       position: positions.next,
     )
 
-    employee.allowed_facilities << facilities.sample
+    employee.facilities << facilities.sample
   end
 
   business

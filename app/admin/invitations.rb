@@ -4,7 +4,7 @@ ActiveAdmin.register Invitation do
   actions :index, :show, :destroy
 
   config.sort_order = 'created_at_asc'
-  includes :manager, :allowed_email
+  includes :manager, allowed_email: [:position]
 
   config.filters = false
 
@@ -22,8 +22,8 @@ ActiveAdmin.register Invitation do
     column :status
     column(:position) { |invitation| invitation.allowed_email.position }
     column(:manager) { |invitation| invitation.manager.email }
-    column(:allowed_facilities) do |invitation|
-      invitation.allowed_email.allowed_facilities.pluck(:name).sort.join(', ')
+    column(:facilities) do |invitation|
+      invitation.allowed_email.facilities.pluck(:name).sort.join(', ')
     end
     column :token
     actions
@@ -36,8 +36,8 @@ ActiveAdmin.register Invitation do
       row :status
       row :position
       row :manager
-      row(:allowed_facilities) do |invitation|
-        invitation.allowed_email.allowed_facilities.pluck(:name).sort.join(', ')
+      row(:facilities) do |invitation|
+        invitation.allowed_email.facilities.pluck(:name).sort.join(', ')
       end
       row :token
       row :created_at

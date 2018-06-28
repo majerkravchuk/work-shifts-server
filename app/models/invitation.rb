@@ -45,7 +45,7 @@ class Invitation < ApplicationRecord
   enum status: %i[pending received]
 
   # === delegates ===
-  delegate :name, :email, :position, :role, :allowed_facilities,
+  delegate :name, :email, :position, :role, :facilities,
            to: :allowed_email,
            allow_nil: true
 

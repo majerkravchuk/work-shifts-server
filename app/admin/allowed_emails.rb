@@ -1,8 +1,7 @@
 ActiveAdmin.register AllowedEmail do
   menu parent: 'Emails'
 
-  permit_params :name, :email, :business_id, :position_id, :manager_id, :role,
-                allowed_facility_ids: []
+  permit_params :name, :email, :business_id, :position_id, :manager_id, :role, facility_ids: []
 
   config.sort_order = 'email_asc'
   includes :position
@@ -60,9 +59,7 @@ ActiveAdmin.register AllowedEmail do
     column :role
     column :status
     column :position
-    column :allowed_facilities do |invitation|
-      invitation.allowed_facilities.pluck(:name).sort.join(', ')
-    end
+    column(:facilities) { |invitation| invitation.facilities.pluck(:name).sort.join(', ') }
     actions defaults: true do |user|
       actions = ''
 
@@ -96,9 +93,7 @@ ActiveAdmin.register AllowedEmail do
       row :name
       row :status
       row :position
-      row(:allowed_facilities) do |invitation|
-        invitation.allowed_facilities.pluck(:name).sort.join(', ')
-      end
+      row(:facilities) { |invitation| invitation.facilities.pluck(:name).sort.join(', ') }
       row :created_at
     end
   end
@@ -124,7 +119,7 @@ ActiveAdmin.register AllowedEmail do
       positions_collection = current_business.positions.order(:name).map do |position|
         if position.kind_of?(ManagerPosition) && !current_user.super_admin?
           nil
-        elsif current_user.allowed_employee_positions.exclude?(position) && !current_user.super_admin?
+        elsif current_user.employee_positions.exclude?(position) && !current_user.super_admin?
           nil
         else
           [position.name, position.id, {
@@ -139,9 +134,9 @@ ActiveAdmin.register AllowedEmail do
               include_blank: false
 
       collected_data = current_business.facilities.order(:name).map do |facility|
-        [facility.name, facility.id, { checked: f.object.allowed_facilities.include?(facility) }]
+        [facility.name, facility.id, { checked: f.object.facilities.include?(facility) }]
       end
-      f.input :allowed_facilities,
+      f.input :facilities,
               as: :check_boxes,
               collection: collected_data
     end

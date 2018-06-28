@@ -30,7 +30,7 @@
 class Manager < User
   # === relations ===
   belongs_to :manager_position, foreign_key: :position_id
-  has_many :allowed_employee_positions, through: :manager_position
+  has_many :employee_positions, through: :manager_position
 
   # === validations ===
   validate do

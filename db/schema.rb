@@ -95,13 +95,13 @@ ActiveRecord::Schema.define(version: 2018_06_26_153155) do
     t.index ["manager_id"], name: "index_invitations_on_manager_id"
   end
 
-  create_table "managers_employees_positions", id: false, force: :cascade do |t|
+  create_table "managers_employee_positions", id: false, force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "manager_position_id"
     t.bigint "employee_position_id"
-    t.index ["business_id"], name: "index_managers_employees_positions_on_business_id"
-    t.index ["employee_position_id"], name: "index_managers_employees_positions_on_employee_position_id"
-    t.index ["manager_position_id"], name: "index_managers_employees_positions_on_manager_position_id"
+    t.index ["business_id"], name: "index_managers_employee_positions_on_business_id"
+    t.index ["employee_position_id"], name: "index_managers_employee_positions_on_employee_position_id"
+    t.index ["manager_position_id"], name: "index_managers_employee_positions_on_manager_position_id"
   end
 
   create_table "positions", force: :cascade do |t|

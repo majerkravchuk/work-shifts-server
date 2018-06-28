@@ -29,7 +29,7 @@
 
 class SuperAdmin < User
   # === relations ===
-  has_many :allowed_employee_positions,
+  has_many :employee_positions,
            source: :employee_positions,
            through: :business
 

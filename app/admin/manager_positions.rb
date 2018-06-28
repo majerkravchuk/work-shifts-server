@@ -1,28 +1,28 @@
 ActiveAdmin.register ManagerPosition do
   menu parent: 'Positions', priority: 1
 
-  permit_params :name, :business_id, allowed_employee_position_ids: []
+  permit_params :name, :business_id, employee_position_ids: []
 
   config.sort_order = 'name_asc'
 
   index do
     column :name
-    column(:allowed_employee_positions) do |manager_position|
-      manager_position.allowed_employee_positions.pluck(:name).sort.join(', ')
+    column(:employee_positions) do |manager_position|
+      manager_position.employee_positions.pluck(:name).sort.join(', ')
     end
     actions
   end
 
   filter :name
-  filter :allowed_employee_positions,
+  filter :employee_positions,
          as: :select,
          collection: proc { current_business.employee_positions }
 
   show do
     attributes_table do
       row :name
-      row(:allowed_employee_positions) do |manager_position|
-        manager_position.allowed_employee_positions.pluck(:name).join(', ')
+      row(:employee_positions) do |manager_position|
+        manager_position.employee_positions.pluck(:name).join(', ')
       end
       row :created_at
     end
@@ -36,11 +36,11 @@ ActiveAdmin.register ManagerPosition do
           position.name,
           position.id,
           {
-            checked: f.object.allowed_employee_positions.include?(position)
+            checked: f.object.employee_positions.include?(position)
           }
         ]
       end
-      f.input :allowed_employee_positions, as: :check_boxes, collection: collected_data
+      f.input :employee_positions, as: :check_boxes, collection: collected_data
       f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions

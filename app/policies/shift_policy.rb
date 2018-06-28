@@ -5,7 +5,7 @@ class ShiftPolicy < ApplicationPolicy
 
   def show?
     current_user.super_admin? ||
-    current_user.manager? && current_user.allowed_employee_positions.include?(record.employee_position)
+    current_user.manager? && current_user.employee_positions.include?(record.employee_position)
   end
 
   def create?
@@ -44,7 +44,7 @@ class ShiftPolicy < ApplicationPolicy
       if current_user.super_admin?
         scope.where(business: current_user.business)
       elsif current_user.manager?
-        scope.where(business: current_user.business).where(employee_position_id: current_user.allowed_employee_positions)
+        scope.where(business: current_user.business).where(employee_position_id: current_user.employee_positions)
       else
         []
       end

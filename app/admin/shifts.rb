@@ -30,7 +30,7 @@ ActiveAdmin.register Shift do
   filter :facility
   filter :employee_position,
          as: :select,
-         collection: proc { current_user.allowed_employee_positions },
+         collection: proc { current_user.employee_positions },
          if: proc { current_user.super_admin? }
 
   show do
@@ -55,7 +55,7 @@ ActiveAdmin.register Shift do
       })
       f.input(:employee_position, {
         as: :select,
-        collection: current_user.allowed_employee_positions.map { |p| [p.name.capitalize, p.id] },
+        collection: current_user.employee_positions.map { |p| [p.name.capitalize, p.id] },
         include_blank: false
       })
       f.input :start_time, input_html: { autocomplete: :off, placeholder: '00:00 AM', class: 'time-input' }

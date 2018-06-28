@@ -5,7 +5,7 @@ class AllowedEmailPolicy < ApplicationPolicy
 
   def show?
     current_user.super_admin? ||
-    current_user.manager? && record.employee? && current_user.allowed_employee_positions.include?(record.position)
+    current_user.manager? && record.employee? && current_user.employee_positions.include?(record.position)
   end
 
   def create?
@@ -54,7 +54,7 @@ class AllowedEmailPolicy < ApplicationPolicy
       elsif current_user.manager?
         scope.where(business: current_user.business).where(
           role: :employee,
-          position_id: current_user.allowed_employee_positions
+          position_id: current_user.employee_positions
         )
       else
         []

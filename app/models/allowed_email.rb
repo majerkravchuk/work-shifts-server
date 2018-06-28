@@ -25,9 +25,7 @@ class AllowedEmail < ApplicationRecord
   belongs_to :business
   belongs_to :position
   has_one :invitation
-  has_and_belongs_to_many :allowed_facilities,
-                          class_name: 'Facility',
-                          join_table: :allowed_emails_facilities
+  has_and_belongs_to_many :facilities
 
   # === validations ===
   validates_presence_of :email
@@ -57,7 +55,7 @@ class AllowedEmail < ApplicationRecord
 
       if fields[:role] == :employee
         facilities = business.facilities.where('LOWER(name) IN (?)', fields[:facilities].map(&:downcase))
-        email.allowed_facilities = facilities
+        email.facilities = facilities
       end
 
       if email.new_record?
@@ -69,6 +67,7 @@ class AllowedEmail < ApplicationRecord
       end
 
       row.save
+      email.save
       email
     end
   end
