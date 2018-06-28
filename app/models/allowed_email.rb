@@ -45,5 +45,5 @@ class AllowedEmail < ApplicationRecord
 
   # === enums ===
   enum role: %i[employee manager]
-  enum status: %i[imported invited registered]
+  enum status: %i[imported invited]
 end
