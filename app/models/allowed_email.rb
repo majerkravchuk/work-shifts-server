@@ -23,7 +23,7 @@ class AllowedEmail < ApplicationRecord
   # === relations ===
   belongs_to :business
   belongs_to :position
-  has_one :invitation
+  has_one :invitation, dependent: :destroy
   has_and_belongs_to_many :facilities
 
   # === validations ===
