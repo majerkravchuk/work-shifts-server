@@ -7,122 +7,13 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
-// Active Admin's got SASS!
+$skinMainFirstColor: #3d4852 !default;
+$skinMainSecondColor: #606f7b !default;
+
 @import "active_admin/mixins";
 @import "active_admin/base";
-//@import "simple-jscalendar/source/jsCalendar";
-//@import "calendar";
 
-// Overriding any non-variable SASS must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+@import "wigu/active_admin_theme";
+@import "wigu/active_admin_theme/extension";
 
-body {
-  &.active_admin {
-    .index_as_table,
-    .index_as_grouped_by_belongs_to_table {
-      table {
-        table-layout: fixed;
-
-        th, td {
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          &.col-selectable {
-            width: 12px;
-          }
-
-          &.col-actions {
-            text-align: center;
-            width: 220px;
-          }
-        }
-      }
-    }
-
-    #active_admin_content {
-      #sidebar {
-        margin-top: 4px;
-
-        #load_from_file_sidebar_section {
-          .panel_contents {
-            padding-top: 8px;
-
-            .file-field {
-              display: block;
-              margin: 0 auto 12px;
-            }
-
-            .submit-button {
-              display: block;
-              margin: 0 auto 8px;
-            }
-
-            .example-link {
-              display: block;
-              text-align: center;
-            }
-          }
-        }
-      }
-    }
-
-    &.index.admin_shifts {
-      #active_admin_content {
-        padding-top: 10px;
-
-        #sidebar {
-          margin-top: 40px;
-        }
-      }
-    }
-
-    &.admin_emails_from_file {
-      #main_content {
-        form {
-          margin-bottom: 4px;
-        }
-
-        .download-example {
-          color: #3e4850;
-          display: inline-block;
-          margin-bottom: 20px;
-        }
-
-        .result {
-          .row {
-            border-style: solid;
-            border-width: 1px;
-            border-radius: 4px;
-            color: #4c4c4c;
-            font-size: 0.9rem;
-            font-weight: 400;
-            line-height: 1.5;
-            margin-bottom: 10px;
-            padding: 8px 16px;
-
-            &.row-created {
-              background: #d9ead3;
-              border-color: #7e9e6f;
-            }
-
-            &.row-updated {
-              background: #fdf2cc;
-              border-color: #b7a774;
-            }
-
-            &.row-rejected {
-              background: #f4cccd;
-              border-color: #a26467;
-            }
-
-            p {
-              margin-bottom: 3px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+@import "active_admin/emails_from_file";

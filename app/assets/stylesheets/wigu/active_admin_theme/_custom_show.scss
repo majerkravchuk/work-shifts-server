@@ -1,0 +1,47 @@
+body {
+  &.active_admin {
+    &.show {
+      #active_admin_content {
+        #main_content {
+          h3 {
+            margin-top: 0;
+          }
+
+          .panel {
+            border: 1px solid #606f7a;
+            border-radius: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+
+            h3 {
+              border-radius: 0;
+            }
+
+            .panel_contents {
+              padding-bottom: 5px;
+              padding-top: 5px !important;
+
+              .attributes_table {
+                table {
+                  margin-top: 0;
+                  margin-bottom: 0;
+
+                  tbody {
+                    tr {
+                      &:last-child {
+                        th,
+                        td {
+                          border-bottom: 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+body {
+  &.active_admin {
+    #header {
+      #site_title {
+        color: #b8c2cc;
+      }
+    }
+
+    #title_bar {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+      #titlebar_left,
+      #titlebar_right {
+        height: 34px;
+      }
+
+      #titlebar_left {
+        #page_title {
+          font-size: 2.2em;
+        }
+      }
+    }
+  }
+}

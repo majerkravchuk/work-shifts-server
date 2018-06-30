@@ -11,7 +11,7 @@ module ActiveAdmin
                       .sort_by { |key, _v| key.name }
 
           Hash[grouped_collection].each do |parent, group_collection|
-            h3 parent.send(page_presenter[:association_title] || :id)
+            h2 parent.send(page_presenter[:association_title] || :id)
             super page_presenter, group_collection
           end
         else

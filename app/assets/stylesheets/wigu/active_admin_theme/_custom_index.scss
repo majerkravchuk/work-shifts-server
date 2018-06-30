@@ -1,0 +1,65 @@
+body {
+  &.active_admin {
+    #active_admin_content {
+      #main_content_wrapper {
+        #main_content {
+          .table_tools {
+            margin: 0;
+
+            .batch_actions_selector {
+              margin-bottom: 14px;
+            }
+          }
+
+          .index_as_table,
+          .index_as_grouped_by_belongs_to_table {
+            table {
+              border: 1px solid #606f7a;
+              border-radius: 0;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+              box-sizing: border-box;
+              table-layout: fixed;
+
+              thead {
+                th {
+                  background: #606f7b;
+                  color: #fff;
+                  padding: 8px 12px 8px 12px;
+
+                  a {
+                    color: #fff;
+                  }
+
+                  &.col-actions {
+                    border-right: 0;
+                  }
+                }
+              }
+
+              th, td {
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &.col-selectable {
+                  width: 12px;
+                }
+
+                &.col-actions {
+                  text-align: center;
+                  width: 220px;
+                }
+              }
+            }
+          }
+          .index_as_grouped_by_belongs_to_table {
+            h2 {
+              &:first-child {
+                margin-top: -8px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

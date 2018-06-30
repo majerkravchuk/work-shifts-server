@@ -1,0 +1,20 @@
+body {
+  &.active_admin {
+    #active_admin_content {
+      #sidebar {
+        .sidebar_section {
+          border: 1px solid #606f7a;
+          border-radius: 0;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          box-sizing: border-box;
+        }
+
+        h3 {
+          border-bottom: 3px solid #d7dce4;
+          border-radius: 0;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+body {
+  &.admin_emails_from_file {
+    #main_content {
+      .panel-file-loading {
+        float: left;
+        width: 384px;
+
+        form {
+          margin-bottom: 4px;
+        }
+
+        .download-example {
+          color: #3e4850;
+          display: inline-block;
+          margin-top: 15px;
+        }
+      }
+
+      .panel-result {
+        margin-left: 412px;
+
+        .panel_contents {
+          .row {
+            border-style: solid;
+            border-width: 1px;
+            color: #0f2f52;
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            padding: 8px 16px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            &.row-created {
+              background: #e3fcec;
+              border-color: #1a4731;
+            }
+
+            &.row-updated {
+              background: #fcfbeb;
+              border-color: #684f1d;
+            }
+
+            &.row-rejected {
+              background: #fcebea;
+              border-color: #621b18;
+            }
+
+            p {
+              margin-bottom: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

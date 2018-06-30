@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # The administration framework for Ruby on Rails applications
 gem 'activeadmin'
+gem 'active_admin_theme'
 # Flexible authentication solution for Rails with Warden
 gem 'devise'
 # Minimal authorization through OO design and pure Ruby classes

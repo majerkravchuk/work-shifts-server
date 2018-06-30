@@ -1,0 +1,17 @@
+body {
+  &.active_admin {
+    #active_admin_content {
+      #main_content {
+        fieldset {
+          &.inputs {
+            border: 1px solid #606f7a;
+            border-radius: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+}
