@@ -21,14 +21,24 @@ class EmailLoader::Result < ApplicationRecord
   belongs_to :manager, class_name: 'User', foreign_key: :manager_id
   has_many :rows, dependent: :delete_all
 
+  has_one_attached :file
+
   # === callbacks ===
   # before_create :destroy_old_results
 
   # === enums ===
-  enum status: %i[success error]
+  enum status: %i[uploaded rejected]
 
   #=== instance methods ===
   def destroy_old_results
     EmailLoader::Result.where('created_at < ?', 10.days.ago).destroy_all
+  end
+
+  def filename
+    if file.present? && file.attachment.present?
+      file.attachment.blob.filename
+    else
+      'File is missing'
+    end
   end
 end

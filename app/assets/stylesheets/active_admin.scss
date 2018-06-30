@@ -17,3 +17,7 @@ $skinMainSecondColor: #606f7b !default;
 @import "wigu/active_admin_theme/extension";
 
 @import "active_admin/emails_from_file";
+
+.footer {
+  display: none;
+}

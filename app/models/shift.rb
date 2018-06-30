@@ -21,7 +21,7 @@
 
 class Shift < ApplicationRecord
   # === constants ===
-  TIME_FORMAT = /\A(0[0-9]|1[0-2]):[0-5][0-9]\s[AP]M\z/
+  TIME_FORMAT = /\A(0[0-9]|1[0-2]):[0-5][0-9]\s[ap]m\z/
 
   # === relations ===
   belongs_to :business
@@ -36,12 +36,10 @@ class Shift < ApplicationRecord
   # === callbacks ===
   before_validation :normalize_time
 
-  # === instance methods ===
-
   private
 
   def normalize_time
-    self.start_time = Time.parse(start_time).strftime('%I:%M %p') rescue nil
-    self.end_time = Time.parse(end_time).strftime('%I:%M %p') rescue nil
+    self.start_time = Time.parse(start_time).strftime('%I:%M %P') rescue nil
+    self.end_time = Time.parse(end_time).strftime('%I:%M %P') rescue nil
   end
 end

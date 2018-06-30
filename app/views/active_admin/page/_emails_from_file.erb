@@ -1,24 +1,53 @@
-<div class="panel panel-file-loading">
-  <h3>File loading</h3>
-  <div class="panel_contents">
-    <%= form_tag admin_emails_from_file_create_path, multipart: true do %>
-      <%= file_field_tag 'file' %>
-      <%= submit_tag 'Load Invitations' %>
-    <% end %>
+<div class="left-side">
+  <div class="panel panel-file-loading">
+    <h3>File loading</h3>
+    <div class="panel_contents">
+      <%= form_tag admin_emails_from_file_create_path, multipart: true do %>
+        <%= file_field_tag 'file' %>
+        <%= submit_tag 'Load Invitations' %>
+      <% end %>
 
-    <%= link_to 'Download example', admin_emails_from_file_download_example_path, class: 'download-example' %>
+      <%= link_to 'Download example', admin_emails_from_file_download_example_path, class: 'download-example' %>
+    </div>
+  </div>
+
+  <div class="panel panel-previous-imports">
+    <h3>Previous Imports</h3>
+    <div class="panel_contents">
+      <% if previous_results.present? %>
+        <% previous_results.each do |previous_result| %>
+          <a class="previous-import <%= previous_result.status %> <%= 'active' if result.present? && previous_result.id == result.id %>"
+             href="<%= admin_emails_from_file_path(result_id: previous_result.id) %>">
+            <%= previous_result.filename %> <span class="date">[<%= previous_result.created_at.strftime("%B %d, %Y %I:%M %P") %>]</span>
+          </a>
+        <% end %>
+      <% else %>
+        <p class="no-results">You have not imported anything yet.</p>
+      <% end%>
+    </div>
   </div>
 </div>
 
 <% if result.present? %>
-  <div class="panel panel-result">
-    <h3>Result</h3>
-    <div class="panel_contents">
-      <% result.rows.order(:row).each do |row| %>
-        <div class="row row-<%= row.status %>">
-          <p>Row <%= row.row %>: <%= row.message %></p>
-        </div>
-      <% end %>
+  <div class="right-side">
+    <div class="panel panel-result">
+      <h3>Result</h3>
+      <div class="panel_contents">
+        <% result.rows.order(:row).each do |row| %>
+          <div class="row row-<%= row.status %>">
+            <p>Row <%= row.row %>: <%= row.message %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
+
+    <% if result.file.attached? %>
+      <div class="download-file">
+        <%= link_to "Download file", '#', class: "download-button" %>
+        <div class="file-name">
+          File: <span class="name"><%= result.filename %></span>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>

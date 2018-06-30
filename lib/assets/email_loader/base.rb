@@ -6,7 +6,8 @@ module EmailLoader
       @business = business
       @user = user
       @file = file
-      @result = nil
+      @result = EmailLoader::Result.create(business: business, manager: user, status: :uploaded)
+      @result.file.attach(file)
     end
 
     def parse!

@@ -4,8 +4,7 @@ module EmailLoader
 
     def parse!
       open_xlsx_file
-
-      return @result if @result.error?
+      return @result if @result.rejected?
 
       row_id = 0
 
@@ -35,19 +34,13 @@ module EmailLoader
       end
 
       if @xlsx_file.nil?
-        @result = EmailLoader::Result.create(
-          business: business,
-          manager: user,
-          status: :error
-        )
+        @result.update(status: :rejected)
         @result.rows.create(
           business: business,
           row: 0,
           status: :rejected,
           message: 'Unsupported file format'
         )
-      else
-        @result = EmailLoader::Result.create(business: business, manager: user)
       end
     end
 
