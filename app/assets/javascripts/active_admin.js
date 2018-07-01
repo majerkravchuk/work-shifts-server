@@ -3,6 +3,9 @@
 //= require activeadmin/trumbowyg/trumbowyg
 //= require activeadmin/trumbowyg_input
 
+$.trumbowyg.svgPath = false;
+$.trumbowyg.hideButtonTexts = true;
+
 $(function() {
   if (location.pathname === "/admin/employees" || location.pathname === "/admin") {
     $('#employees').addClass("current");
