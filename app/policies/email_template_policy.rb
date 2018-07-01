@@ -1,4 +1,4 @@
-class EmailTemplate::TemplatePolicy < ApplicationPolicy
+class EmailTemplatePolicy < ApplicationPolicy
   def index?
     current_user.super_admin?
   end
@@ -24,7 +24,7 @@ class EmailTemplate::TemplatePolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.where(business: current_user.business)
+      scope
     end
   end
 end

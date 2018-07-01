@@ -1,4 +1,4 @@
-ActiveAdmin.register EmailTemplate::Template, as: 'Email Template' do
+ActiveAdmin.register EmailTemplate do
   menu parent: 'Settings', priority: 1
 
   actions :index, :edit, :update
@@ -9,7 +9,7 @@ ActiveAdmin.register EmailTemplate::Template, as: 'Email Template' do
 
   controller do
     def index
-      current_business.sync_templates
+      EmailTemplate.sync_templates
       super
     end
   end

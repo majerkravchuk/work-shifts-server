@@ -87,9 +87,7 @@ ActiveRecord::Schema.define(version: 2018_07_01_182906) do
     t.index ["result_id"], name: "index_email_loader_rows_on_result_id"
   end
 
-  create_table "email_template_bases", force: :cascade do |t|
-    t.integer "business_id"
-    t.string "type"
+  create_table "email_templates", force: :cascade do |t|
     t.string "name"
     t.string "key"
     t.string "body"
