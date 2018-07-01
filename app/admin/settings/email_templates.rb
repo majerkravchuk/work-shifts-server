@@ -12,6 +12,13 @@ ActiveAdmin.register EmailTemplate do
       EmailTemplate.sync_templates
       super
     end
+
+    def update
+      params[:email_template][:body].gsub!('&lt;', '<')
+      params[:email_template][:body].gsub!('&gt;', '>')
+      resource.edited!
+      super
+    end
   end
 
   index do
@@ -24,7 +31,7 @@ ActiveAdmin.register EmailTemplate do
 
   form do |f|
     f.inputs do
-      f.input :name
+      f.input :name, input_html: { readonly: true, disabled: true }
       f.input :body
     end
     f.actions
