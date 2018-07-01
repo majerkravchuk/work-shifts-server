@@ -1,0 +1,57 @@
+body {
+  &.active_admin {
+    #active_admin_content {
+      #main_content {
+        .trumbowyg-box {
+          border: 1px solid #e6e9ee;
+          border-radius: 3px;
+          margin-top: 0;
+          width: calc(80% - 2px);
+
+          .trumbowyg-button-pane {
+            background: #ecf0f1;
+            min-height: 29px;
+
+            &::after {
+              top: 29px;
+            }
+
+            .trumbowyg-open-dropdown {
+              &::after {
+                top: 18px;
+              }
+            }
+
+            .trumbowyg-button-group {
+              height: 29px;
+
+              &::before {
+                height: 29px;
+              }
+
+              button {
+                border-radius: 0;
+                box-shadow: none;
+                height: 29px;
+                width: 29px;
+
+                &:hover {
+                  background: #fff;
+                }
+              }
+            }
+          }
+
+          button {
+            border-radius: 0;
+            font-size: 1em;
+
+            &:hover {
+              background: #ecf0f1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

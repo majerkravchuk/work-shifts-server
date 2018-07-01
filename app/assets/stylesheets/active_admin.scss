@@ -16,6 +16,10 @@ $skinMainSecondColor: #606f7b !default;
 @import "wigu/active_admin_theme";
 @import "wigu/active_admin_theme/extension";
 
+@import 'activeadmin/trumbowyg/ui/sass/trumbowyg';
+@import 'activeadmin/trumbowyg_input';
+@import 'activeadmin/trumbowyg/extension';
+
 @import "active_admin/emails_from_file";
 
 .footer {

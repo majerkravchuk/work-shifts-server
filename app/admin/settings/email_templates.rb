@@ -32,7 +32,19 @@ ActiveAdmin.register EmailTemplate do
   form do |f|
     f.inputs do
       f.input :name, input_html: { readonly: true, disabled: true }
-      f.input :body
+      f.input :body, as: :trumbowyg, input_html: { data:
+        {
+          options: {
+            btns: [
+              ['bold', 'italic'],
+              ['superscript', 'subscript'],
+              ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+              ['unorderedList', 'orderedList'],
+              ['horizontalRule'], ['removeformat']
+            ]
+          }
+        }
+      }
     end
     f.actions
   end
