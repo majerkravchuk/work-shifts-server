@@ -1,20 +1,17 @@
 # == Schema Information
 #
-# Table name: positions
+# Table name: email_template_bases
 #
 #  id          :bigint(8)        not null, primary key
+#  body        :string
+#  key         :string
 #  name        :string
+#  status      :integer          default("default")
 #  type        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  business_id :bigint(8)
-#
-# Indexes
-#
-#  index_positions_on_business_id  (business_id)
+#  business_id :integer
 #
 
-class Position < ApplicationRecord
-  # === relations ===
-  belongs_to :business
+class EmailTemplate::Default < EmailTemplate::Base
 end

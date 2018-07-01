@@ -89,3 +89,12 @@ businesses.each do |business|
     end
   end
 end
+
+default_email_templates_data = YAML.load_file("#{Rails.root}/db/import/default_email_templates.yml")
+default_email_templates_data.each do |data|
+  EmailTemplate::Default.create(
+    name: data['name'],
+    key: data['key'],
+    body: data['body']
+  )
+end

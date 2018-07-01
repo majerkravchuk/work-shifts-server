@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_30_161331) do
+ActiveRecord::Schema.define(version: 2018_07_01_182906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(version: 2018_06_30_161331) do
     t.index ["result_id"], name: "index_email_loader_rows_on_result_id"
   end
 
+  create_table "email_template_bases", force: :cascade do |t|
+    t.integer "business_id"
+    t.string "type"
+    t.string "name"
+    t.string "key"
+    t.string "body"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "employees_facilities", id: false, force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "employee_id"
@@ -98,9 +109,10 @@ ActiveRecord::Schema.define(version: 2018_06_30_161331) do
 
   create_table "facilities", force: :cascade do |t|
     t.string "name"
-    t.integer "business_id", null: false
+    t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_facilities_on_business_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -128,9 +140,10 @@ ActiveRecord::Schema.define(version: 2018_06_30_161331) do
   create_table "positions", force: :cascade do |t|
     t.string "name"
     t.string "type"
-    t.integer "business_id", null: false
+    t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_positions_on_business_id"
   end
 
   create_table "shifts", force: :cascade do |t|

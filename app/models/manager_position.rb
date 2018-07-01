@@ -7,7 +7,11 @@
 #  type        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  business_id :integer          not null
+#  business_id :bigint(8)
+#
+# Indexes
+#
+#  index_positions_on_business_id  (business_id)
 #
 
 class ManagerPosition < Position

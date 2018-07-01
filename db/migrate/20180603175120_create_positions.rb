@@ -3,7 +3,7 @@ class CreatePositions < ActiveRecord::Migration[5.2]
     create_table :positions do |t|
       t.string :name
       t.string :type
-      t.integer :business_id, null: false
+      t.belongs_to :business
 
       t.timestamps
     end

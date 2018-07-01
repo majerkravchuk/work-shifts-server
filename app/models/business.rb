@@ -25,4 +25,34 @@ class Business < ApplicationRecord
   has_many :allowed_email
   has_many :email_loader_results, class_name: 'EmailLoader::Result'
   has_many :invitations
+  has_many :email_templates, class_name: 'EmailTemplate::Template'
+
+  # === instance methods ===
+  def sync_templates
+    default_templates =
+      EmailTemplate::Default.where.not(key: email_templates.pluck(:key))
+
+    default_templates.each do |template|
+      email_templates.create(name: template.name, key: template.key, body: template.body)
+    end
+  end
+
+  def email_template_for(key)
+    template = email_templates.find_by(key: key)
+
+    return template if template.present?
+
+    default_template = EmailTemplate::Default.find_by(key: key)
+
+    if default_template.present?
+      template = email_templates.create(
+        name: default_template.name,
+        key: default_template.key,
+        body: default_template.body
+      )
+    end
+
+    template
+  end
+
 end

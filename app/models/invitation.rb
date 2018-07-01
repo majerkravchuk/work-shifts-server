@@ -39,6 +39,7 @@ class Invitation < ApplicationRecord
 
   # === callbacks ===
   before_validation :set_token, on: [:create]
+  after_create :send_email
 
   # === enums ===
   enum role: %i[employee manager]
@@ -53,5 +54,9 @@ class Invitation < ApplicationRecord
   def set_token
     self.token = SecureRandom.urlsafe_base64(64, false)
     set_token if Invitation.exists?(token: token)
+  end
+
+  def send_email
+    #TODO: inplement!
   end
 end
