@@ -20,5 +20,13 @@ body {
         }
       }
     }
+
+    .flashes {
+      .flash {
+        &.flash_alert {
+          color: #323537 !important;
+        }
+      }
+    }
   }
 }
