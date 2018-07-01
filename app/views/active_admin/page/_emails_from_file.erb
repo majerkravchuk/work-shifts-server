@@ -43,7 +43,7 @@
 
     <% if result.file.attached? %>
       <div class="download-file">
-        <%= link_to "Download file", '#', class: "download-button" %>
+        <%= link_to "Download file", rails_blob_path(result.file), class: "download-button" %>
         <div class="file-name">
           File: <span class="name"><%= result.filename %></span>
         </div>
