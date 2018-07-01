@@ -13,13 +13,13 @@ ActiveAdmin.register_page 'Emails from file' do
 
   page_action :create, method: :post do
     if params[:file].nil?
-      redirect_to admin_emails_from_file_path, flash: { error: 'You did not select a file' }
+      redirect_to admin_emails_from_file_path, flash: { error: 'You did not select a file!' }
     else
       loader = EmailLoader::FromXlsx.new(
         current_business, current_user, params[:file]
       )
       result = loader.parse!
-      redirect_to admin_emails_from_file_path(result_id: result.id), notice: 'File successfully uploaded'
+      redirect_to admin_emails_from_file_path(result_id: result.id), notice: 'File successfully uploaded!'
     end
 
   end
