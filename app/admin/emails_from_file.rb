@@ -3,7 +3,7 @@ ActiveAdmin.register_page 'Emails from file' do
 
   content do
     @result = EmailLoader::Result.find_by(id: params[:result_id])
-    @previous_results = EmailLoader::Result.order(created_at: :desc).first(10)
+    @previous_results = EmailLoader::Result.order(created_at: :desc)
     render partial: 'emails_from_file', locals: { result: @result, previous_results: @previous_results }
   end
 
