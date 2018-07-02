@@ -19,7 +19,12 @@ ActiveAdmin.register_page 'Emails from file' do
         current_business, current_user, params[:file]
       )
       result = loader.parse!
-      redirect_to admin_emails_from_file_path(result_id: result.id), notice: 'File successfully uploaded!'
+
+      if result.uploaded?
+        redirect_to admin_emails_from_file_path(result_id: result.id), notice: 'File successfully uploaded!'
+      else
+        redirect_to admin_emails_from_file_path(result_id: result.id), flash: { error: 'Sorry, something went wrong!' }
+      end
     end
 
   end
