@@ -9,3 +9,13 @@
 
     <p>If you didn't request this, please ignore this email.</p>
     <p>Your password won't change until you access the link above and create a new one.</p>
+- name: Invitation
+  key: invitation
+  body: |
+    <p>Hello <%= @resource.name || @resource.email %>!</p>
+
+    <p><%= @manager.name %> has invited you to join <%= business.name =>
+
+    <p>There will be a link</p>
+
+    <p>If you didn't request this, please ignore this email.</p>
