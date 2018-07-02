@@ -18,7 +18,7 @@
         <% previous_results.each do |previous_result| %>
           <a class="previous-import <%= previous_result.status %> <%= 'active' if result.present? && previous_result.id == result.id %>"
              href="<%= admin_emails_from_file_path(result_id: previous_result.id) %>">
-            <%= previous_result.filename %> <span class="date">[<%= previous_result.created_at.strftime("%B %d, %Y %I:%M %P") %>]</span>
+            <span class="file-name"><%= previous_result.filename %></span> <span class="date">[<%= previous_result.created_at.strftime("%B %d, %Y %I:%M %P") %>]</span>
           </a>
         <% end %>
       <% else %>

@@ -39,6 +39,13 @@ body {
               padding: 8px 16px;
               text-decoration: none;
 
+              .file-name {
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 169px;
+              }
+
               &:last-child {
                 margin-bottom: 0;
               }
@@ -79,6 +86,7 @@ body {
                 color: #606f7a;
                 float: right;
                 font-size: 0.9em;
+                line-height: 19px;
               }
             }
           }
