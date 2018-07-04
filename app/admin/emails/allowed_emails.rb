@@ -46,8 +46,8 @@ ActiveAdmin.register AllowedEmail do
 
   controller do
     def create
-      params[:email][:business_id] = current_business.id
-      params[:email][:role] = :employee if current_user.manager?
+      params[:allowed_email][:business_id] = current_business.id
+      params[:allowed_email][:role] = :employee if current_user.manager?
       super
     end
   end
