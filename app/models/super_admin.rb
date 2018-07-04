@@ -28,6 +28,9 @@
 #
 
 class SuperAdmin < User
+  # === audited ===
+  audited
+
   # === relations ===
   has_many :employee_positions,
            source: :employee_positions,

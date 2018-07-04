@@ -11,6 +11,9 @@
 #
 
 class Business < ApplicationRecord
+  # === audited ===
+  audited
+
   # === relations ===
   has_many :users
   has_many :admins_and_managers, -> { where(role: %i[manager super_admin]) }, class_name: 'User'
@@ -25,4 +28,5 @@ class Business < ApplicationRecord
   has_many :allowed_email
   has_many :email_loader_results, class_name: 'EmailLoader::Result'
   has_many :invitations
+  has_many :audits, class_name: 'BusinessAudit'
 end

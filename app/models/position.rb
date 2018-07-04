@@ -15,6 +15,9 @@
 #
 
 class Position < ApplicationRecord
+  # === audited ===
+  audited
+
   # === relations ===
   belongs_to :business
 end

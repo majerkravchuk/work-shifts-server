@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
   end
 
   create_table "audits", force: :cascade do |t|
+    t.bigint "business_id"
     t.integer "auditable_id"
     t.string "auditable_type"
     t.integer "associated_id"
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.datetime "created_at"
     t.index ["associated_type", "associated_id"], name: "associated_index"
     t.index ["auditable_type", "auditable_id"], name: "auditable_index"
+    t.index ["business_id"], name: "index_audits_on_business_id"
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"

@@ -6,12 +6,15 @@
 #  body       :string
 #  key        :string
 #  name       :string
-#  status     :integer          default(0)
+#  status     :integer          default("default")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class EmailTemplate < ApplicationRecord
+  # === audited ===
+  audited
+
   # === enums ===
   enum status: %i[default edited]
 

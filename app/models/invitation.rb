@@ -19,6 +19,9 @@
 #
 
 class Invitation < ApplicationRecord
+  # === audited ===
+  audited
+
   # === relations ===
   belongs_to :business
   belongs_to :allowed_email

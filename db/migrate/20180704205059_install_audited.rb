@@ -1,6 +1,7 @@
 class InstallAudited < ActiveRecord::Migration[5.2]
   def self.up
     create_table :audits, :force => true do |t|
+      t.belongs_to :business
       t.column :auditable_id, :integer
       t.column :auditable_type, :string
       t.column :associated_id, :integer

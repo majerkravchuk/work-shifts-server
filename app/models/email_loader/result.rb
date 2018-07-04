@@ -16,6 +16,9 @@
 #
 
 class EmailLoader::Result < ApplicationRecord
+  # === audited ===
+  audited
+
   # === consts ===
   SAVE_LAST_RECORDS_COUNT = 8
 

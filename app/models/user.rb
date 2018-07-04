@@ -28,6 +28,9 @@
 #
 
 class User < ApplicationRecord
+  # === audited ===
+  audited
+
   # === devise settings ===
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
          request_keys: [:subdomain, :path]

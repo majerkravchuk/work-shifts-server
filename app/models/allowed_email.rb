@@ -20,6 +20,9 @@
 #
 
 class AllowedEmail < ApplicationRecord
+  # === audited ===
+  audited
+
   # === relations ===
   belongs_to :business
   belongs_to :position

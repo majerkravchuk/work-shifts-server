@@ -23,6 +23,9 @@ class Shift < ApplicationRecord
   # === constants ===
   TIME_FORMAT = /\A(0[0-9]|1[0-2]):[0-5][0-9]\s[ap]m\z/
 
+  # === audited ===
+  audited
+
   # === relations ===
   belongs_to :business
   belongs_to :facility, required: false

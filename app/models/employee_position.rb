@@ -15,6 +15,9 @@
 #
 
 class EmployeePosition < Position
+  # === audited ===
+  audited
+
   # === relations ===
   belongs_to :business
   has_many :employees, foreign_key: :position_id
