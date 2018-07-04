@@ -235,6 +235,10 @@ ActiveAdmin.setup do |config|
                if: -> { current_user.manager? }
       menu.add label: 'Emails', priority: 6
       menu.add label: 'Settings', priority: 7, if: -> { current_user.super_admin? }
+      menu.add label: 'Letters',
+               priority: 8,
+               url: '/letters',
+               if: -> { Rails.env.development? }
     end
   end
 

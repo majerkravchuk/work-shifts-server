@@ -57,6 +57,6 @@ class Invitation < ApplicationRecord
   end
 
   def send_email
-    #TODO: inplement!
+    InvitationMailer.invitation(self).deliver_now
   end
 end
