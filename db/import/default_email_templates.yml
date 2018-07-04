@@ -1,21 +1,19 @@
 - name: Reset password instructions
   key: reset_password_instructions
   body: |
-    <p>Hello <%= @resource.name %>!</p>
+    <p style='text-align: center;'>Hello <%= @resource.name %>!</p>
 
-    <p>Someone has requested a link to change your password. You can do this through the link below.</p>
+    <p style='text-align: center;'>Someone has requested a link to change your password. You can do this through the link below.</p>
 
-    <p><%= link_to 'Change my password', edit_password_url(@resource, reset_password_token: @token, subdomain: @resource.business.subdomain) %></p>
+    <p style='text-align: center;'><%= link_to 'Change my password', edit_password_url(@resource, reset_password_token: @token, subdomain: @resource.business.subdomain) %></p>
 
-    <p>If you didn't request this, please ignore this email.</p>
-    <p>Your password won't change until you access the link above and create a new one.</p>
+    <p style='text-align: center;'>If you didn't request this, please ignore this email.</p>
+    <p style='text-align: center;'>Your password won't change until you access the link above and create a new one.</p>
 - name: Invitation
   key: invitation
   body: |
-    <p>Hello <%= @invitation.name || @invitation.email %>!</p>
+    <p style='text-align: center;'>Hello <%= @invitation.name || @invitation.email %>!</p>
 
-    <p><%= @manager.name %> has invited you to join <%= @business.name %></p>
+    <p style='text-align: center;'><%= @manager.name %> has invited you to join <%= @business.name %>.</p>
 
-    <p><a>Click on the link</a> below to set up your account</p>
-
-    <p>If you didn't request this, please ignore this email.</p>
+    <p style='text-align: center;'><a>Click on the link</a> below to set up your account.</p>
