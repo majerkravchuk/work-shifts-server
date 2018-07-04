@@ -19,13 +19,13 @@ ActiveAdmin.register AllowedEmail do
       )
     end
     batch_action_collection.where(status: :imported).update_all(status: :invited)
-    redirect_to collection_path, notice: 'The users have been invited.'
+    redirect_to collection_path, notice: 'The users were successfully invited.'
   end
 
   batch_action :reject_invitations do
     Invitation.where(allowed_email: batch_action_collection).delete_all
     batch_action_collection.update_all(status: :imported)
-    redirect_to collection_path, notice: 'The invitations have been rejected.'
+    redirect_to collection_path, notice: 'The invitations were successfully rejected.'
   end
 
   member_action :invite, method: :put do
@@ -35,13 +35,13 @@ ActiveAdmin.register AllowedEmail do
       manager: current_user
     )
     resource.update(status: :invited)
-    redirect_to admin_allowed_emails_path, notice: 'The user has been invited.'
+    redirect_to admin_allowed_emails_path, notice: 'The user was successfully invited.'
   end
 
   member_action :reject_invitation, method: :put do
     resource.invitation.delete if resource.invitation.present?
     resource.update(status: :imported)
-    redirect_to admin_allowed_emails_path, notice: 'The invitation has been rejected.'
+    redirect_to admin_allowed_emails_path, notice: 'The invitation was successfully rejected.'
   end
 
   controller do

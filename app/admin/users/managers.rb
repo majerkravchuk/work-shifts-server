@@ -19,7 +19,7 @@ ActiveAdmin.register Manager do
 
   member_action :reset_password, method: :post do
     resource.send_reset_password_instructions
-    redirect_to admin_managers_path, notice: 'The instruction for password recovery has been sent.'
+    redirect_to admin_managers_path, notice: 'The instruction for password recovery was successfully sent.'
   end
 
   filter :name

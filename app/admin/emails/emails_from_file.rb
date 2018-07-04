@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Emails from file' do
       result = loader.parse!
 
       if result.uploaded?
-        redirect_to admin_emails_from_file_path(result_id: result.id), notice: 'File successfully uploaded!'
+        redirect_to admin_emails_from_file_path(result_id: result.id), notice: 'The file was successfully uploaded!'
       else
         redirect_to admin_emails_from_file_path(result_id: result.id), flash: { error: 'Sorry, something went wrong!' }
       end
