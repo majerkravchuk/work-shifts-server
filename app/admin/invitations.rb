@@ -25,7 +25,6 @@ ActiveAdmin.register Invitation do
     column(:facilities) do |invitation|
       invitation.allowed_email.facilities.pluck(:name).sort.join(', ')
     end
-    column :token
     actions
   end
 
