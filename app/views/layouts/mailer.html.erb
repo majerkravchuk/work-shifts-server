@@ -2,12 +2,53 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
   </head>
 
   <body>
-    <%= yield %>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f7f9fb" style="margin: 0; padding-top: 50px; padding-bottom: 30px;">
+      <tbody>
+        <tr>
+          <td align="center" valign="top">
+            <table width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff" style="border: 1px solid #606f7a; margin: 0; padding: 0;">
+              <tbody>
+                <tr>
+                  <td>
+                    <table width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#606f7b" style="border-bottom: 3px solid #d7dce4; color: #fff;">
+                      <tbody>
+                        <tr>
+                          <td align="left" valign="top" style="font-size: 18px; line-height: 40px; padding-left: 15px;">
+                            WorkSifts
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff" style="color: #323537; padding: 40px 15px">
+                      <tbody>
+                        <tr>
+                          <td align="left" valign="top" style="font-size: 14px;">
+                            <%= yield %>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table width="600" cellpadding="0" cellspacing="0" border="0" style="margin: 0; padding-top: 10px;">
+              <tbody>
+                <tr>
+                  <td align="center" style="color: #ababab; font-size: 12px; line-height: 18px;">
+                    This email is generated automatically, do not reply to it.<br>
+                    For questions and suggestions for working with the service, please contact:<br>
+                    <i>majerkravchuk@gmail.com</i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
