@@ -50,6 +50,8 @@ gem 'roo'
 # The official AWS SDK for Ruby
 gem 'aws-sdk-s3', require: false
 
+# Audited (formerly acts_as_audited) is an ORM extension that logs all changes to your Rails models.
+gem 'audited'
 # Annotate Rails classes with schema and routes info
 gem 'annotate'
 # A library for generating fake data such as names, addresses, and phone numbers.
