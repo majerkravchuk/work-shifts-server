@@ -56,4 +56,11 @@ class EmailTemplate < ApplicationRecord
       YAML.load_file("#{Rails.root}/db/import/default_email_templates.yml")
     end
   end
+
+  # === instance methods ===
+  def restore_template!
+    default_email_templates = self.class.load_templates
+    default_template = default_email_templates.find { |t| t['key'] == key }
+    update(body: default_template['body'], status: :default)
+  end
 end

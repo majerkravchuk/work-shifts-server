@@ -11,6 +11,10 @@ class EmailTemplatePolicy < ApplicationPolicy
     current_user.super_admin?
   end
 
+  def restore_template?
+    current_user.super_admin?
+  end
+
   def scope
     Pundit.policy_scope!(current_user, record.class)
   end
