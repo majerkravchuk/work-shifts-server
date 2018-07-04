@@ -8,6 +8,11 @@ ActiveAdmin.register Employee do
   config.sort_order = 'name_asc'
 
   controller do
+    def create
+      params[:employee][:business_id] = current_business.id
+      super
+    end
+
     def update
       if params[:employee][:password].blank? && params[:employee][:password_confirmation].blank?
         params[:employee].delete('password')
@@ -74,7 +79,6 @@ ActiveAdmin.register Employee do
         ]
       end
       f.input :facilities, as: :check_boxes, collection: collected_data
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
   end

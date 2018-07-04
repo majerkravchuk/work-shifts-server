@@ -5,6 +5,13 @@ ActiveAdmin.register ManagerPosition do
 
   config.sort_order = 'name_asc'
 
+  controller do
+    def create
+      params[:manager_position][:business_id] = current_business.id
+      super
+    end
+  end
+
   index do
     column :name
     column(:employee_positions) do |manager_position|
@@ -41,7 +48,6 @@ ActiveAdmin.register ManagerPosition do
         ]
       end
       f.input :employee_positions, as: :check_boxes, collection: collected_data
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
   end

@@ -8,6 +8,11 @@ ActiveAdmin.register Manager do
   config.sort_order = 'name_asc'
 
   controller do
+    def create
+      params[:manager][:business_id] = current_business.id
+      super
+    end
+
     def update
       if params[:manager][:password].blank? && params[:manager][:password_confirmation].blank?
         params[:manager].delete('password')
@@ -59,7 +64,6 @@ ActiveAdmin.register Manager do
         collection: ManagerPosition.where(business: current_business).map { |p| [p.name.capitalize, p.id] },
         include_blank: false
       })
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
   end

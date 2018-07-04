@@ -10,6 +10,7 @@ ActiveAdmin.register Shift do
 
   controller do
     def create
+      params[:shift][:business_id] = current_business.id
       create!{ admin_shifts_path }
     end
 
@@ -60,7 +61,6 @@ ActiveAdmin.register Shift do
       })
       f.input :start_time, input_html: { autocomplete: :off, placeholder: '00:00 AM', class: 'time-input' }
       f.input :end_time, input_html: { autocomplete: :off, placeholder: '00:00 AM', class: 'time-input' }
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
   end

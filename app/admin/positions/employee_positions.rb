@@ -5,6 +5,13 @@ ActiveAdmin.register EmployeePosition do
 
   config.sort_order = 'name_asc'
 
+  controller do
+    def create
+      params[:employee_position][:business_id] = current_business.id
+      super
+    end
+  end
+
   index do
     column :name
     column(:manager_positions) do |employee_position|
@@ -31,7 +38,6 @@ ActiveAdmin.register EmployeePosition do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
       collected_data = current_business.manager_positions.map do |position|
         [
           position.name,

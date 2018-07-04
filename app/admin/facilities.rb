@@ -5,6 +5,13 @@ ActiveAdmin.register Facility do
 
   config.sort_order = 'name_asc'
 
+  controller do
+    def create
+      params[:facility][:business_id] = current_business.id
+      super
+    end
+  end
+
   index do
     column :name
     actions
@@ -24,7 +31,6 @@ ActiveAdmin.register Facility do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :business_id, input_html: { value: current_user.business.id }, as: :hidden
     end
     f.actions
   end
