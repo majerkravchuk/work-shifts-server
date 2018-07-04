@@ -32,5 +32,6 @@ module WorkShifts
     config.eager_load_paths << Rails.root.join('lib/assets')
     config.autoload_paths << config.root.join('lib/assets')
     Rails.application.config.assets.paths << Rails.root.join('node_modules')
+    config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
   end
 end
