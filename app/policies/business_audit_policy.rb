@@ -1,30 +1,30 @@
 class BusinessAuditPolicy < ApplicationPolicy
   def index?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def show?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def create?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def new?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def update?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def edit?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def destroy?
-    current_user.administrator?
+    current_user.administrator? && current_user.super_administrator?
   end
 
   def scope

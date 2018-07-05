@@ -1,5 +1,5 @@
 ActiveAdmin.register Manager do
-  menu parent: 'Users', priority: 1
+  menu parent: 'Users', priority: 2, if: -> { current_user.administrator? }
 
   includes :position
 

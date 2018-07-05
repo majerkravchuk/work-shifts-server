@@ -1,5 +1,5 @@
 ActiveAdmin.register BusinessAudit do
-  menu priority: 9, label: 'Audit'
+  menu priority: 9, label: 'Audit', if: -> { current_user.administrator? && current_user.super_administrator? }
 
   config.sort_order = 'created_at_desc'
   actions :index, :show

@@ -21,6 +21,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer :business_id
       t.string  :type
 
+      t.boolean :super_administrator, default: false
+
       t.timestamps null: false
     end
 

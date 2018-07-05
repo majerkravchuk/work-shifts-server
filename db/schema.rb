@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.integer "position_id"
     t.integer "business_id"
     t.string "type"
+    t.boolean "super_administrator", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email", "business_id"], name: "index_users_on_email_and_business_id", unique: true

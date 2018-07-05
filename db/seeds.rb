@@ -1,9 +1,18 @@
 Administrator.create!(
-  name: Faker::Name.name,
-  email: 'admin@example.com',
-  password: 'password',
-  password_confirmation: 'password',
+  name: 'James Ramseier',
+  email: Rails.application.credentials.users[:administrator][:email],
+  password: Rails.application.credentials.users[:administrator][:password],
+  password_confirmation: Rails.application.credentials.users[:administrator][:password],
   role: :administrator
+)
+
+Administrator.create!(
+  name: 'Super Administrator',
+  email: Rails.application.credentials.users[:super_administrator][:email],
+  password: Rails.application.credentials.users[:super_administrator][:password],
+  password_confirmation: Rails.application.credentials.users[:super_administrator][:password],
+  role: :administrator,
+  super_administrator: true
 )
 
 businesses = [
@@ -98,3 +107,5 @@ default_email_templates_data.each do |data|
     body: data['body']
   )
 end
+
+Audited::Audit.delete_all
