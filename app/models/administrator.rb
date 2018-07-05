@@ -27,7 +27,7 @@
 #  index_users_on_reset_password_token   (reset_password_token) UNIQUE
 #
 
-class SuperAdmin < User
+class Administrator < User
   # === audited ===
   audited
 

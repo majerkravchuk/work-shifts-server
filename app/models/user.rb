@@ -50,7 +50,7 @@ class User < ApplicationRecord
   validates_length_of       :password, minimum: 8, maximum: 32, allow_blank: true
 
   # === enums ===
-  enum role: %i[employee manager super_admin]
+  enum role: %i[employee manager administrator]
 
   # === class methods ===
   class << self
@@ -60,7 +60,7 @@ class User < ApplicationRecord
 
       where(
         email: warden_conditions[:email],
-        role: :super_admin
+        role: :administrator
       ).or(
         where(
           email: warden_conditions[:email],

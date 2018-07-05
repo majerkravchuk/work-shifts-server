@@ -1,9 +1,9 @@
-SuperAdmin.create!(
+Administrator.create!(
   name: Faker::Name.name,
   email: 'admin@example.com',
   password: 'password',
   password_confirmation: 'password',
-  role: :super_admin
+  role: :administrator
 )
 
 businesses = [

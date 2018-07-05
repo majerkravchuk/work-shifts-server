@@ -109,7 +109,7 @@ ActiveAdmin.register AllowedEmail do
 
       f.input :name
 
-      if current_user.super_admin?
+      if current_user.administrator?
         f.input :role,
                 as: :select,
                 collection: [['Employee', :employee], ['Manager', :manager]],
@@ -117,9 +117,9 @@ ActiveAdmin.register AllowedEmail do
       end
 
       positions_collection = current_business.positions.order(:name).map do |position|
-        if position.is_a?(ManagerPosition) && !current_user.super_admin?
+        if position.is_a?(ManagerPosition) && !current_user.administrator?
           nil
-        elsif current_user.employee_positions.exclude?(position) && !current_user.super_admin?
+        elsif current_user.employee_positions.exclude?(position) && !current_user.administrator?
           nil
         else
           [position.name, position.id, {

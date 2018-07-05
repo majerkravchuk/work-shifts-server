@@ -32,7 +32,7 @@ ActiveAdmin.register Shift do
   filter :employee_position,
          as: :select,
          collection: proc { current_user.employee_positions },
-         if: proc { current_user.super_admin? }
+         if: proc { current_user.administrator? }
 
   show do
     attributes_table do

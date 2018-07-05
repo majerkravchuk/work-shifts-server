@@ -219,7 +219,7 @@ ActiveAdmin.setup do |config|
     admin.download_links = false
 
     admin.build_menu do |menu|
-      menu.add label: 'Switch current business', priority: 0, if: -> { current_user.super_admin? } do |dropdown|
+      menu.add label: 'Switch current business', priority: 0, if: -> { current_user.administrator? } do |dropdown|
         app = Rails.application
         host = app.credentials[Rails.env.to_sym][:host]
         Business.all.sort.each do |business|
@@ -227,14 +227,14 @@ ActiveAdmin.setup do |config|
           dropdown.add label: business.name, url: url
         end
       end
-      menu.add label: 'Positions', priority: 3, if: -> { current_user.super_admin? }
-      menu.add label: 'Users', priority: 2, if: -> { current_user.super_admin? }
+      menu.add label: 'Positions', priority: 3, if: -> { current_user.administrator? }
+      menu.add label: 'Users', priority: 2, if: -> { current_user.administrator? }
       menu.add label: 'Employees',
                priority: 2,
                url: Rails.application.routes.url_helpers.admin_employees_path,
                if: -> { current_user.manager? }
       menu.add label: 'Emails', priority: 6
-      menu.add label: 'Settings', priority: 7, if: -> { current_user.super_admin? }
+      menu.add label: 'Settings', priority: 7, if: -> { current_user.administrator? }
       menu.add label: 'Letters',
                priority: 8,
                url: '/letters',

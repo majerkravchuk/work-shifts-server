@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def switch_business_for_admin
-    if current_user.present? && current_user.super_admin? && current_user.business != current_business
+    if current_user.present? && current_user.administrator? && current_user.business != current_business
       current_user.update(business: current_business)
     end
   end

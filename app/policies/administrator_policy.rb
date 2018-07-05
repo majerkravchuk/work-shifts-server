@@ -1,0 +1,2 @@
+class AdministratorPolicy < UserPolicy
+end

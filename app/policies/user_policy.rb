@@ -1,6 +1,6 @@
 class UserPolicy < ApplicationPolicy
   def reset_password?
-    @current_user.super_admin? || @current_user.manager?
+    @current_user.administrator? || @current_user.manager?
   end
 
   class Scope
@@ -12,7 +12,7 @@ class UserPolicy < ApplicationPolicy
     end
 
     def resolve
-      @scope = @scope.where(business: current_user.business).where.not(role: :super_admin)
+      @scope = @scope.where(business: current_user.business).where.not(role: :administrator)
 
       if current_user.manager?
         @scope = @scope.where(position: current_user.position.employee_positions)

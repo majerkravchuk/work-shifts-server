@@ -1,10 +1,10 @@
 class ShiftPolicy < ApplicationPolicy
   def index?
-    current_user.super_admin? || current_user.manager?
+    current_user.administrator? || current_user.manager?
   end
 
   def show?
-    current_user.super_admin? ||
+    current_user.administrator? ||
     current_user.manager? && current_user.employee_positions.include?(record.employee_position)
   end
 
@@ -13,7 +13,7 @@ class ShiftPolicy < ApplicationPolicy
   end
 
   def new?
-    current_user.super_admin? || current_user.manager?
+    current_user.administrator? || current_user.manager?
   end
 
   def update?
@@ -41,7 +41,7 @@ class ShiftPolicy < ApplicationPolicy
     end
 
     def resolve
-      if current_user.super_admin?
+      if current_user.administrator?
         scope.where(business: current_user.business)
       elsif current_user.manager?
         scope.where(business: current_user.business).where(employee_position_id: current_user.employee_positions)

@@ -1,2 +1,0 @@
-class SuperAdminPolicy < UserPolicy
-end

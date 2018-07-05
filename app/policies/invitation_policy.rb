@@ -1,20 +1,20 @@
 class InvitationPolicy < ApplicationPolicy
   def index?
-    current_user.super_admin? || current_user.manager?
+    current_user.administrator? || current_user.manager?
   end
 
   def show?
-    current_user.super_admin? ||
+    current_user.administrator? ||
       current_user.manager? && record.allowed_email.employee? &&
       current_user.employee_positions.include?(record.allowed_email.position)
   end
 
   def create?
-    current_user.super_admin? || current_user.manager?
+    current_user.administrator? || current_user.manager?
   end
 
   def new?
-    current_user.super_admin? || current_user.manager?
+    current_user.administrator? || current_user.manager?
   end
 
   def update?
@@ -42,7 +42,7 @@ class InvitationPolicy < ApplicationPolicy
     end
 
     def resolve
-      if current_user.super_admin?
+      if current_user.administrator?
         scope.where(business: current_user.business)
       elsif current_user.manager?
         scope.includes(:allowed_email).where(business: current_user.business).where(allowed_emails: {

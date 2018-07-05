@@ -1,18 +1,18 @@
 class EmailTemplatePolicy < ApplicationPolicy
   def index?
-    current_user.super_admin?
+    current_user.administrator?
   end
 
   def update?
-    current_user.super_admin?
+    current_user.administrator?
   end
 
   def edit?
-    current_user.super_admin?
+    current_user.administrator?
   end
 
   def restore_template?
-    current_user.super_admin?
+    current_user.administrator?
   end
 
   def scope
