@@ -10,12 +10,12 @@ $(function() {
 
   $('.admin_shifts .time-input').each(function(_i, input) {
     new IMask(input, {
-      mask: 'HH:MM D{M}',
+      mask: 'HH:MM D{m}',
       lazy: false,
       groups: {
         HH: new IMask.MaskedPattern.Group.Range([0, 12]),
         MM: new IMask.MaskedPattern.Group.Range([0, 59]),
-        D: new IMask.MaskedPattern.Group.Enum(['A', 'P'])
+        D: new IMask.MaskedPattern.Group.Enum(['a', 'p'])
       }
     });
   });
