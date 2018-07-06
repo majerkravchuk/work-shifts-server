@@ -31,7 +31,7 @@ ActiveAdmin.register Manager do
   filter :email
   filter :position,
          as: :select,
-         collection: proc { ManagerPosition.where(business: current_business) }
+         collection: proc { current_business.manager_positions }
   filter :created_at
 
   index do
