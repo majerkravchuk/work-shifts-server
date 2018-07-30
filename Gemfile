@@ -56,6 +56,8 @@ gem 'audited'
 gem 'annotate'
 # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'faker'
+# A Ruby gem to load environment variables from `.env`
+gem 'dotenv-rails'
 
 group :development, :test do
   # A Ruby static code analyzer, based on the community Ruby style guide
