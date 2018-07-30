@@ -28,3 +28,6 @@
 
 # Ignore IDEA files
 /.idea
+
+# Ignore ENV files
+.env
