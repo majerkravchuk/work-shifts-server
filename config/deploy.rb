@@ -21,7 +21,7 @@ set :user, 'deploy'              # Username in the server to SSH to.
 set :port, '1008'                # SSH port number.
 set :forward_agent, true         # SSH forward_agent.
 
-set :shared_dirs, fetch(:shared_dirs, []).push('public/assets', 'log', 'tmp/pids', 'tmp/sockets')
+set :shared_dirs, fetch(:shared_dirs, []).push('public/assets', 'log', 'tmp/pids', 'tmp/sockets', 'storage')
 set :shared_files, fetch(:shared_files, []).push('config/puma.rb', 'config/master.key','.env')
 
 # This task is the environment that is loaded for all remote run commands, such as
