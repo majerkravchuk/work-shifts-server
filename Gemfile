@@ -45,6 +45,8 @@ gem 'active_admin_theme'
 gem 'activeadmin_trumbowyg'
 # Flexible authentication solution for Rails with Warden
 gem 'devise'
+# A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard
+gem 'jwt'
 # Minimal authorization through OO design and pure Ruby classes
 gem 'pundit'
 # Roo provides an interface to spreadsheets of several sorts

@@ -74,6 +74,22 @@ class User < ApplicationRecord
 
   #=== instance methods ===
 
+  def jwt_payload
+    {
+      user: {
+        id: id,
+        email: email,
+        name: name,
+        role: role
+      },
+      business: {
+        name: business.name,
+        subdomain: business.subdomain
+      },
+      exp: (Time.now + 2.days).to_i
+    }
+  end
+
   protected
 
   def password_required?
