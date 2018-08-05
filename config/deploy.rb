@@ -83,3 +83,11 @@ namespace :server do
     ]
   end
 end
+
+namespace :client do
+  task deploy: :remote_environment do
+    command %[
+      cd /home/deploy/work-shifts/client && git pull && yarn && yarn build
+    ]
+  end
+end
