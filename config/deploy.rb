@@ -50,6 +50,7 @@ task :deploy do
     invoke :'rails:db_migrate'
     command %{yarn install}
     invoke :'rails:assets_precompile'
+    command %{RAILS_ENV=production bundle exec rails trumbowyg:nondigest}
     invoke :'deploy:cleanup'
 
     on :launch do
