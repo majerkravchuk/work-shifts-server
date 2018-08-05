@@ -21,7 +21,7 @@ class ApiController < ApplicationController
   private
 
   def token
-    request.env['HTTP_AUTHORIZATION'].scan(/Bearer (.*)$/).flatten.last
+    request.env['Http-Authorization'].scan(/Bearer (.*)$/).flatten.last
   end
 
   def auth
@@ -29,6 +29,6 @@ class ApiController < ApplicationController
   end
 
   def auth_present?
-    request.env.fetch('HTTP_AUTHORIZATION', '').scan(/Bearer/).flatten.first.present?
+    request.env.fetch('Http-Authorization', '').scan(/Bearer/).flatten.first.present?
   end
 end
