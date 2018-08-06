@@ -4,7 +4,7 @@ module Api
 
       # GET /api/auth/current-user
       def show
-        render json: current_user
+        render json: CurrentUserSerializer.new(current_user)
       end
     end
   end

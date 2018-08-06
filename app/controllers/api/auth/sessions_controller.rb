@@ -9,7 +9,7 @@ module Api
         resource = warden.authenticate(scope: :user, recall: 'api/sessions#new')
         if resource.present?
           sign_in(:user, resource)
-          render json: resource
+          render json: CurrentUserSerializer.new(resource)
         else
           render json: { error: 'Invalid email or password' }, status: 422
         end
