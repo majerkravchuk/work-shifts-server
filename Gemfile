@@ -51,7 +51,8 @@ gem 'jwt'
 gem 'pundit'
 # Roo provides an interface to spreadsheets of several sorts
 gem 'roo'
-
+# A lightning fast JSON:API serializer for Ruby Objects
+gem 'fast_jsonapi'
 # Audited (formerly acts_as_audited) is an ORM extension that logs all changes to your Rails models.
 gem 'audited'
 # Annotate Rails classes with schema and routes info
