@@ -17,6 +17,9 @@ Rails.application.routes.draw do
           sessions: 'api/auth/sessions'
         }
       )
+
+      resource :current_user, only: [:show], path: 'current-user'
     end
+
   end
 end

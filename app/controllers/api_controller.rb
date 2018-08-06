@@ -1,6 +1,9 @@
 class ApiController < ApplicationController
-  skip_after_action :verify_authorized
-  skip_after_action :verify_policy_scoped
+  before_action :authenticate
 
   protect_from_forgery unless: -> { request.format.json? }
+
+  def authenticate
+    render json: { error: 'Unauthorized' }, status: 401 unless current_user.present?
+  end
 end
