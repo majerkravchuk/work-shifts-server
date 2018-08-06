@@ -51,8 +51,6 @@ gem 'jwt'
 gem 'pundit'
 # Roo provides an interface to spreadsheets of several sorts
 gem 'roo'
-# The official AWS SDK for Ruby
-gem 'aws-sdk-s3', require: false
 
 # Audited (formerly acts_as_audited) is an ORM extension that logs all changes to your Rails models.
 gem 'audited'
