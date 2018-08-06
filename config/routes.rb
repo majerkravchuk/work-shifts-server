@@ -5,7 +5,16 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letters' if Rails.env.development?
 
   namespace :api do
-    post '/sign-in', to: 'sessions#create'
-    post '/sign-out', to: 'sessions#destroy'
+    devise_for(
+      :users,
+      path: 'auth',
+      path_names: {
+        sign_in: 'sign-in',
+        sign_out: 'sign-out',
+      },
+      controllers: {
+        sessions: 'api/sessions'
+      }
+    )
   end
 end

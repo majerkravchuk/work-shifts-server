@@ -4,12 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :current_business
   before_action :set_time_zone
   before_action :switch_business_for_admin
-  after_action :verify_authorized, except: :index, unless: :active_admin_controller?
-  after_action :verify_policy_scoped, only: :index, unless: :active_admin_controller?
-
-  def active_admin_controller?
-    is_a?(ActiveAdmin::BaseController) || is_a?(ActiveAdmin::Devise::SessionsController)
-  end
 
   def current_business
     return nil if request.subdomain.nil?
