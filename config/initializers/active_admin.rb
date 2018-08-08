@@ -239,6 +239,9 @@ ActiveAdmin.setup do |config|
                priority: 8,
                url: '/letters',
                if: -> { Rails.env.development? }
+      menu.add label: 'Site',
+               priority: 9,
+               url: '/'
     end
   end
 
