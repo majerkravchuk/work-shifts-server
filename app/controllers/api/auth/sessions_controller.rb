@@ -17,7 +17,7 @@ module Api
 
       # DELETE /api/auth/sign-out
       def destroy
-        sign_out(:user)
+        sign_out(:user) if current_user
         head :ok
       end
     end
