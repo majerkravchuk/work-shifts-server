@@ -5,6 +5,18 @@ ActiveAdmin.register Business do
 
   config.sort_order = 'name_asc'
 
+  collection_action :shitch, method: :get do
+    business = Business.find_by(id: params[:business])
+    if business.present?
+      current_user.update(business: business)
+      redirect_to request.referrer, notice: "The business successfully switched to #{business.name}"
+    else
+      redirect_to request.referrer, flash: {
+        error: 'You do not have access to this business!'
+      }
+    end
+  end
+
   index do
     column :name
     column :subdomain

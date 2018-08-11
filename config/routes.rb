@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
 
-  scope '/*business' do
-    devise_for :users, ActiveAdmin::Devise.config
-    ActiveAdmin.routes(self)
-  end
-
+  devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   mount LetterOpenerWeb::Engine, at: '/letters' if Rails.env.development?
 
