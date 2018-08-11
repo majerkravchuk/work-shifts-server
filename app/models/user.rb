@@ -24,8 +24,8 @@
 #
 # Indexes
 #
-#  index_users_on_email_and_business_id  (email,business_id) UNIQUE
-#  index_users_on_reset_password_token   (reset_password_token) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ApplicationRecord
@@ -33,8 +33,7 @@ class User < ApplicationRecord
   audited
 
   # === devise settings ===
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable,
-         request_keys: [:subdomain, :path]
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable
 
   # === relations ===
   belongs_to :business, required: false
@@ -54,23 +53,23 @@ class User < ApplicationRecord
   enum role: %i[employee manager administrator]
 
   # === class methods ===
-  class << self
-    def find_for_authentication(warden_conditions)
-      allowed_roles = [:manager]
-      allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
-
-      where(
-        email: warden_conditions[:email],
-        role: :administrator
-      ).or(
-        where(
-          email: warden_conditions[:email],
-          role: allowed_roles,
-          business: Business.find_by_subdomain(warden_conditions[:subdomain])
-        )
-      ).first
-    end
-  end
+  # class << self
+  #   def find_for_authentication(warden_conditions)
+  #     allowed_roles = [:manager]
+  #     allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
+  #
+  #     where(
+  #       email: warden_conditions[:email],
+  #       role: :administrator
+  #     ).or(
+  #       where(
+  #         email: warden_conditions[:email],
+  #         role: allowed_roles,
+  #         business: Business.find_by_subdomain(warden_conditions[:subdomain])
+  #       )
+  #     ).first
+  #   end
+  # end
 
   #=== instance methods ===
 

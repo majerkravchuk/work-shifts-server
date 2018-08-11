@@ -19,7 +19,6 @@ ActiveAdmin.register Business do
 
   index do
     column :name
-    column :subdomain
     column :time_zone
     actions
   end
@@ -29,7 +28,6 @@ ActiveAdmin.register Business do
   show do
     attributes_table do
       row :name
-      row :subdomain
       row :time_zone
       row :created_at
     end
@@ -40,7 +38,6 @@ ActiveAdmin.register Business do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :subdomain
       f.input :time_zone, as: :time_zone
     end
     f.actions

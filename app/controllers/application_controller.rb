@@ -6,9 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_time_zone
 
   def check_current_user_business
-    if current_user.present? && current_user.business.nil?
-      current_user.update(business: Business.first)
-    end
+    current_user.update(business: Business.first) if current_user.present? && current_user.business.nil?
   end
 
   def current_business
