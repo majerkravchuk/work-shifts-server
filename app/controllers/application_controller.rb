@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :switch_business_for_admin
 
   def current_business
-    return nil if request.subdomain.nil?
-    @current_business ||= Business.find_by_subdomain(request.subdomain)
+    return nil if params[:business].blank?
+    @current_business ||= Business.find_by_scope(params[:business])
   end
   helper_method :current_business
 

@@ -16,8 +16,8 @@ Administrator.create!(
 )
 
 businesses = [
-  { name: 'DMS/Envision', subdomain: 'dms' },
-  { name: 'Fake business', subdomain: 'fake' }
+  { name: 'DMS/Envision', scope: 'dms' },
+  { name: 'Fake business', scope: 'fake' }
 ]
 
 facility_names = [
@@ -26,7 +26,7 @@ facility_names = [
 ]
 
 businesses = businesses.map do |business_data|
-  business = Business.create(name: business_data[:name], subdomain: business_data[:subdomain])
+  business = Business.create(name: business_data[:name], scope: business_data[:scope])
 
   facilities = facility_names.map { |name| Facility.create(name: name, business: business) }
 

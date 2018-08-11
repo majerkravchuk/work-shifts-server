@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
-    t.string "subdomain"
+    t.string "scope"
     t.string "time_zone", default: "Pacific Time (US & Canada)"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

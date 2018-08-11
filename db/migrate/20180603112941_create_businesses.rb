@@ -1,8 +1,8 @@
 class CreateBusinesses < ActiveRecord::Migration[5.2]
   def change
     create_table :businesses do |t|
-      t.string :name
-      t.string :subdomain
+      t.string :name, nil: false
+      t.string :scope, nil: false
       t.string :time_zone, default: 'Pacific Time (US & Canada)'
 
       t.timestamps
