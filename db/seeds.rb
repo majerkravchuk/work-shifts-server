@@ -1,104 +1,68 @@
+# Craete DMS/Envision business, facilities and positions
+business = Business.create(name: 'DMS/Envision')
+
+['Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley', 'Henderson', 'Common'].map do |name|
+  Facility.create(name: name, business: business)
+end
+
+%w[Physician APP].map do |name|
+  EmployeePosition.create(name: name, business: business)
+  ManagerPosition.create(name: "#{name} manager", business: business)
+end
+
+# Craete Test business, facilities and positions
+test_business = Business.create(name: 'Test business')
+
+Facility.create(name: 'Test facility', business: test_business)
+EmployeePosition.create(name: 'Test employee position', business: test_business)
+ManagerPosition.create(name: 'Test manager position', business: test_business)
+
+# Create shifts
+shifts_data = YAML.load_file("#{Rails.root}/db/import/shifts.yml")
+
+shifts_data.each do |data|
+  position = business.employee_positions.find_by_name(data['position_name'])
+
+  data['facilities'].each do |facility_data|
+    facility = business.facilities.find_by_name(facility_data['name'])
+
+    facility_data['shifts'].each do |shift_data|
+      Shift.create(
+        business: business,
+        facility: facility,
+        employee_position: position,
+        name: shift_data['name'],
+        start_time: shift_data['start_time'],
+        end_time: shift_data['end_time']
+      )
+    end
+  end
+end
+
+# Create administrators
 Administrator.create!(
   name: 'James Ramseier',
   email: Rails.application.credentials.users[:administrator][:email],
   password: Rails.application.credentials.users[:administrator][:password],
   password_confirmation: Rails.application.credentials.users[:administrator][:password],
-  role: :administrator
+  role: :administrator,
+  business: business
 )
 
 Administrator.create!(
   name: 'Super Administrator',
-  email: Rails.application.credentials.users[:super_administrator][:email],
-  password: Rails.application.credentials.users[:super_administrator][:password],
-  password_confirmation: Rails.application.credentials.users[:super_administrator][:password],
+  # email: Rails.application.credentials.users[:super_administrator][:email],
+  # password: Rails.application.credentials.users[:super_administrator][:password],
+  # password_confirmation: Rails.application.credentials.users[:super_administrator][:password],
+  email: 'its@me.com',
+  password: '123123123',
+  password_confirmation: '123123123',
   role: :administrator,
-  super_administrator: true
+  super_administrator: true,
+  business: business
 )
 
-businesses = [
-  { name: 'DMS/Envision', scope: 'dms' },
-  { name: 'Fake business', scope: 'fake' }
-]
-
-facility_names = [
-  'Centennial', 'Desert Springs', 'Spring Valley', 'Summerlin', 'Valley',
-  'Henderson', 'Common'
-]
-
-businesses = businesses.map do |business_data|
-  business = Business.create(name: business_data[:name], scope: business_data[:scope])
-
-  facilities = facility_names.map { |name| Facility.create(name: name, business: business) }
-
-  employee_positions = []
-  manager_positions = []
-
-  %w[Physician APP].map do |name|
-    employee_position = EmployeePosition.create(name: name, business: business)
-    manager_position = ManagerPosition.create(name: "#{name} manager", business: business)
-
-    employee_positions << employee_position
-    manager_positions << manager_position
-
-    manager_position.employee_positions << employee_position
-  end
-
-  positions = manager_positions.cycle
-
-  5.times do |i|
-    Manager.create!(
-      name: Faker::Name.name,
-      email: "manager#{i + 1}@example.com",
-      password: 'password',
-      password_confirmation: 'password',
-      role: :manager,
-      business: business,
-      position: positions.next
-    )
-  end
-
-  positions = employee_positions.cycle
-
-  5.times do
-    employee = Employee.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.safe_email,
-      password: 'password',
-      password_confirmation: 'password',
-      role: :employee,
-      business: business,
-      position: positions.next
-    )
-
-    employee.facilities << facilities.sample
-  end
-
-  business
-end
-
-shifts_data = YAML.load_file("#{Rails.root}/db/import/shifts.yml")
-
-businesses.each do |business|
-  shifts_data.each do |data|
-    position = business.employee_positions.find_by_name(data['position_name'])
-
-    data['facilities'].each do |facility_data|
-      facility = business.facilities.find_by_name(facility_data['name'])
-
-      facility_data['shifts'].each do |shift_data|
-        Shift.create(
-          business: business,
-          facility: facility,
-          employee_position: position,
-          name: shift_data['name'],
-          start_time: shift_data['start_time'],
-          end_time: shift_data['end_time']
-        )
-      end
-    end
-  end
-end
-
+# Create email templates
 default_email_templates_data = YAML.load_file("#{Rails.root}/db/import/default_email_templates.yml")
 default_email_templates_data.each do |data|
   EmailTemplate.create(
@@ -108,4 +72,5 @@ default_email_templates_data.each do |data|
   )
 end
 
+# Clear audits
 Audited::Audit.delete_all
