@@ -1,25 +1,22 @@
 require 'mina/rails'
 require 'mina/puma'
 require 'mina/git'
-require 'mina/rvm'      # for rvm support. (https://rvm.io)
-# require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
+require 'mina/rvm'
 
-# Basic settings:
-#   domain       - The hostname to SSH to.
-#   deploy_to    - Path to deploy into.
-#   repository   - Git repo to clone from. (needed by mina/git)
-#   branch       - Branch name to deploy. (needed by mina/git)
+require 'dotenv/load'
+Dotenv.load
 
 set :application_name, 'work-shifts-server'
-set :domain, '142.93.25.1'
 set :deploy_to, '/home/deploy/work-shifts/server'
 set :repository, 'git@github.com:BabenkoOleg/work-shifts-server.git'
 set :branch, 'master'
 
-# Optional settings:
-set :user, 'deploy'              # Username in the server to SSH to.
-set :port, '1008'                # SSH port number.
-set :forward_agent, true         # SSH forward_agent.
+set :domain, ENV['SERVER_HOST']
+set :user,   ENV['SERVER_USER']
+set :port,   ENV['SERVER_PORT']
+set :forward_agent, true
+
+set :rvm_use_path, '/usr/share/rvm/scripts/rvm'
 
 set :shared_dirs, fetch(:shared_dirs, []).push('public/assets', 'log', 'tmp/pids', 'tmp/sockets', 'storage')
 set :shared_files, fetch(:shared_files, []).push('config/puma.rb', 'config/master.key','.env')
@@ -78,7 +75,7 @@ namespace :server do
   task wait_puma: :remote_environment do
     command %[
       until [ -e #{fetch(:pumactl_socket)} ]; do
-        echo "Wait puma..." && sleep 0.5
+        echo "Wait puma..." && sleep 1
       done
     ]
   end
