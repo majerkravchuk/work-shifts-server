@@ -15,7 +15,8 @@ Rails.application.routes.draw do
           sign_out: 'sign-out',
         },
         controllers: {
-          sessions: 'api/auth/sessions'
+          sessions: 'api/auth/sessions',
+          passwords: 'api/auth/passwords'
         }
       )
 
@@ -23,5 +24,9 @@ Rails.application.routes.draw do
     end
 
     resource :business, only: [:show]
+  end
+
+  scope module: 'client' do
+    get '/password/edit'
   end
 end
