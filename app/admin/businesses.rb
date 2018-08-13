@@ -1,7 +1,7 @@
 ActiveAdmin.register Business do
   menu priority: 2
 
-  permit_params :name, :subdomain, :time_zone
+  permit_params :name, :time_zone
 
   config.sort_order = 'name_asc'
 
