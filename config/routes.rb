@@ -27,6 +27,6 @@ Rails.application.routes.draw do
   end
 
   scope module: 'client' do
-    get '/reset-password'
+    get '/reset-password', to: 'not#implemented'
   end
 end

@@ -7,7 +7,7 @@
 
     <p style='text-align: center;'>You can do this through the link below.</p>
 
-    <p style='text-align: center;'><%= link_to 'Change my password', password_edit_url(token: @token) %></p>
+    <p style='text-align: center;'><%= link_to 'Change my password', reset_password_url(token: @token) %></p>
 
     <p style='text-align: center;'>If you didn't request this, please ignore this email.</p>
     <p style='text-align: center;'>Your password won't change until you access the link above and create a new one.</p>
