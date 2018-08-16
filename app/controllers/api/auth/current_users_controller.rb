@@ -4,7 +4,7 @@ module Api
 
       # GET /api/auth/current-user
       def show
-        render json: CurrentUserSerializer.new(current_user)
+        render json: CurrentUserSerializer.new(current_user, include: [:business])
       end
     end
   end
