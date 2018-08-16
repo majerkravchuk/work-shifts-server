@@ -13,7 +13,7 @@ module Api
             message: 'You will receive instructions on how to reset your password in a few minutes'
           }, status: 201
         else
-          render json: { error: 'The user with this email does not exist' }, status: 422
+          render json: { error: 'User with this email does not exist' }, status: 422
         end
       end
 
