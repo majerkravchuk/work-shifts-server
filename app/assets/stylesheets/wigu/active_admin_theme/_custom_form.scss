@@ -10,6 +10,21 @@ body {
             box-sizing: border-box;
             padding: 10px;
           }
+
+          &.choices {
+            .choices-group {
+              .choice {
+                label {
+                  color: #000;
+                  font-weight: normal;
+
+                  input {
+                    margin-right: 6px;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
