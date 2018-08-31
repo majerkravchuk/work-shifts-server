@@ -1,4 +1,4 @@
-module EmailLoader
+module UserUploader
   module Validation
     class Role < Validation::Base
       def validate!

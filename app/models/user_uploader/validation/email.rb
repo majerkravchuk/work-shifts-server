@@ -1,4 +1,4 @@
-module EmailLoader
+module UserUploader
   module Validation
     class Email < Validation::Base
       def validate!
@@ -12,8 +12,8 @@ module EmailLoader
           return false
         end
 
-        if business.users.find_by(email: value).present?
-          reject_row("user with email [#{email}] already registered")
+        if business.users.where(email: value).where.not(invitation_status: %i[uploaded invited]).any?
+          reject_row("user with email [#{value}] already registered")
           return false
         end
 

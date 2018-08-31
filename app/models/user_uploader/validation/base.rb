@@ -1,4 +1,4 @@
-module EmailLoader
+module UserUploader
   module Validation
     class Base
       attr_accessor :business, :user, :row, :value
