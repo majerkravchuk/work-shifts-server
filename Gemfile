@@ -61,6 +61,8 @@ gem 'annotate'
 gem 'faker'
 # A Ruby gem to load environment variables from `.env`
 gem 'dotenv-rails'
+# Your Rails variables in your JS
+gem 'gon'
 
 group :development, :test do
   # A Ruby static code analyzer, based on the community Ruby style guide
