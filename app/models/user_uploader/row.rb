@@ -6,8 +6,6 @@
 #  message     :string
 #  row         :integer
 #  status      :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
 #  business_id :bigint(8)
 #  result_id   :bigint(8)
 #
@@ -24,6 +22,6 @@ module UserUploader
     belongs_to :result
 
     # === enums ===
-    enum status: %i[created updated rejected]
+    enum status: %i[created updated rejected blocked]
   end
 end

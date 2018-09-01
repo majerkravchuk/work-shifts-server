@@ -1,11 +1,11 @@
 module UserUploader
-  module Validation
+  class Validator
     class Base
-      attr_accessor :business, :user, :row, :value
+      attr_accessor :business, :current_user, :row, :value
 
-      def initialize(business, user, row, value)
+      def initialize(business, current_user, row, value)
         @business = business
-        @user = user
+        @current_user = current_user
         @row = row
         @value = value
       end

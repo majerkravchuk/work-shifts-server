@@ -34,7 +34,7 @@ module UserUploader
     before_create :destroy_old_results
 
     # === enums ===
-    enum status: %i[uploaded rejected]
+    enum status: %i[uploaded uploaded_with_errors rejected]
 
     #=== instance methods ===
     def destroy_old_results
