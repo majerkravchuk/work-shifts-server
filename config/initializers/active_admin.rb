@@ -225,13 +225,13 @@ ActiveAdmin.setup do |config|
           dropdown.add label: business.name, url: path
         end
       end
-      menu.add label: 'Positions', priority: 3, if: -> { current_user.administrator? }
+      menu.add label: 'Positions', priority: 4, if: -> { current_user.administrator? }
       menu.add label: 'Users', priority: 2, if: -> { current_user.administrator? }
       menu.add label: 'Employees',
                priority: 2,
                url: Rails.application.routes.url_helpers.admin_employees_path,
                if: -> { current_user.manager? }
-      menu.add label: 'Emails', priority: 6
+      menu.add label: 'Upload user process', priority: 3
       menu.add label: 'Settings', priority: 7, if: -> { current_user.administrator? }
       menu.add label: 'Letters',
                priority: 8,
@@ -320,4 +320,24 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+end
+
+module ActiveAdmin
+  module Views
+    module Pages
+      class Base < Arbre::HTML::Document
+
+        alias_method :original_build_head, :build_active_admin_head
+
+        def build_active_admin_head
+          original_build_head
+
+          within @head do
+            text_node Gon::Base.render_data
+          end
+        end
+
+      end
+    end
+  end
 end
