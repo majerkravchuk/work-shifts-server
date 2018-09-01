@@ -75,6 +75,16 @@ body {
                 }
               }
 
+              &.uploaded_with_errors {
+                background: #fcfbeb;
+                border-color: #684f1d;
+
+                &:hover,
+                &.active {
+                  background: #fdf67d;
+                }
+              }
+
               &.rejected {
                 background: #fcebea;
                 border-color: #621b18;

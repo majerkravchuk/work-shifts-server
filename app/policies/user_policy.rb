@@ -1,4 +1,8 @@
 class UserPolicy < ApplicationPolicy
+  def invite?
+    @current_user.administrator? || @current_user.manager?
+  end
+
   def reset_password?
     @current_user.administrator? || @current_user.manager?
   end

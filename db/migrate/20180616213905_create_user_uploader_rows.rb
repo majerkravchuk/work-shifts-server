@@ -6,8 +6,6 @@ class CreateUserUploaderRows < ActiveRecord::Migration[5.2]
       t.integer :status
       t.integer :row
       t.string :message
-
-      t.timestamps
     end
   end
 end

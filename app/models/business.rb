@@ -22,8 +22,6 @@ class Business < ApplicationRecord
   has_many :manager_positions
   has_many :employee_positions
   has_many :shifts
-  has_many :allowed_email
   has_many :email_loader_results, class_name: 'EmailLoader::Result'
-  has_many :invitations
   has_many :audits, class_name: 'BusinessAudit'
 end

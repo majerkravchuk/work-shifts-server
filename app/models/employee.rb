@@ -7,6 +7,8 @@
 #  current_sign_in_ip     :inet
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  invitation_status      :integer          default("uploaded")
+#  invitation_token       :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  name                   :string           not null
@@ -20,6 +22,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  business_id            :integer
+#  inviter_id             :integer
 #  position_id            :integer
 #
 # Indexes

@@ -7,6 +7,8 @@
 #  current_sign_in_ip     :inet
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  invitation_status      :integer          default("uploaded")
+#  invitation_token       :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  name                   :string           not null
@@ -20,6 +22,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  business_id            :integer
+#  inviter_id             :integer
 #  position_id            :integer
 #
 # Indexes
@@ -38,7 +41,7 @@ class User < ApplicationRecord
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
-  has_many :invitation_loading_results, class_name: 'InvitationLoading::Result'
+  # has_many :invitation_loading_results, class_name: 'InvitationLoading::Result'
 
   # === validations ===
   validates_presence_of   :email, :name
@@ -51,9 +54,35 @@ class User < ApplicationRecord
 
   # === enums ===
   enum role: %i[employee manager administrator]
+  enum invitation_status: %i[uploaded invited accepted]
 
   # === class methods ===
-  # class << self
+  class << self
+    def from_uploader_row(business, row, fields)
+      user = business.send(fields[:role].to_s.pluralize).find_or_initialize_by(email: fields[:email])
+      user.invitation_status = :uploaded if user.invitation_status.nil?
+      user.name = fields[:name]
+      user.role = fields[:role]
+      user.position = business.positions.where('LOWER(name) = ?', fields[:position].downcase).first
+
+      if fields[:role] == :employee
+        facilities = business.facilities.where('LOWER(name) IN (?)', fields[:facilities].map(&:downcase))
+        user.facilities = facilities
+      end
+
+      if user.new_record?
+        row.status = :created
+        row.message = "User with email [#{fields[:email]}] successfully uploaded!"
+      else
+        row.status = :updated
+        row.message = "User with email [#{fields[:email]}] successfully updated!"
+      end
+
+      row.save
+      user.save
+      user
+    end
+
   #   def find_for_authentication(warden_conditions)
   #     allowed_roles = [:manager]
   #     allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
@@ -69,13 +98,21 @@ class User < ApplicationRecord
   #       )
   #     ).first
   #   end
-  # end
+  end
 
   #=== instance methods ===
+  def invite!
+    invited!
+  end
+
+  def set_invitation_token!
+    self.invitation_token = SecureRandom.urlsafe_base64(64, false)
+    set_invitation_token! if User.exists?(invitation_token: invitation_token)
+  end
 
   protected
 
   def password_required?
-    !persisted? || !password.nil? || !password_confirmation.nil?
+    !password.nil? || !password_confirmation.nil?
   end
 end

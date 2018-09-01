@@ -36,27 +36,6 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "allowed_emails", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "position_id"
-    t.string "name"
-    t.string "email"
-    t.integer "role", null: false
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_allowed_emails_on_business_id"
-    t.index ["email"], name: "index_allowed_emails_on_email"
-    t.index ["position_id"], name: "index_allowed_emails_on_position_id"
-  end
-
-  create_table "allowed_emails_facilities", id: false, force: :cascade do |t|
-    t.bigint "facility_id"
-    t.bigint "allowed_email_id"
-    t.index ["allowed_email_id"], name: "index_allowed_emails_facilities_on_allowed_email_id"
-    t.index ["facility_id"], name: "index_allowed_emails_facilities_on_facility_id"
-  end
-
   create_table "audits", force: :cascade do |t|
     t.bigint "business_id"
     t.integer "auditable_id"
@@ -88,28 +67,6 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "email_loader_results", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "manager_id"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_email_loader_results_on_business_id"
-    t.index ["manager_id"], name: "index_email_loader_results_on_manager_id"
-  end
-
-  create_table "email_loader_rows", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "result_id"
-    t.integer "status"
-    t.integer "row"
-    t.string "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_email_loader_rows_on_business_id"
-    t.index ["result_id"], name: "index_email_loader_rows_on_result_id"
-  end
-
   create_table "email_templates", force: :cascade do |t|
     t.string "name"
     t.string "key"
@@ -134,19 +91,6 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_facilities_on_business_id"
-  end
-
-  create_table "invitations", force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "manager_id"
-    t.bigint "allowed_email_id"
-    t.string "token"
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["allowed_email_id"], name: "index_invitations_on_allowed_email_id"
-    t.index ["business_id"], name: "index_invitations_on_business_id"
-    t.index ["manager_id"], name: "index_invitations_on_manager_id"
   end
 
   create_table "managers_employee_positions", id: false, force: :cascade do |t|
@@ -181,6 +125,26 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.index ["facility_id"], name: "index_shifts_on_facility_id"
   end
 
+  create_table "user_uploader_results", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "user_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_user_uploader_results_on_business_id"
+    t.index ["user_id"], name: "index_user_uploader_results_on_user_id"
+  end
+
+  create_table "user_uploader_rows", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "result_id"
+    t.integer "status"
+    t.integer "row"
+    t.string "message"
+    t.index ["business_id"], name: "index_user_uploader_rows_on_business_id"
+    t.index ["result_id"], name: "index_user_uploader_rows_on_result_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -196,6 +160,9 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.integer "role", default: 0
     t.integer "position_id"
     t.integer "business_id"
+    t.string "invitation_token"
+    t.integer "invitation_status", default: 0
+    t.integer "inviter_id"
     t.string "type"
     t.boolean "super_administrator", default: false
     t.datetime "created_at", null: false

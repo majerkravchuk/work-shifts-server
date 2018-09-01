@@ -2,6 +2,7 @@
 //= require imask/dist/imask.min
 //= require activeadmin/trumbowyg/trumbowyg
 //= require activeadmin/trumbowyg_input
+//= require active_admin/uploaded_users
 
 $(function() {
   if (location.pathname === "/admin/employees" || location.pathname === "/admin") {
