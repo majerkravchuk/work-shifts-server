@@ -1,5 +1,5 @@
 body {
-  &.admin_emails_from_file {
+  &.admin_upload_users {
     #main_content {
       .left-side {
         float: left;
@@ -7,13 +7,22 @@ body {
 
         .panel-file-loading {
           form {
-            margin-bottom: 4px;
+            overflow: hidden;
+
+            input[type="file"] {
+              padding: 7px 0;
+            }
+
+            input[type="submit"] {
+              float: right;
+              margin-right: 0;
+            }
           }
 
           .download-example {
             color: #3e4850;
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 10px;
           }
         }
 
@@ -43,7 +52,7 @@ body {
                 display: inline-block;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                width: 169px;
+                width: 125px;
               }
 
               &:last-child {
