@@ -4,7 +4,7 @@ class CreateShifts < ActiveRecord::Migration[5.2]
       t.string :name
       t.belongs_to :business
       t.belongs_to :facility
-      t.belongs_to :employee_position
+      t.belongs_to :position
       t.string :start_time
       t.string :end_time
 

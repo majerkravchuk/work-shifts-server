@@ -36,12 +36,12 @@ class Administrator < User
   audited
 
   # === relations ===
-  has_many :employee_positions,
-           source: :employee_positions,
-           through: :business
-
-  # === validations ===
-  validate do
-    errors.add(:position, 'the administrator can not have a position') if position.present?
-  end
+  # has_many :employee_positions,
+  #          source: :employee_positions,
+  #          through: :business
+  #
+  # # === validations ===
+  # validate do
+  #   errors.add(:position, 'the administrator can not have a position') if position.present?
+  # end
 end

@@ -33,13 +33,13 @@
 
 class Manager < User
   # === relations ===
-  belongs_to :manager_position, foreign_key: :position_id
-  has_many :employee_positions, through: :manager_position
+  # belongs_to :manager_position, foreign_key: :position_id
+  # has_many :employee_positions, through: :manager_position
 
   # === validations ===
-  validate do
-    unless position.is_a? ManagerPosition
-      errors.add(:position, 'the manager can have a position only for the manager')
-    end
-  end
+  # validate do
+  #   unless position.is_a? ManagerPosition
+  #     errors.add(:position, 'the manager can have a position only for the manager')
+  #   end
+  # end
 end

@@ -31,13 +31,13 @@ class Invitation < ApplicationRecord
   validates_presence_of :allowed_email, :token
 
   validate do
-    if manager? && !position.is_a?(ManagerPosition)
-      errors.add(:position, 'manager can have a position only for managers')
-    end
-
-    if employee? && !position.is_a?(EmployeePosition)
-      errors.add(:position, 'emlpoyee can have a position only for employees')
-    end
+    # if manager? && !position.is_a?(ManagerPosition)
+    #   errors.add(:position, 'manager can have a position only for managers')
+    # end
+    #
+    # if employee? && !position.is_a?(EmployeePosition)
+    #   errors.add(:position, 'emlpoyee can have a position only for employees')
+    # end
   end
 
   # === callbacks ===

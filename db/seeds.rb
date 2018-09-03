@@ -6,22 +6,25 @@ business = Business.create(name: 'DMS/Envision')
 end
 
 %w[Physician APP].map do |name|
-  EmployeePosition.create(name: name, business: business)
-  ManagerPosition.create(name: "#{name} manager", business: business)
+  Position.create(name: "#{name} manager", business: business, role: :manager)
+  Position.create(name: name, business: business, role: :employee)
 end
+
+Position.find_by(name: 'Physician manager').employee_positions << business.positions.employee
+Position.find_by(name: 'APP manager').employee_positions << business.positions.find_by(name: 'APP')
 
 # Craete Test business, facilities and positions
 test_business = Business.create(name: 'Test business')
 
 Facility.create(name: 'Test facility', business: test_business)
-EmployeePosition.create(name: 'Test employee position', business: test_business)
-ManagerPosition.create(name: 'Test manager position', business: test_business)
+Position.create(name: 'Test manager position', business: test_business, role: :manager)
+Position.create(name: 'Test employee position', business: test_business, role: :employee)
 
 # Create shifts
 shifts_data = YAML.load_file("#{Rails.root}/db/import/shifts.yml")
 
 shifts_data.each do |data|
-  position = business.employee_positions.find_by_name(data['position_name'])
+  position = business.positions.employee.find_by_name(data['position_name'])
 
   data['facilities'].each do |facility_data|
     facility = business.facilities.find_by_name(facility_data['name'])
@@ -30,7 +33,7 @@ shifts_data.each do |data|
       Shift.create(
         business: business,
         facility: facility,
-        employee_position: position,
+        position: position,
         name: shift_data['name'],
         start_time: shift_data['start_time'],
         end_time: shift_data['end_time']

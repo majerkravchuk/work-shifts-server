@@ -97,16 +97,16 @@ ActiveAdmin.register User, as: 'UploadedUsers' do
       end
 
       positions_collection = current_business.positions.order(:name).map do |position|
-        if position.is_a?(ManagerPosition) && !current_user.administrator?
-          nil
-        elsif current_user.employee_positions.exclude?(position) && !current_user.administrator?
-          nil
-        else
-          [position.name, position.id, {
-            class: position.type.underscore.gsub('_', '-'),
-            hidden: position.is_a?(ManagerPosition)
-          }]
-        end
+        # if position.is_a?(ManagerPosition) && !current_user.administrator?
+        #   nil
+        # elsif current_user.employee_positions.exclude?(position) && !current_user.administrator?
+        #   nil
+        # else
+        #   [position.name, position.id, {
+        #     class: position.type.underscore.gsub('_', '-'),
+        #     hidden: position.is_a?(ManagerPosition)
+        #   }]
+        # end
       end
       f.input :position,
               as: :select,

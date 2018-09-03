@@ -32,16 +32,16 @@
 #
 
 class Employee < User
-  # === relations ===
-  has_and_belongs_to_many :facilities,
-                          class_name: 'Facility',
-                          foreign_key: :employee_id,
-                          join_table: :employees_facilities
+  # # === relations ===
+  # has_and_belongs_to_many :facilities,
+  #                         class_name: 'Facility',
+  #                         foreign_key: :employee_id,
+  #                         join_table: :employees_facilities
 
   # === validations ===
-  validate do
-    unless position.is_a? EmployeePosition
-      errors.add(:position, 'the employee can have a position only for the employee')
-    end
-  end
+  # validate do
+  #   unless position.is_a? EmployeePosition
+  #     errors.add(:position, 'the employee can have a position only for the employee')
+  #   end
+  # end
 end

@@ -59,11 +59,11 @@ ActiveAdmin.register Manager do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input(:position, {
-        as: :select,
-        collection: ManagerPosition.where(business: current_business).map { |p| [p.name.capitalize, p.id] },
-        include_blank: false
-      })
+      # f.input(:position, {
+      #   as: :select,
+      #   collection: ManagerPosition.where(business: current_business).map { |p| [p.name.capitalize, p.id] },
+      #   include_blank: false
+      # })
     end
     f.actions
   end

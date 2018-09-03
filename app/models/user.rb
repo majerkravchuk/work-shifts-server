@@ -41,6 +41,7 @@ class User < ApplicationRecord
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
+
   # has_many :invitation_loading_results, class_name: 'InvitationLoading::Result'
 
   # === validations ===

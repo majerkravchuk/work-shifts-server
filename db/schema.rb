@@ -76,6 +76,11 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "employee_positions_manager_positions", id: false, force: :cascade do |t|
+    t.integer "manager_position_id"
+    t.integer "employee_position_id"
+  end
+
   create_table "employees_facilities", id: false, force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "employee_id"
@@ -93,18 +98,9 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.index ["business_id"], name: "index_facilities_on_business_id"
   end
 
-  create_table "managers_employee_positions", id: false, force: :cascade do |t|
-    t.bigint "business_id"
-    t.bigint "manager_position_id"
-    t.bigint "employee_position_id"
-    t.index ["business_id"], name: "index_managers_employee_positions_on_business_id"
-    t.index ["employee_position_id"], name: "index_managers_employee_positions_on_employee_position_id"
-    t.index ["manager_position_id"], name: "index_managers_employee_positions_on_manager_position_id"
-  end
-
   create_table "positions", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.integer "role"
     t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,14 +111,14 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.string "name"
     t.bigint "business_id"
     t.bigint "facility_id"
-    t.bigint "employee_position_id"
+    t.bigint "position_id"
     t.string "start_time"
     t.string "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_shifts_on_business_id"
-    t.index ["employee_position_id"], name: "index_shifts_on_employee_position_id"
     t.index ["facility_id"], name: "index_shifts_on_facility_id"
+    t.index ["position_id"], name: "index_shifts_on_position_id"
   end
 
   create_table "user_uploader_results", force: :cascade do |t|
