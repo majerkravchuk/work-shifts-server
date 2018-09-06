@@ -36,13 +36,12 @@ class Position < ApplicationRecord
                           association_foreign_key: :employee_position_id,
                           join_table: :employee_positions_manager_positions
 
-  # === scopes ===
-  scope :manager, -> { where role: :manager }
-  scope :employee, -> { where role: :employee }
-
   # === validations ===
   validates_presence_of :name, :role
 
   # === enums ===
   enum role: %i[employee manager]
+
+  # === scopes ===
+  roles.keys.each { |role| scope role.pluralize.to_sym, -> { where(role: role) } }
 end
