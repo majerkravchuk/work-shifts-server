@@ -6,7 +6,7 @@ ActiveAdmin.register Shift do
   config.sort_order = 'name_asc'
   config.paginate = false
 
-  includes :facility, :employee_position
+  includes :facility, :position
 
   controller do
     def create
@@ -21,7 +21,7 @@ ActiveAdmin.register Shift do
 
   index as: :grouped_by_belongs_to_table, association: :facility, association_title: :name do
     column :name
-    column(:employee_position) { |shift| shift.employee_position.name }
+    column(:position) { |shift| shift.position.name }
     column :start_time
     column :end_time
     actions
@@ -31,15 +31,15 @@ ActiveAdmin.register Shift do
   filter :facility,
          as: :select,
          collection: proc { current_business.facilities }
-  filter :employee_position,
+  filter :position,
          as: :select,
-         collection: proc { current_user.employee_positions }
+         collection: proc { current_user.admin? ? current_business.employee_positions: current_user.employee_positions }
 
   show do
     attributes_table do
       row :name
       row(:facility) { |shift| shift.facility.name }
-      row(:employee_position) { |shift| shift.employee_position.name }
+      row(:position) { |shift| shift.position.name }
       row :start_time
       row :end_time
       row :created_at
@@ -51,16 +51,16 @@ ActiveAdmin.register Shift do
   form do |f|
     f.inputs do
       f.input :name
-      f.input(:facility, {
-        as: :select,
-        collection: current_business.facilities.map { |p| [p.name.capitalize, p.id] },
-        include_blank: false
-      })
-      f.input(:employee_position, {
-        as: :select,
-        collection: current_user.employee_positions.map { |p| [p.name.capitalize, p.id] },
-        include_blank: false
-      })
+      f.input :facility,
+              as: :select,
+              collection: current_business.facilities.map { |p| [p.name.capitalize, p.id] },
+              include_blank: false
+      collected_data = if current_user.admin?
+                         current_business.employee_positions.map { |p| [p.name.capitalize, p.id] }
+                       else
+                         current_user.employee_positions.map { |p| [p.name.capitalize, p.id] }
+                       end
+      f.input :position, as: :select, collection: collected_data, include_blank: false
       f.input :start_time, input_html: { autocomplete: :off, placeholder: '00:00 AM', class: 'time-input' }
       f.input :end_time, input_html: { autocomplete: :off, placeholder: '00:00 AM', class: 'time-input' }
     end
