@@ -1,2 +1,0 @@
-class ManagerPositionPolicy < PositionPolicy
-end

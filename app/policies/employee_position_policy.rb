@@ -1,2 +1,0 @@
-class EmployeePositionPolicy < PositionPolicy
-end
