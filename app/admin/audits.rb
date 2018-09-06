@@ -1,5 +1,5 @@
 ActiveAdmin.register BusinessAudit do
-  menu priority: 9, label: 'Audit', if: -> { current_user.administrator? && current_user.super_administrator? }
+  menu priority: 9, label: 'Audit', if: -> { current_user.admin? && current_user.super_admin? }
 
   config.sort_order = 'created_at_desc'
   actions :index, :show
@@ -8,20 +8,7 @@ ActiveAdmin.register BusinessAudit do
 
   index do
     column(:user) { |audit| audit.username }
-    column(:auditable) do |audit|
-      record = audit.auditable_type.constantize.find_by(id: audit.auditable_id)
-      if record.is_a?(EmailLoader::Result)
-        link_to 'EmailLoader::Result', admin_emails_from_file_path(result_id: record.id)
-      elsif record.present?
-        begin
-          link_to record.class.name, send("admin_#{record.class.name.underscore}_path", record.id)
-        rescue
-          record.class.name
-        end
-      else
-        audit.auditable_type
-      end
-    end
+    column(:auditable) { |audit| audit.auditable_type }
     column :action
     column :created_at
     actions
@@ -36,7 +23,7 @@ ActiveAdmin.register BusinessAudit do
       row :auditable_id
       row :associated_id
       row :auditable_type
-      row :audited_changes
+      row(:audited_changes) { |resource| pre JSON.pretty_generate(resource.audited_changes.as_json) }
       row :action
       row :associated_type
       row :remote_address
