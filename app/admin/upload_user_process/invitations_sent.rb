@@ -1,7 +1,7 @@
 ActiveAdmin.register User, as: 'InvitationsSent' do
   menu label: 'Invitations sent', parent: 'Upload user process', priority: 3
 
-  actions :index, :show, :edit, :destroy
+  actions :index, :show, :destroy
 
   config.sort_order = 'email_asc'
   includes :position
@@ -11,81 +11,34 @@ ActiveAdmin.register User, as: 'InvitationsSent' do
       end_of_association_chain.where(invitation_status: :invited)
     end
   end
-#
-#   batch_action :invite do
-#     batch_action_collection.each do |resource|
-#       Invitation.create!(
-#         allowed_email: resource,
-#         business: current_business,
-#         manager: current_user
-#       )
-#     end
-#     batch_action_collection.where(status: :imported).update_all(status: :invited)
-#     redirect_to collection_path, notice: 'The users were successfully invited.'
-#   end
-#
-#   batch_action :reject_invitations do
-#     Invitation.where(allowed_email: batch_action_collection).delete_all
-#     batch_action_collection.update_all(status: :imported)
-#     redirect_to collection_path, notice: 'The invitations were successfully rejected.'
-#   end
-#
-  # member_action :invite, method: :put do
-  #   resource.invite!
-  #   notice = 'The user was successfully invited. Moved to the Invitations sent page.'
-  #   redirect_to admin_uploaded_users_path, notice: notice
-  # end
-#   member_action :reject_invitation, method: :put do
-#     resource.invitation.delete if resource.invitation.present?
-#     resource.update(status: :imported)
-#     redirect_to admin_allowed_emails_path, notice: 'The invitation was successfully rejected.'
-#   end
-#
-#   controller do
-#     def create
-#       params[:allowed_email][:business_id] = current_business.id
-#       params[:allowed_email][:role] = :employee if current_user.manager?
-#       super
-#     end
-#   end
-#
+
   index do
     selectable_column
     column :email
     column :name
-    column :role
+    column(:role) { |resource| resource.type.split('::').last }
     column :invitation_status
     column :position
-    column :facilities
-    actions defaults: true
-    # actions defaults: true do |user|
-    #   link_to 'Invite', invite_admin_uploaded_user_path(user), method: :put
-    # end
+    column(:facilities) { |user| user.employee? ? user.facilities.pluck(:name).sort.join(', ') : '' }
+    actions
   end
-#
-#   filter :email
-#   filter :name
-#   filter :status,
-#          as: :select,
-#          collection: proc { AllowedEmail.statuses }
-#   filter :role,
-#          as: :select,
-#          collection: proc { AllowedEmail.roles }
-#   filter :position,
-#          as: :select,
-#          collection: proc { current_business.positions.order(:name) }
-#
-#   show do
-#     attributes_table do
-#       row :email
-#       row :name
-#       row :status
-#       row :position
-#       row(:facilities) { |invitation| invitation.facilities.pluck(:name).sort.join(', ') }
-#       row :created_at
-#     end
-#   end
-#
+
+  filter :email
+  filter :name
+  filter :position,
+         as: :select,
+         collection: proc { current_business.positions.order(:name) }
+
+  show do
+    attributes_table do
+      row :email
+      row :name
+      row :position
+      row(:facilities) { |user| user.facilities.pluck(:name).sort.join(', ') } if resource.employee?
+      row :created_at
+    end
+  end
+
 #   form do |f|
 #     f.inputs do
 #       input_html = {}.tap do |p|
