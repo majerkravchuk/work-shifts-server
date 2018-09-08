@@ -4,7 +4,7 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  name        :string
-#  role        :integer
+#  type        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  business_id :bigint(8)
@@ -37,11 +37,11 @@ class Position < ApplicationRecord
                           join_table: :employee_positions_manager_positions
 
   # === validations ===
-  validates_presence_of :name, :role
+  # validates_presence_of :name, :role
 
-  # === enums ===
-  enum role: %i[employee manager]
+  # # === enums ===
+  # enum role: %i[employee manager]
 
   # === scopes ===
-  roles.keys.each { |role| scope role.pluralize.to_sym, -> { where(role: role) } }
+  # roles.keys.each { |role| scope role.pluralize.to_sym, -> { where(role: role) } }
 end
