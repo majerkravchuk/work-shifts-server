@@ -7,23 +7,17 @@
 #  current_sign_in_ip     :inet
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  invitation_status      :integer          default("uploaded")
-#  invitation_token       :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  name                   :string           not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :integer          default("employee")
 #  sign_in_count          :integer          default(0), not null
-#  super_administrator    :boolean          default(FALSE)
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  business_id            :integer
-#  inviter_id             :integer
-#  position_id            :integer
 #
 # Indexes
 #
@@ -32,6 +26,9 @@
 #
 
 class User < ApplicationRecord
+  # === includes ===
+  include Uploadable
+
   # === audited ===
   audited
 
@@ -41,8 +38,7 @@ class User < ApplicationRecord
   # === relations ===
   belongs_to :business, required: false
   belongs_to :position, required: false
-
-  # has_many :invitation_loading_results, class_name: 'InvitationLoading::Result'
+  has_many :profiles, foreign_key: :user_id
 
   # === validations ===
   validates_presence_of   :email, :name
@@ -53,55 +49,56 @@ class User < ApplicationRecord
   validates_confirmation_of :password, if: :password_required?
   validates_length_of       :password, minimum: 8, maximum: 32, allow_blank: true
 
+  validate do
+    # if admin? && position.present?
+    #   errors.add(:position, 'the admin can not have a position')
+    #
+    # elsif manager? && !position.manager?
+    #   errors.add(:position, 'the manager can have a position only for the manager')
+    #
+    # elsif employee? && !position.employee?
+    #   errors.add(:position, 'the employee can have a position only for the employee')
+    # end
+  end
+
   # === enums ===
-  enum role: %i[employee manager administrator]
   enum invitation_status: %i[uploaded invited accepted]
+
+  # === scopes ===
+  scope :not_in_inviting_process, -> { where(invitation_status: [:accepted, nil]) }
 
   # === class methods ===
   class << self
-    def from_uploader_row(business, row, fields)
-      user = business.send(fields[:role].to_s.pluralize).find_or_initialize_by(email: fields[:email])
-      user.invitation_status = :uploaded if user.invitation_status.nil?
-      user.name = fields[:name]
-      user.role = fields[:role]
-      user.position = business.positions.where('LOWER(name) = ?', fields[:position].downcase).first
-
-      if fields[:role] == :employee
-        facilities = business.facilities.where('LOWER(name) IN (?)', fields[:facilities].map(&:downcase))
-        user.facilities = facilities
-      end
-
-      if user.new_record?
-        row.status = :created
-        row.message = "User with email [#{fields[:email]}] successfully uploaded!"
-      else
-        row.status = :updated
-        row.message = "User with email [#{fields[:email]}] successfully updated!"
-      end
-
-      row.save
-      user.save
-      user
-    end
-
-  #   def find_for_authentication(warden_conditions)
-  #     allowed_roles = [:manager]
-  #     allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
+  # def find_for_authentication(warden_conditions)
+  #   allowed_roles = [:manager]
+  #   allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
   #
+  #   where(
+  #     email: warden_conditions[:email],
+  #     role: :administrator
+  #   ).or(
   #     where(
   #       email: warden_conditions[:email],
-  #       role: :administrator
-  #     ).or(
-  #       where(
-  #         email: warden_conditions[:email],
-  #         role: allowed_roles,
-  #         business: Business.find_by_subdomain(warden_conditions[:subdomain])
-  #       )
-  #     ).first
-  #   end
+  #       role: allowed_roles,
+  #       business: Business.find_by_subdomain(warden_conditions[:subdomain])
+  #     )
+  #   ).first
+  # end
   end
 
-  #=== instance methods ===
+  # === instance methods ===
+  %i[employee manager admin super_admin].each do |role|
+    define_method("#{role}?") do |business = nil|
+      if %i[admin super_admin].include?(role)
+        type == "User::#{role.to_s.camelize}"
+      else
+        profile = profiles.find_by(business: business)
+        return false if profile.nil?
+        profile.position.type == "Position::#{role.to_s.camelize}"
+      end
+    end
+  end
+
   def invite!
     invited!
   end
