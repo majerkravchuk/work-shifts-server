@@ -15,16 +15,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
-      t.string  :name, null: false
-      t.integer :role, default: 0
-      t.integer :position_id
+      t.string :name, null: false
       t.integer :business_id
-      t.string  :invitation_token
-      t.integer :invitation_status, default: 0
-      t.integer :inviter_id
-      t.string  :type
-
-      t.boolean :super_administrator, default: false
+      t.string :type
 
       t.timestamps null: false
     end
