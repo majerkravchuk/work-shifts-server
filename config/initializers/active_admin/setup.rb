@@ -219,20 +219,20 @@ ActiveAdmin.setup do |config|
     admin.download_links = false
 
     admin.build_menu do |menu|
-      menu.add label: 'Switch current business', priority: 0, if: -> { current_user.administrator? } do |dropdown|
+      menu.add label: 'Switch current business', priority: 0, if: -> { current_user.admin? } do |dropdown|
         Business.all.sort.each do |business|
           path = Rails.application.routes.url_helpers.shitch_admin_businesses_path(business: business.id)
           dropdown.add label: business.name, url: path
         end
       end
-      menu.add label: 'Positions', priority: 4, if: -> { current_user.administrator? }
-      menu.add label: 'Users', priority: 2, if: -> { current_user.administrator? }
+      menu.add label: 'Positions', priority: 4, if: -> { current_user.admin? }
+      menu.add label: 'Users', priority: 2, if: -> { current_user.admin? }
       menu.add label: 'Employees',
                priority: 2,
                url: Rails.application.routes.url_helpers.admin_employees_path,
                if: -> { current_user.manager? }
       menu.add label: 'Upload user process', priority: 3
-      menu.add label: 'Settings', priority: 7, if: -> { current_user.administrator? }
+      menu.add label: 'Settings', priority: 7, if: -> { current_user.admin? }
       menu.add label: 'Letters',
                priority: 8,
                url: '/letters',
@@ -320,24 +320,4 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
-end
-
-module ActiveAdmin
-  module Views
-    module Pages
-      class Base < Arbre::HTML::Document
-
-        alias_method :original_build_head, :build_active_admin_head
-
-        def build_active_admin_head
-          original_build_head
-
-          within @head do
-            text_node Gon::Base.render_data
-          end
-        end
-
-      end
-    end
-  end
 end
