@@ -5,7 +5,7 @@ ActiveAdmin.register Business do
 
   config.sort_order = 'name_asc'
 
-  collection_action :shitch, method: :get do
+  collection_action :switch, method: :get do
     business = Business.find_by(id: params[:business])
     if business.present?
       current_user.update(business: business)

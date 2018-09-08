@@ -220,10 +220,7 @@ ActiveAdmin.setup do |config|
 
     admin.build_menu do |menu|
       menu.add label: 'Switch current business', priority: 0, if: -> { current_user.admin? } do |dropdown|
-        Business.all.sort.each do |business|
-          path = Rails.application.routes.url_helpers.shitch_admin_businesses_path(business: business.id)
-          dropdown.add label: business.name, url: path
-        end
+        dropdown.add label: '', url: '#'
       end
       menu.add label: 'Positions', priority: 4, if: -> { current_user.admin? }
       menu.add label: 'Users', priority: 2, if: -> { current_user.admin? }
