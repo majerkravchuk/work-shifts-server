@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_04_205059) do
+ActiveRecord::Schema.define(version: 2018_09_08_120452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,11 +100,26 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
 
   create_table "positions", force: :cascade do |t|
     t.string "name"
-    t.integer "role"
     t.bigint "business_id"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_positions_on_business_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "position_id"
+    t.bigint "business_id"
+    t.integer "invitation_status"
+    t.integer "inviter_id"
+    t.string "invitation_token"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_profiles_on_business_id"
+    t.index ["position_id"], name: "index_profiles_on_position_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "shifts", force: :cascade do |t|
@@ -153,14 +168,8 @@ ActiveRecord::Schema.define(version: 2018_07_04_205059) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "name", null: false
-    t.integer "role", default: 0
-    t.integer "position_id"
     t.integer "business_id"
-    t.string "invitation_token"
-    t.integer "invitation_status", default: 0
-    t.integer "inviter_id"
     t.string "type"
-    t.boolean "super_administrator", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
