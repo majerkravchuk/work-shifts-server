@@ -2,13 +2,10 @@
 //= require imask/dist/imask.min
 //= require activeadmin/trumbowyg/trumbowyg
 //= require activeadmin/trumbowyg_input
+//= require active_admin/menu
 //= require active_admin/uploaded_users
 
 $(function() {
-  if (location.pathname === "/admin/employees" || location.pathname === "/admin") {
-    $('#employees').addClass("current");
-  }
-
   $('.admin_shifts .time-input').each(function(_i, input) {
     new IMask(input, {
       mask: 'HH:MM D{m}',
