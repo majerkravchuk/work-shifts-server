@@ -1,19 +1,19 @@
 class AllowedEmailPolicy < ApplicationPolicy
   def index?
-    current_user.administrator? || current_user.manager?
+    current_user.admin? || current_user.manager?
   end
 
   def show?
-    current_user.administrator? ||
+    current_user.admin? ||
     current_user.manager? && record.employee? && current_user.employee_positions.include?(record.position)
   end
 
   def create?
-    current_user.administrator? || current_user.manager?
+    current_user.admin? || current_user.manager?
   end
 
   def new?
-    current_user.administrator? || current_user.manager?
+    current_user.admin? || current_user.manager?
   end
 
   def update?
@@ -49,7 +49,7 @@ class AllowedEmailPolicy < ApplicationPolicy
     end
 
     def resolve
-      if current_user.administrator?
+      if current_user.admin?
         scope.where(business: current_user.business)
       elsif current_user.manager?
         scope.where(business: current_user.business).where(

@@ -1,10 +1,10 @@
 class UserPolicy < ApplicationPolicy
   def invite?
-    @current_user.administrator? || @current_user.manager?
+    current_user.admin? || current_user.manager?
   end
 
   def reset_password?
-    @current_user.administrator? || @current_user.manager?
+    current_user.admin? || current_user.manager?
   end
 
   class Scope
@@ -16,10 +16,11 @@ class UserPolicy < ApplicationPolicy
     end
 
     def resolve
-      @scope = @scope.where(business: current_user.business).where.not(role: :administrator)
+      scope = @scope.where(business: current_user.business)
+      # scope = scope.where.not(role: :admin) unless current_user.admin? && current_user.super_admin?
 
       if current_user.manager?
-        @scope = @scope.where(position: current_user.position.employee_positions)
+        scope = scope.where(position: current_user.position.employee_positions)
       end
 
       scope
