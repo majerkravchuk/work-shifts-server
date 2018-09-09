@@ -42,8 +42,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, request_keys: [:path]
 
   # === relations ===
-  belongs_to :business, required: false
-  belongs_to :position, required: false
+  belongs_to :business, optional: true
+  belongs_to :position, optional: true
+  belongs_to :inviter, class_name: 'User', optional: true
 
   # === validations ===
   validates_presence_of   :email, :name
@@ -96,8 +97,10 @@ class User < ApplicationRecord
     Rails.application.routes.url_helpers.send("admin_#{persisted? ? role : role.pluralize}_path", id)
   end
 
-  def invite!
-    invited!
+  def invite!(inviter)
+    set_invitation_token!
+    update(inviter: inviter, invitation_status: :invited)
+    UserMailer.invitation(self).deliver_now
   end
 
   def set_invitation_token!
