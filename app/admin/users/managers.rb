@@ -31,10 +31,10 @@ ActiveAdmin.register User::Worker, as: 'Manager' do
     end
   end
 
-  #  member_action :reset_password, method: :post do
-  #    resource.send_reset_password_instructions
-  #    redirect_to admin_managers_path, notice: 'The instruction for password recovery was successfully sent.'
-  #  end
+  member_action :reset_password, method: :post do
+    resource.send_reset_password_instructions
+    redirect_to admin_managers_path, notice: 'The instruction for password recovery was successfully sent.'
+  end
 
   filter :name
   filter :email
@@ -47,7 +47,7 @@ ActiveAdmin.register User::Worker, as: 'Manager' do
     column(:position) { |resource| resource.position.name.capitalize }
     column :created_at
     actions defaults: true do |resource|
-      link_to 'Reset password', reset_password_admin_employee_path(resource), method: :post
+      link_to 'Reset password', reset_password_admin_manager_path(resource), method: :post
     end
   end
 
