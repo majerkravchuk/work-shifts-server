@@ -9,6 +9,8 @@ module Seeds
           user = ::User::Worker.create(
             email: "user-#{i + 1}-b-#{business.id}@example.com",
             name: "User #{i + 1} for business #{business.id}",
+            password: '123123123',
+            password_confirmation: '123123123',
             business: business,
             position: positions.sample
           )
