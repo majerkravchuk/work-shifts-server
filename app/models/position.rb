@@ -23,4 +23,9 @@ class Position < ApplicationRecord
 
   # === validations ===
   validates_presence_of :name
+
+  # === instance methods ===
+  %w[employee manager].each do |role|
+    define_method("#{role}?") { type == "Position::#{role.camelize}" }
+  end
 end
