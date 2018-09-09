@@ -47,7 +47,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope.where(business: current_user.business)
+      @scope.where(business: current_user.business)
     end
   end
 end
