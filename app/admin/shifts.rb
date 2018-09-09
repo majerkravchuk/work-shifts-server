@@ -1,7 +1,7 @@
 ActiveAdmin.register Shift do
   menu priority: 5
 
-  permit_params :name, :business_id, :facility_id, :employee_position_id, :start_time, :end_time
+  permit_params :name, :business_id, :facility_id, :position_id, :start_time, :end_time
 
   config.sort_order = 'name_asc'
   config.paginate = false
