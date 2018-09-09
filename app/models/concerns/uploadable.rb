@@ -2,7 +2,7 @@ module Uploadable
   extend ActiveSupport::Concern
 
   def change_position(new_position)
-    facilities.clear if persisted? && position.type != new_position.type && position.employee? && new_position.manager?
+    facilities.clear if persisted? && position.employee? && new_position.manager?
     self.position = new_position
   end
 
