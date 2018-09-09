@@ -39,7 +39,7 @@ class User < ApplicationRecord
   audited
 
   # === devise settings ===
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, request_keys: [:path]
 
   # === relations ===
   belongs_to :business, required: false
@@ -62,21 +62,17 @@ class User < ApplicationRecord
 
   # === class methods ===
   class << self
-  # def find_for_authentication(warden_conditions)
-  #   allowed_roles = [:manager]
-  #   allowed_roles.push(:employee) unless warden_conditions[:path].split('/')[1].eql?('admin')
-  #
-  #   where(
-  #     email: warden_conditions[:email],
-  #     role: :administrator
-  #   ).or(
-  #     where(
-  #       email: warden_conditions[:email],
-  #       role: allowed_roles,
-  #       business: Business.find_by_subdomain(warden_conditions[:subdomain])
-  #     )
-  #   ).first
-  # end
+    def find_for_authentication(warden_conditions)
+      allowed_positions = ['Position::Manager']
+      allowed_positions.push('Position::Employee') unless warden_conditions[:path].split('/')[1].eql?('admin')
+
+      left_joins(:position).where(
+        email: warden_conditions[:email],
+        type: %w[User::Admin User::SuperAdmin]
+      ).or(
+        left_joins(:position).where(email: warden_conditions[:email], positions: { type: allowed_positions })
+      ).first
+    end
   end
 
   # === instance methods ===
