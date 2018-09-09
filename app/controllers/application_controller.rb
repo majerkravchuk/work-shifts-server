@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
 
   def set_gon_available_businesses
     return unless is_a?(ActiveAdmin::BaseController)
+    return if current_user.nil?
     businesses = current_user.admin? ? Business.all : current_user.businesses
     gon.availableBusinesses = businesses.map { |business| { id: business.id, name: business.name } }
   end
