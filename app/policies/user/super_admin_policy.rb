@@ -41,7 +41,7 @@ class User
       end
 
       def resolve
-        current_user.super_admin? ? @scope : []
+        current_user.super_admin? ? @scope.where(type: 'User::SuperAdmin') : []
       end
     end
   end
