@@ -1,5 +1,5 @@
 # Craete DMS/Envision business, facilities and positions
-%w[business facility position worker profile production_admin development_admin shift email_template].each do |file|
+%w[business facility position worker production_admin development_admin shift email_template].each do |file|
   require "#{Rails.root}/db/seeds/#{file}"
 end
 
@@ -12,7 +12,6 @@ if Rails.env.production?
 else
   Seeds::DevelopmentAdmin.new.seed!
   Seeds::Worker.new.seed!
-  Seeds::Profile.new.seed!
 end
 
 Seeds::Shift.new.seed!
