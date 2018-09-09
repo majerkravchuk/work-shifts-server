@@ -3,7 +3,6 @@
 //= require activeadmin/trumbowyg/trumbowyg
 //= require activeadmin/trumbowyg_input
 //= require active_admin/menu
-//= require active_admin/uploaded_users
 
 $(function() {
   $('.admin_shifts .time-input').each(function(_i, input) {
