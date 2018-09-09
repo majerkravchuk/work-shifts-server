@@ -1,4 +1,4 @@
-ActiveAdmin.register Position, as: 'EmployeePosition' do
+ActiveAdmin.register Position::Employee, as: 'EmployeePosition' do
   menu parent: 'Positions', priority: 2
 
   permit_params :name, :business_id, :role, manager_position_ids: []
@@ -6,20 +6,15 @@ ActiveAdmin.register Position, as: 'EmployeePosition' do
   config.sort_order = 'name_asc'
 
   controller do
-    def scoped_collection
-      end_of_association_chain.employees
-    end
-
     def create
-      params[:position][:business_id] = current_business.id
-      params[:position][:role] = :employee
+      params[:position_employee][:business_id] = current_business.id
       super
     end
   end
 
   index do
     column :name
-    column(:manager_positions) { |position| position.manager_positions.pluck(:name).join(', ') }
+    column(:manager_positions) { |resource| resource.manager_positions.pluck(:name).join(', ') }
     actions
   end
 
@@ -31,7 +26,7 @@ ActiveAdmin.register Position, as: 'EmployeePosition' do
   show do
     attributes_table do
       row :name
-      row(:manager_positions) { |positions| positions.manager_positions.pluck(:name).join(', ') }
+      row(:manager_positions) { |resource| resource.manager_positions.pluck(:name).join(', ') }
       row :created_at
     end
   end
