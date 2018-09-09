@@ -1,21 +1,21 @@
 ActiveAdmin.register User::Admin, as: 'Admin' do
-  menu parent: 'Users', priority: 1, if: -> { current_user.admin? && current_user.super_admin? }
+  menu parent: 'Users', priority: 2, if: -> { current_user.super_admin? }
 
-  permit_params :name, :email, :business_id, :password, :password_confirmation
+  permit_params :name, :email, :password, :password_confirmation
 
   config.sort_order = 'name_asc'
 
   controller do
-    def scoped_collection
-      end_of_association_chain.not_in_inviting_process
+    def create
+      create!{ admin_admins_path }
     end
 
     def update
-      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-        params[:user].delete('password')
-        params[:user].delete('password_confirmation')
+      if params[:user_admin][:password].blank? && params[:user_admin][:password_confirmation].blank?
+        params[:user_admin].delete('password')
+        params[:user_admin].delete('password_confirmation')
       end
-      super
+      update!{ admin_admins_path }
     end
   end
 
