@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_08_120452) do
+ActiveRecord::Schema.define(version: 2018_07_04_205059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2018_09_08_120452) do
 
   create_table "employees_facilities", id: false, force: :cascade do |t|
     t.bigint "business_id"
-    t.bigint "employee_id"
     t.bigint "facility_id"
+    t.bigint "employee_id"
     t.index ["business_id"], name: "index_employees_facilities_on_business_id"
     t.index ["employee_id"], name: "index_employees_facilities_on_employee_id"
     t.index ["facility_id"], name: "index_employees_facilities_on_facility_id"
@@ -105,21 +105,6 @@ ActiveRecord::Schema.define(version: 2018_09_08_120452) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_positions_on_business_id"
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "position_id"
-    t.bigint "business_id"
-    t.integer "invitation_status"
-    t.integer "inviter_id"
-    t.string "invitation_token"
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_profiles_on_business_id"
-    t.index ["position_id"], name: "index_profiles_on_position_id"
-    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "shifts", force: :cascade do |t|
@@ -168,11 +153,17 @@ ActiveRecord::Schema.define(version: 2018_09_08_120452) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "name", null: false
-    t.integer "business_id"
+    t.bigint "business_id"
+    t.bigint "position_id"
+    t.integer "invitation_status"
+    t.integer "inviter_id"
+    t.string "invitation_token"
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_users_on_business_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["position_id"], name: "index_users_on_position_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
