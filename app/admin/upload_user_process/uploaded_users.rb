@@ -19,13 +19,13 @@ ActiveAdmin.register User::Worker, as: 'UploadedUsers' do
   end
 
   batch_action :invite do
-    batch_action_collection.each(&:invite!)
+    batch_action_collection.each { |resource| resource.invite!(current_user) }
     notice = 'The users were successfully invited. Moved to the Invitations sent page.'
     redirect_to collection_path, notice: notice
   end
 
   member_action :invite, method: :put do
-    resource.invite!
+    resource.invite!(current_user)
     notice = 'The user was successfully invited. Moved to the Invitations sent page.'
     redirect_to admin_uploaded_users_path, notice: notice
   end
