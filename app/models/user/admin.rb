@@ -34,6 +34,6 @@
 class User
   class Admin < User
     # === relations ===
-    has_many :employee_positions, source: :employee_positions, through: :business
+    has_many :employee_positions, through: :business, source: :employee_positions
   end
 end

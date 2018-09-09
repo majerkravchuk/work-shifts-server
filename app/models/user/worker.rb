@@ -35,6 +35,8 @@ class User
   class Worker < User
     # === relations ===
     belongs_to :position
+    belongs_to :manager_position, class_name: 'Position::Manager', foreign_key: :position_id, optional: true
+    has_many :employee_positions, through: :manager_position
     has_and_belongs_to_many :facilities, join_table: :employees_facilities, foreign_key: :employee_id
   end
 end
