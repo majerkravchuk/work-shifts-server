@@ -1,4 +1,4 @@
-ActiveAdmin.register User, as: 'UploadedUsers' do
+ActiveAdmin.register User::Worker, as: 'UploadedUsers' do
   menu label: 'Uploaded users', parent: 'Upload user process', priority: 2
 
   permit_params :name, :email, :business_id, :position_id, :manager_id, :role, facility_ids: []
@@ -34,7 +34,7 @@ ActiveAdmin.register User, as: 'UploadedUsers' do
     selectable_column
     column :email
     column :name
-    column(:role) { |resource| resource.type.split('::').last }
+    column :role
     column :invitation_status
     column :position
     column(:facilities) { |user| user.employee? ? user.facilities.pluck(:name).sort.join(', ') : '' }
