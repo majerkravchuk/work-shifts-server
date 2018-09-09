@@ -15,8 +15,8 @@
 - name: Invitation
   key: invitation
   body: |
-    <p style='text-align: center;'>Hello, <%= @invitation.name || @invitation.email %>!</p>
+    <p style='text-align: center;'>Hello, <%= @user.name || @user.email %>!</p>
 
     <p style='text-align: center;'><%= @manager.name %> has invited you to join <%= @business.name %>.</p>
 
-    <p style='text-align: center;'><a>Click on the link</a> below to set up your account.</p>
+    <p style='text-align: center;'><%= link_to 'Click on the link', invite_url(token: @token) %> below to set up your account.</p>
