@@ -1,5 +1,5 @@
-class InvitationMailerPreview < ActionMailer::Preview
+class UserMailerPreview < ActionMailer::Preview
   def invitation
-    InvitationMailer.invitation(Invitation.first)
+    UserMailer.invitation(User.first)
   end
 end
