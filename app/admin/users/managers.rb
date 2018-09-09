@@ -3,13 +3,16 @@ ActiveAdmin.register User::Worker, as: 'Manager' do
 
   includes :position
 
-  permit_params :name, :email, :business_id, :position_id, :password, :password_confirmation
+  permit_params :name, :email, :business_id, :position_id, :password, :password_confirmation, facility_ids: []
 
   config.sort_order = 'name_asc'
 
   controller do
     def scoped_collection
-      end_of_association_chain.joins(:position).where(positions: { type: 'Position::Manager' }).distinct
+      end_of_association_chain.joins(:position)
+                              .where(positions: { type: 'Position::Manager' })
+                              .not_in_inviting_process
+                              .distinct
     end
 
     def create
@@ -58,20 +61,8 @@ ActiveAdmin.register User::Worker, as: 'Manager' do
   end
 
   form do |f|
-  #   generator = ActiveAdmin::UserFormGenerator.new(current_user, current_business, f.object)
-  #   form_proc = generator.generate_form_proc
-  #   form_proc.call(f)
-
-    f.inputs do
-      f.input :name
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
-      f.input :position,
-              as: :select,
-              collection: current_business.manager_positions.order(:name).map { |p| [p.name, p.id] },
-              include_blank: false
-    end
-    f.actions
+    generator = ActiveAdmin::UserFormGenerator.new(current_user, current_business, f.object, :manager)
+    form_proc = generator.generate_form_proc
+    form_proc.call(f)
   end
 end

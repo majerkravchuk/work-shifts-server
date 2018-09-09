@@ -1,7 +1,7 @@
 ActiveAdmin.register User::Worker, as: 'Employee' do
   menu parent: 'Users', priority: 4
 
-  includes :position
+  includes :position, :facilities
 
   permit_params :name, :email, :business_id, :position_id, :password, :password_confirmation, facility_ids: []
 
@@ -9,7 +9,10 @@ ActiveAdmin.register User::Worker, as: 'Employee' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.joins(:position).where(positions: { type: 'Position::Employee' }).distinct
+      end_of_association_chain.joins(:position)
+                              .where(positions: { type: 'Position::Employee' })
+                              .not_in_inviting_process
+                              .distinct
     end
 
     def create
@@ -43,7 +46,7 @@ ActiveAdmin.register User::Worker, as: 'Employee' do
     column :name
     column :email
     column(:position) { |resource| resource.position.name.capitalize }
-    column(:facilities) { |resource| resource.facilities.pluck(:name).sort.join(', ') }
+    column(:facilities) { |resource| resource.facilities.map(&:name).sort.join(', ') }
     column :created_at
     actions defaults: true do |resource|
       link_to 'Reset password', reset_password_admin_employee_path(resource), method: :post
@@ -61,28 +64,8 @@ ActiveAdmin.register User::Worker, as: 'Employee' do
   end
 
   form do |f|
-    #   generator = ActiveAdmin::UserFormGenerator.new(current_user, current_business, f.object)
-    #   form_proc = generator.generate_form_proc
-    #   form_proc.call(f)
-
-    f.inputs do
-      f.input :name
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
-      f.input :position,
-              as: :select,
-              collection: current_business.employee_positions.order(:name).map { |p| [p.name, p.id] },
-              include_blank: false
-      collected_data = current_business.facilities.map do |facility|
-        [
-          facility.name,
-          facility.id,
-          { checked: f.object.facilities.include?(facility) }
-        ]
-      end
-      f.input :facilities, as: :check_boxes, collection: collected_data
-    end
-    f.actions
+    generator = ActiveAdmin::UserFormGenerator.new(current_user, current_business, f.object, :employee)
+    form_proc = generator.generate_form_proc
+    form_proc.call(f)
   end
 end

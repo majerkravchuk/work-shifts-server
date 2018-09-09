@@ -6,6 +6,10 @@ ActiveAdmin.register User::Admin, as: 'Admin' do
   config.sort_order = 'name_asc'
 
   controller do
+    def scoped_collection
+      end_of_association_chain.not_in_inviting_process
+    end
+
     def create
       create!{ admin_admins_path }
     end
@@ -46,12 +50,8 @@ ActiveAdmin.register User::Admin, as: 'Admin' do
   end
 
   form do |f|
-    f.inputs do
-      f.input :name
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
-    end
-    f.actions
+    generator = ActiveAdmin::UserFormGenerator.new(current_user, current_business, f.object, :admin)
+    form_proc = generator.generate_form_proc
+    form_proc.call(f)
   end
 end
