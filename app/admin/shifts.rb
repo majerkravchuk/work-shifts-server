@@ -28,12 +28,8 @@ ActiveAdmin.register Shift do
   end
 
   filter :name
-  filter :facility,
-         as: :select,
-         collection: proc { current_business.facilities }
-  filter :position,
-         as: :select,
-         collection: proc { current_user.admin? ? current_business.employee_positions: current_user.employee_positions }
+  filter :facility, as: :select, collection: proc { current_business.facilities }
+  filter :position, as: :select, collection: proc { current_user.employee_positions }
 
   show do
     attributes_table do
