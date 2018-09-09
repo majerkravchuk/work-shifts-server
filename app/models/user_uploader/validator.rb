@@ -10,7 +10,7 @@ module UserUploader
     end
 
     def validate!
-      %i[email role position facilities].each do |type|
+      %i[email position facilities].each do |type|
         class_name = "UserUploader::Validator::#{type.to_s.capitalize}"
         class_name.constantize.new(business, current_user, row, fields[type]).validate!
 

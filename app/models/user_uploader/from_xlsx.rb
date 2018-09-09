@@ -49,9 +49,8 @@ module UserUploader
       {
         name:       safe_value(xlsx_row, 0),
         email:      safe_value(xlsx_row, 1),
-        role:       safe_value(xlsx_row, 2).downcase,
-        position:   safe_value(xlsx_row, 3),
-        facilities: safe_value(xlsx_row, 4).split(',').map(&:strip)
+        position:   safe_value(xlsx_row, 2),
+        facilities: safe_value(xlsx_row, 3).split(',').map(&:strip)
       }
     end
 
