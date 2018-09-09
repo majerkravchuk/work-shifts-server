@@ -16,7 +16,7 @@ ActiveAdmin.register User, as: 'InvitationsSent' do
     selectable_column
     column :email
     column :name
-    column(:role) { |resource| resource.type.split('::').last }
+    column :role
     column :invitation_status
     column :position
     column(:facilities) { |user| user.employee? ? user.facilities.pluck(:name).sort.join(', ') : '' }
