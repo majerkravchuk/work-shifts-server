@@ -7,6 +7,8 @@
 #  current_sign_in_ip     :inet
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  invitation_status      :integer
+#  invitation_token       :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  name                   :string           not null
@@ -17,11 +19,15 @@
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  business_id            :integer
+#  business_id            :bigint(8)
+#  inviter_id             :integer
+#  position_id            :bigint(8)
 #
 # Indexes
 #
+#  index_users_on_business_id           (business_id)
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_position_id           (position_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
@@ -29,10 +35,5 @@ class User
   class Admin < User
     # === relations ===
     has_many :employee_positions, source: :employee_positions, through: :business
-
-    # === validations ===
-    validate do
-      errors.add(:position, 'the admin can not have a position') if position.present?
-    end
   end
 end

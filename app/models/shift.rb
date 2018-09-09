@@ -29,7 +29,7 @@ class Shift < ApplicationRecord
   # === relations ===
   belongs_to :business
   belongs_to :facility
-  belongs_to :position
+  belongs_to :position, class_name: 'Position::Employee'
 
   # === validations ===
   validates_presence_of :name, :start_time, :end_time
