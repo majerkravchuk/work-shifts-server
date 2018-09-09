@@ -92,6 +92,10 @@ class User < ApplicationRecord
     class_name.split(':').last.downcase
   end
 
+  def admin_user_form_path
+    Rails.application.routes.url_helpers.send("admin_#{persisted? ? role : role.pluralize}_path", id)
+  end
+
   def invite!
     invited!
   end
