@@ -22,5 +22,7 @@
 
 class Profile
   class Employee < Profile
+    # === relations ===
+    has_and_belongs_to_many :facilities, foreign_key: :profile_id
   end
 end

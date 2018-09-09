@@ -19,9 +19,6 @@ class Facility < ApplicationRecord
 
   # === relations ===
   belongs_to :business
-  has_and_belongs_to_many :employees,
-                          class_name: 'User',
-                          association_foreign_key: :employee_id,
-                          join_table: :employees_facilities
   has_many :shifts
+  has_and_belongs_to_many :profiles, class_name: 'Profile::Employee', association_foreign_key: :profile_id
 end
