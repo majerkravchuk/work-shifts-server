@@ -1,5 +1,5 @@
 ActiveAdmin.register BusinessAudit do
-  menu priority: 9, label: 'Audit', if: -> { current_user.admin? && current_user.super_admin? }
+  menu priority: 9, label: 'Audit', if: -> { current_user.super_admin? }
 
   config.sort_order = 'created_at_desc'
   actions :index, :show
@@ -7,8 +7,8 @@ ActiveAdmin.register BusinessAudit do
   config.filters = false
 
   index do
-    column(:user) { |audit| audit.username }
-    column(:auditable) { |audit| audit.auditable_type }
+    column(:user) { |resource| resource.username }
+    column(:auditable) { |resource| resource.auditable_type }
     column :action
     column :created_at
     actions
