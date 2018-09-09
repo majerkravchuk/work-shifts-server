@@ -4,12 +4,11 @@ class ShiftPolicy < ApplicationPolicy
   end
 
   def show?
-    current_user.admin? ||
-    current_user.manager? && current_user.employee_positions.include?(record.employee_position)
+    current_user.admin? || current_user.manager?
   end
 
   def create?
-    show?
+    current_user.admin? || current_user.manager?
   end
 
   def new?
@@ -17,15 +16,15 @@ class ShiftPolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    current_user.admin? || current_user.manager?
   end
 
   def edit?
-    show?
+    current_user.admin? || current_user.manager?
   end
 
   def destroy?
-    show?
+    current_user.admin? || current_user.manager?
   end
 
   def scope
@@ -44,7 +43,7 @@ class ShiftPolicy < ApplicationPolicy
       if current_user.admin?
         scope.where(business: current_user.business)
       elsif current_user.manager?
-        scope.where(business: current_user.business).where(employee_position_id: current_user.employee_positions)
+        scope.where(business: current_user.business).where(position: current_user.employee_positions)
       else
         []
       end
