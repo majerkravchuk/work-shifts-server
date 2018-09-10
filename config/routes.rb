@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       )
 
       resource :current_user, only: [:show], path: 'current-user'
+      resource :invitation, only: [:show, :create], path: 'invitation'
     end
 
     resource :business, only: [:show]
