@@ -19,4 +19,4 @@
 
     <p style='text-align: center;'><%= @manager.name %> has invited you to join <%= @business.name %>.</p>
 
-    <p style='text-align: center;'><%= link_to 'Click on the link', invite_url(token: @token) %> below to set up your account.</p>
+    <p style='text-align: center;'><%= link_to 'Click on the link', invitation_url(token: @token) %> below to set up your account.</p>
