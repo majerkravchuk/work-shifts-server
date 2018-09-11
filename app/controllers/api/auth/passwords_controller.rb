@@ -1,6 +1,8 @@
 module Api
   module Auth
     class PasswordsController < Devise::PasswordsController
+      include ApiResponsable
+
       protect_from_forgery unless: -> { request.format.json? }
       skip_before_action :verify_authenticity_token
 
@@ -13,7 +15,7 @@ module Api
             message: 'You will receive instructions on how to reset your password in a few minutes'
           }, status: 201
         else
-          render json: { error: 'User with this email does not exist' }, status: 422
+          render_client_errors('User with this email does not exist', :unprocessable_entity)
         end
       end
 
@@ -25,7 +27,7 @@ module Api
           sign_in(:user, resource)
           render json: CurrentUserSerializer.new(resource)
         else
-          render json: { error: resource.errors.messages.values.flatten.first }, status: 422
+          render_client_errors(resource.errors.messages.values.flatten.first, :unprocessable_entity)
         end
       end
 

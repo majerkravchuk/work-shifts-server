@@ -1,6 +1,8 @@
 module Api
   module Auth
     class SessionsController < Devise::SessionsController
+      include ApiResponsable
+
       protect_from_forgery unless: -> { request.format.json? }
       skip_before_action :verify_authenticity_token
 
@@ -11,7 +13,7 @@ module Api
           sign_in(:user, resource)
           render json: CurrentUserSerializer.new(resource, include: [:business])
         else
-          render json: { error: 'Invalid email or password' }, status: 422
+          render_client_errors('Invalid email or password', :unprocessable_entity)
         end
       end
 
