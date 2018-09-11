@@ -4,15 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (gon.availableBusinesses.length > 0) {
-    let parentMenu = document.getElementById('switch_current_business');
-    let list = parentMenu.querySelector('ul');
+    const parentMenu = document.getElementById('switch_current_business');
+    const list = parentMenu.querySelector('ul');
     list.innerHTML = '';
 
     gon.availableBusinesses.forEach(function(business) {
-      let item = document.createElement('li');
+      const item = document.createElement('li');
       item.setAttribute('id', `business_${business.id}`);
 
-      let link = document.createElement('a');
+      const link = document.createElement('a');
       link.setAttribute('href', `/admin/businesses/switch?business=${business.id}`);
       link.innerText = business.name;
 
