@@ -17,7 +17,7 @@ module ActiveAdmin
           f.input :password
           f.input :password_confirmation
           f.input :position, as: :select, collection: position_list, include_blank: false unless resource.admin?
-          f.input :facilities, as: :check_boxes, collection: facilities_list
+          f.input :facilities, as: :check_boxes, collection: facilities_list unless resource.admin?
         end
         f.actions
       end
