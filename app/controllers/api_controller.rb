@@ -7,6 +7,6 @@ class ApiController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def authenticate
-    render_client_errors('You are not authorized', :forbidden) unless current_user.present?
+    render_client_errors('You are not authorized', :unauthorized) unless current_user.present?
   end
 end
