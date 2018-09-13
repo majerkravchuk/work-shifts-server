@@ -1,4 +1,4 @@
 class ErrorSerializer < BaseSerializer
   set_type :error
-  attributes :url, :errors, :code, :message
+  attributes :url, :messages, :http_method, :http_code, :http_message
 end
