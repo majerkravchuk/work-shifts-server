@@ -1,6 +1,15 @@
 module ApiResponsable
   extend ActiveSupport::Concern
 
+  def render_message(message, status = :ok)
+    message_object = {}.tap do |e|
+      e[:id] = SecureRandom.uuid
+      e[:text] = message
+    end
+
+    render json: MessageSerializer.new(OpenStruct.new(message_object)), status: status
+  end
+
   def render_client_errors(errors, status = :bad_request)
     errors = [errors] unless errors.is_a?(Array)
 
