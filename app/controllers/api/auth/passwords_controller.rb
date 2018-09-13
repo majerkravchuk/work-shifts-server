@@ -11,9 +11,7 @@ module Api
         self.resource = resource_class.send_reset_password_instructions(resource_params)
 
         if successfully_sent?(resource)
-          render json: {
-            message: 'You will receive instructions on how to reset your password in a few minutes'
-          }, status: 201
+          render_message('You will receive instructions on how to reset your password in a few minutes', :created)
         else
           render_client_errors('User with this email does not exist', :unprocessable_entity)
         end
