@@ -7,9 +7,10 @@ module ApiResponsable
     error_object = {}.tap do |e|
       e[:id] = SecureRandom.uuid
       e[:url] = request.url
-      e[:errors] = errors
-      e[:code] = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
-      e[:message] = Rack::Utils::HTTP_STATUS_CODES[e[:code]]
+      e[:messages] = errors
+      e[:http_method] = request.method
+      e[:http_code] = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+      e[:http_message] = Rack::Utils::HTTP_STATUS_CODES[e[:http_code]]
     end
 
     render json: ErrorSerializer.new(OpenStruct.new(error_object)), status: status
