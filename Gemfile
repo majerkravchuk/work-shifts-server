@@ -67,6 +67,8 @@ gem 'gon'
 group :development, :test do
   # A Ruby static code analyzer, based on the community Ruby style guide
   gem 'rubocop'
+  # Testing framework for Rails 3.x, 4.x and 5.x.
+  gem 'rspec-rails', '~> 3.8'
   # Pretty print your Ruby objects with style - in full color and with proper indentation
   gem 'awesome_print'
   # An IRB alternative and runtime developer console
