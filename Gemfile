@@ -95,6 +95,8 @@ group :test do
   gem 'database_cleaner'
   # Code coverage with a powerful configuration library and automatic merging of coverage across test suites
   gem 'simplecov', require: false
+  # RSpec progress bar formatter
+  gem 'fuubar'
 end
 
 
