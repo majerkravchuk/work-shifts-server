@@ -24,4 +24,7 @@ class Business < ApplicationRecord
   has_many :shifts
   has_many :email_loader_results, class_name: 'EmailLoader::Result'
   has_many :audits, class_name: 'BusinessAudit'
+
+  # === validations ===
+  validates_presence_of :name, :time_zone
 end
