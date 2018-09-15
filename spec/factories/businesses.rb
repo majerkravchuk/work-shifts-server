@@ -11,7 +11,7 @@
 
 FactoryBot.define do
   factory :business do
-    name { 'Test business' }
+    sequence(:name) { |n| "Business #{n}" }
     time_zone { 'Pacific Time (US & Canada)' }
   end
 end

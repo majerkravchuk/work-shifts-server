@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :facility do
-    name { 'Test facility' }
+    sequence(:name) { |n| "Facility #{n}" }
     association :business, factory: :business
   end
 end
