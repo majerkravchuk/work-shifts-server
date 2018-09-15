@@ -19,8 +19,12 @@ module Api
 
       # DELETE /api/auth/sign-out
       def destroy
-        sign_out(:user) if current_user
-        head :ok
+        if current_user.present?
+          sign_out(:user)
+          render_message('Signed out successfully')
+        else
+          render_client_errors('You are not authorized', :unauthorized)
+        end
       end
     end
   end
