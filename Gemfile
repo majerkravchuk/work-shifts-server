@@ -93,6 +93,8 @@ end
 group :test do
   # Strategies for cleaning databases in Ruby
   gem 'database_cleaner'
+  # Code coverage with a powerful configuration library and automatic merging of coverage across test suites
+  gem 'simplecov', require: false
 end
 
 
