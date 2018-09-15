@@ -24,4 +24,7 @@ class Facility < ApplicationRecord
                           class_name: 'User::Worker',
                           join_table: :employees_facilities,
                           association_foreign_key: :employee_id
+
+  # === validations ===
+  validates_presence_of :name
 end
