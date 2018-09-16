@@ -15,8 +15,8 @@
 #
 
 FactoryBot.define do
-  factory :position do
-    sequence(:name) { |n| "Position #{n}" }
+  factory :position_employee, class: 'Position::Employee' do
+    sequence(:name) { |n| "Position Employee #{n}" }
     association :business, factory: :business
   end
 end
