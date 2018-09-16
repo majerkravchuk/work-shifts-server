@@ -69,6 +69,8 @@ group :development, :test do
   gem 'rubocop'
   # Testing framework for Rails 3.x, 4.x and 5.x.
   gem 'rspec-rails', '~> 3.8'
+  # Simple one-liner tests for common Rails functionality
+  gem 'shoulda-matchers', '~> 3.1'
   # factory_bot_rails provides Rails integration for factory_bot.
   gem 'factory_bot_rails'
   # Pretty print your Ruby objects with style - in full color and with proper indentation
