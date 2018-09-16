@@ -14,10 +14,9 @@
 #  index_positions_on_business_id  (business_id)
 #
 
-RSpec.describe Position, type: :model do
-  context 'Attributes' do
-    it { expect(FactoryBot.build(:position)).to be_valid }
-    it { expect(FactoryBot.build(:position, name: nil)).to_not be_valid }
-    it { expect(FactoryBot.build(:position, business: nil)).to_not be_valid }
+RSpec.describe Position::Manager, type: :model do
+  context 'Role' do
+    it { expect(FactoryBot.build(:position_manager).manager?).to be_truthy }
+    it { expect(FactoryBot.build(:position_manager).employee?).to be_falsey }
   end
 end
