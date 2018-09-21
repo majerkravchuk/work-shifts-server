@@ -1,8 +1,6 @@
 module Api
   module Auth
     class InvitationsController < ApiController
-      include Devise::Controllers::SignInOut
-
       before_action :find_user_by_invitation_token, only: :show
       before_action :find_user_by_email, only: :create
       before_action :validate_invitation_status
@@ -19,8 +17,7 @@ module Api
         @user.assign_attributes user_params.merge({ invitation_status: :accepted })
 
         if @user.save
-          sign_in(:user, @user)
-          render json: CurrentUserSerializer.new(@user, include: [:business])
+          render_message('Password successfully set', :created)
         else
           render_client_errors(@user.errors.messages.values.flatten, :unprocessable_entity)
         end
