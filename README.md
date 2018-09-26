@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## master.key file:
+**change after setup the application!**
 
-Things you may want to cover:
+`f49ef135e34e431e09a537c3a8dd4f12`
 
-* Ruby version
+## .env file:
+You need to setup this variables:
+```
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+AUTH_SECRET=
+SERVER_HOST=
+SERVER_USER=
+SERVER_PORT=
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Notice!
+Before running the application:
+- check out encrypted credentials:
+[instructions](https://www.engineyard.com/blog/rails-encrypted-credentials-on-rails-5.2)
